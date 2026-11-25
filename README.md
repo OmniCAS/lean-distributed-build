@@ -2,6 +2,8 @@
 
 **Summary (English).** How to build a large Lean 4 repository on several machines, and how fast that can be. This repository collects a working tool (`lakeshard/`: a coordinator plus pull workers that call `lean` per module, byte-identical to `lake build`), a trace-driven scheduling simulator with tests (`study/`), reproducible benchmarks with predicted and measured results (`bench/`), and the reports behind them (`docs/`), with every external claim tied to a numbered source in `REFERENCES.md`. Main findings: dispatching ready modules by *remaining longest path* is within about 1% of the true optimum (proved with CP-SAT on 89 sub-graphs; Lake's ready-order dispatch is up to 44% slower); adding machines helps only up to about W/CP cores (Mathlib v4.34.0: 12.0 core-hours of work, a 1,184 s critical path, W/CP = 36.6); pre-partitioning the graph never beat dynamic dispatch in our simulations; on three 16-core machines a 4,333-module synthetic build went from 564 s to 249 s, and the simulator, given each machine's measured speed, start time and per-task overhead, predicts such runs within about 8%. The Riemann-hypothesis Lean archive (175,187 modules) is predicted at about 1 hour on 512 to 2,048 cores. The documents are in Chinese.
 
+> **要在自己的机器上验证？** 按 [`TODO.md`](TODO.md) 的分阶段清单走：每个阶段写明做什么、通过标准和预期数值。
+
 ## 这是什么
 
 给一个 Lean 仓库和一组机器，尽快产出它的**构建缓存**（每个模块的编译产物），使别人拿到缓存后不必再编译。这里放三样东西：
