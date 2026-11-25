@@ -1,0 +1,10 @@
+import Syn.M73
+import Syn.M166
+import Syn.M364
+
+namespace Syn.M425
+def val : Nat := Syn.M73.val % 7 + Syn.M166.val % 7 + Syn.M364.val % 7 + 1
+theorem val_pos : 0 < val := by unfold val; omega
+theorem w0 (a b : Nat) : a + b + 0 = b + a + 0 := by omega
+theorem w1 (a b : Nat) : a + b + 1 = b + a + 1 := by omega
+end Syn.M425

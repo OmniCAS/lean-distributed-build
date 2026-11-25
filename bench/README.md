@@ -2,7 +2,7 @@
 
 ## 1 实例
 
-三个合成实例（E1）：结构取自黎曼猜想归档导入图的子闭包，文件内容由脚本生成、只导入 Lean 核心库，所以构建它们不执行任何第三方代码。每个模块的工作量按原文件的行数加权（重尾），见各生成脚本的文档字符串。
+三个合成实例（E1）：结构取自黎曼猜想归档导入图的子闭包，文件内容由脚本生成、只导入 Lean 核心库，所以构建它们不执行任何第三方代码。每个模块的工作量按原文件的行数加权（重尾），见各生成脚本的文档字符串。**生成好的工程已放在 `instances/`**（mid 9.1 MB、wide 47.3 MB、narrow 1.7 MB），可以直接复制到机器上，不必先跑下面的命令。
 
 | 实例 | 规格文件 | 模块 | 可并行度 W/CP（实测） | 重新生成 |
 |---|---|---:|---:|---|
@@ -45,13 +45,18 @@ uv run --with numpy python t6_calibrate.py mid-A0-c16-r1 mid-B1-c16-r1 mid-A1-c1
 uv run --with numpy python e1_expected.py                                                            # 每一格的预测与容差
 ```
 
-## 4 真实仓库（钉住的版本）
+## 4 关联的实验仓库（OmniCAS 下的 fork，钉住的版本）
 
-| 仓库 | 版本 | 用途 |
-|---|---|---|
-| [`OmniCAS/mathlib4`](https://github.com/OmniCAS/mathlib4)（leanprover-community/mathlib4 的 fork） | 标签 `v4.34.0` = 提交 `5ed2965256430c3649e86755f9576b54eca72435`；工具链 `leanprover/lean4:v4.34.0` | E2；本仓库的 Mathlib trace（`study/data/mathlib.trace.json.gz`）就是用它量的 |
-| [`OmniCAS/riemann-hypothesis`](https://github.com/OmniCAS/riemann-hypothesis)（leanprover-community/riemann-hypothesis 的 fork） | 提交 `40e56bab026552e089d7afcfeff08d2defb9c005`（2026-11-20，原样镜像所提交的归档） | E4；导入图（`study/data/rh.trace.json.gz`）与 E1 的结构来源。**源码是第三方、AI 生成的，只在隔离环境里构建** |
-| [`OmniCAS/CFSG`](https://github.com/OmniCAS/CFSG)（AxiomMath/CFSG 的 fork） | 提交 `965a0775e82217494217503621b843e1b0e1e337`（2026-11-19） | E4 之后；尚未分析 |
+| 仓库 | 上游 | 钉住的版本 | 用途 |
+|---|---|---|---|
+| [`OmniCAS/mathlib4`](https://github.com/OmniCAS/mathlib4) | leanprover-community/mathlib4 | 标签 `v4.34.0` = 提交 `5ed2965256430c3649e86755f9576b54eca72435`；工具链 `leanprover/lean4:v4.34.0` | **E2**（真实仓库的三机构建）；本仓库的 Mathlib trace（`study/data/mathlib.trace.json.gz`）就是用这个版本量的 |
+| [`OmniCAS/riemann-hypothesis`](https://github.com/OmniCAS/riemann-hypothesis) | leanprover-community/riemann-hypothesis | 原始提交 `40e56bab026552e089d7afcfeff08d2defb9c005`（2026-11-20，原样镜像所提交的归档） | **E4**（大集群）；导入图（`study/data/rh.trace.json.gz`）与 E1 三个实例的结构来源 |
+| [`OmniCAS/riemann-hypothesis-omega`](https://github.com/OmniCAS/riemann-hypothesis-omega) | the-omega-institute/riemann-hypothesis | 提交 `c7d25b3bfd7906388bb8eb0774e027a2b756a7b6`（2026-11-22） | **参考实现**：在 GitHub 托管 runner 上按内容哈希分片构建的脚本（`ci/`、`.github/workflows/`），机制见 `docs/research/precedents-omega-shards.md` |
+| [`OmniCAS/CFSG`](https://github.com/OmniCAS/CFSG) | AxiomMath/CFSG | 提交 `965a0775e82217494217503621b843e1b0e1e337`（2026-11-19） | **E4 之后**；尚未分析 |
+| [`OmniCAS/TauCeti`](https://github.com/OmniCAS/TauCeti) | TauCetiProject/TauCeti | 提交 `5d7b2806e934a829dab114bb0fe9e6653b54fe66`（2026-11-25） | **候选**：34,782 个文件、深 50，按行数估的可并行度约 400（401–468；按 2026-11-19 的副本估计，钉住的版本更新） |
+| [`OmniCAS/Weil`](https://github.com/OmniCAS/Weil) | AxiomMath/Weil | 提交 `27cdb2049be62ee2911429b47f54774078450e32`（2026-11-06） | **候选**：980 个文件、深 17，按行数估的可并行度约 25（23–28；按 2026-11-19 的副本估计） |
+
+除 Mathlib 外，这些仓库都是第三方代码，其中黎曼猜想归档、TauCeti、Weil、CFSG 是 AI 生成的形式化。**它们只在隔离环境里构建**（容器或沙箱，无外网、无凭据）：编译会执行仓库里的元程序。可并行度的估计只读了 import 头，没有构建。
 
 Mathlib 从源码构建（不用缓存）的做法：`study/scripts/remote/setup_tarballs.py` 按 `lake-manifest.json` 的提交取各依赖的源码包并做成本地快照，`setup2.sh` 让 Lake 离线加载工作区，`build.sh ROOT RUN CPUS THREADS` 跑原版 `lake build` 并用 `procmon.py` 采样每个 `lean` 进程。线程伸缩的重放：`replay.py`、`replay_waves.py`；`import Mathlib` 的开销：`import_cost.sh`。
 

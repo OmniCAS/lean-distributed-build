@@ -186,7 +186,9 @@
     250.2,
     338.4
    ],
-   "measured_s": null
+   "measured_s": 273.38,
+   "error_pct": 7.7,
+   "within_band": true
   },
   {
    "inst": "wide",
@@ -230,7 +232,9 @@
     298.2,
     403.4
    ],
-   "measured_s": null
+   "measured_s": 327.02,
+   "error_pct": 7.3,
+   "within_band": true
   },
   {
    "inst": "wide",

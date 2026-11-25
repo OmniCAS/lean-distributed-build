@@ -33,12 +33,28 @@
 | 预先切块（按目录、沿导入链、线性聚类） | 一直到传输比模块慢 10 倍都没赢过动态派发 | 模拟 | 3.2 |
 | 重文件多线程 | 2 线程 1.44 倍，8 线程 1.47 倍；核紧张时 16 线程比 1 线程多用 25% CPU | 实测 | 3.5 |
 | 合成中图（3,156 模块，W/CP 31.7），3 × 16 核 | 单机原版 Lake 733 秒 → 三机 419 秒 | 实测 | `bench/results/` |
-| 合成宽图（4,333 模块，W/CP 60），3 × 16 核 | 本工具单机 564 秒 → 三机 249 秒（2.27 倍），产物与 `lake build` 逐字节一致 | 实测 | 同上 |
-| 模拟器对三机运行的预测误差（给定机器速度、开工时刻、每任务开销） | −7.0% 到 +7.7%（7 次运行，含单机与三机） | 实测 vs 模拟 | `bench/expected.md` |
+| 合成宽图（4,333 模块，W/CP 60），3 × 16 核 | 原版 Lake 570 秒、本工具单机 564 秒 → 三机 249 秒（对 Lake 2.29 倍），12,999 个产物文件与 `lake build` 逐字节一致 | 实测 | 同上 |
+| 同上，三机换派发方式 | 先就绪先派 290 秒（慢 17%），只按图结构排优先级 273 秒（慢 10%），按目录预先固定放置 327 秒（慢 31%） | 实测 | 同上 |
+| 模拟器对实测运行的预测误差（给定机器速度、开工时刻、每任务开销） | −7.0% 到 +7.7%（9 次运行，含单机与三机）；派发方式之间的比值，预测与实测相差 0.04–0.05 | 实测 vs 模拟 | `bench/expected.md` |
 | Mathlib 在 8 + 8 + 16 核上 | 21–24 分钟；核再多也约 20 分钟（每文件 2 线程约 14 分钟） | 预测 | `bench/expected.md` E2 |
 | 黎曼猜想归档（175,187 模块） | 约 475 核·时，最长链约 0.93 小时；128 核 3.9 小时，512 核 69 分钟，2,048 核 56 分钟 | 预测 | 3.7 |
 
-（“3.x”指 `docs/study-report.md` 的节号。）理论框架与文献核对见 `docs/scheduling-theory.md`；问题定义、业界做法、目标架构与路线图见 `docs/problem-and-roadmap.md`；一页结论见 `docs/study-summary.md`。
+（“3.x”指 `docs/study-report.md` 的节号。）**文档是独立的模块，从 [`docs/README.md`](docs/README.md) 开始读**：一页结论、问题定义与路线图、调度理论、完整报告、别人的做法，以及出处 [`REFERENCES.md`](REFERENCES.md)。
+
+## 关联的实验仓库
+
+OmniCAS 下的 fork，版本钉死在下表的提交上（细节与用途见 `bench/README.md` 第 4 节）：
+
+| 仓库 | 钉住的版本 | 用途 |
+|---|---|---|
+| [`OmniCAS/mathlib4`](https://github.com/OmniCAS/mathlib4) | `v4.34.0`（`5ed29652…`） | E2：真实仓库的三机构建；本仓库 Mathlib trace 的版本 |
+| [`OmniCAS/riemann-hypothesis`](https://github.com/OmniCAS/riemann-hypothesis) | 原始提交 `40e56bab…` | E4：大集群；导入图与合成实例的结构来源 |
+| [`OmniCAS/riemann-hypothesis-omega`](https://github.com/OmniCAS/riemann-hypothesis-omega) | `c7d25b3b…` | 参考实现：Omega Institute 按内容哈希分片构建的脚本 |
+| [`OmniCAS/CFSG`](https://github.com/OmniCAS/CFSG) | `965a0775…` | E4 之后 |
+| [`OmniCAS/TauCeti`](https://github.com/OmniCAS/TauCeti) | `5d7b2806…` | 候选，按行数估的可并行度约 400 |
+| [`OmniCAS/Weil`](https://github.com/OmniCAS/Weil) | `27cdb204…` | 候选，按行数估的可并行度约 25 |
+
+除 Mathlib 外都是第三方代码（多为 AI 生成的形式化），**只在隔离环境里构建**。
 
 ## 怎么复现
 
@@ -52,13 +68,14 @@
   uv run --with numpy python t6_calibrate.py                                   # 例：三机运行的回测
   ```
 
-- **合成基准与三机运行**：`bench/README.md`（生成实例、准备机器、运行队列、分析）。
+- **合成基准与三机运行**：`bench/README.md`（准备机器、运行队列、分析）；三个实例的工程已生成好，在 `bench/instances/`。
 - **Mathlib 全量从源码构建与逐模块计时**：`bench/README.md` 第 4 节。
 
 ## 目录
 
 | 位置 | 内容 |
 |---|---|
+| `docs/README.md` | 文档索引：每份讲什么、先读哪份 |
 | `docs/problem-and-roadmap.md` | 问题定义、业界的标准解法、Lean 的技术事实、证据、目标架构、集群上怎么做、分阶段验收、待办 |
 | `docs/scheduling-theory.md` | 调度理论：标准形式、Graham 界与拐点、最优性与难度、带通信的粒度、可塑任务、真实系统，附文献核对记录 |
 | `docs/study-summary.md`、`docs/study-report.md` | 研究结论（一页）与完整报告（七个问题、最优性、校准） |
@@ -66,7 +83,7 @@
 | `REFERENCES.md` | 完整书目：调度理论 [T…]、系统文档与源码 [S…]、公开的构建数据 [D…]，每条标明读了全文、只读了摘要或未重新核对 |
 | `lakeshard/` | 工具快照 |
 | `study/` | 模拟器、测试、trace、实验脚本与结果 |
-| `bench/` | 基准实例、运行脚本、预期效果、运行记录 |
+| `bench/` | 基准实例（规格、生成脚本、生成好的工程）、运行脚本、预期效果、运行记录 |
 
 ## 说明
 

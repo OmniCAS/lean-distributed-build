@@ -1,0 +1,21 @@
+import E1.Formalism.YangianSpanCharacter.ModHypYangian
+import E1.Formalism.YangianSpanCharacter.YangianRTTProofs.DiagonalEntryEqOfModularRelation
+import E1.Formalism.YangianSpanCharacter.YangianRTTProofs.MinusFrameIdentity
+import E1.Formalism.YangianSpanCharacter.YangianRTTProofs.RttRelation
+import E1.Formalism.YangianSpanCharacter.YangianRTTProofs.SpanCharacterIdentity
+import E1.Formalism.YangianSpanCharacter.YangianRTTProofs.SymplecticTransposeEntryZeroOne
+import E1.Formalism.YangianSpanCharacter.YangianRTTProofs.TransposeJReversed
+import E1.Formalism.YangianSpanCharacter.YangianRTTProofs.TransposeJTransposeReal
+import E1.Formalism.YangianSpanCharacter.YangianRTTProofs.TransposeSymplecticShift
+
+set_option Elab.async false
+
+namespace E1N.M2675
+def val : Nat := E1N.M2660.val % 7 + E1N.M2667.val % 7 + E1N.M2668.val % 7 + E1N.M2669.val % 7 + 1
+theorem val_pos : 0 < val := by unfold val; omega
+theorem w0 (a b : Nat) : a + b + 0 = b + a + 0 := by omega
+theorem w1 (a b : Nat) : a + b + 1 = b + a + 1 := by omega
+theorem w2 (a b : Nat) : a + b + 2 = b + a + 2 := by omega
+theorem w3 (a b : Nat) : a + b + 3 = b + a + 3 := by omega
+theorem w4 (a b : Nat) : a + b + 4 = b + a + 4 := by omega
+end E1N.M2675

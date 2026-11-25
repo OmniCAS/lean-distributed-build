@@ -1,0 +1,9 @@
+name = "e1"
+defaultTargets = ["E1"]
+
+[leanOptions]
+autoImplicit = false
+
+[[lean_lib]]
+name = "E1"
+globs = ["E1.+"]

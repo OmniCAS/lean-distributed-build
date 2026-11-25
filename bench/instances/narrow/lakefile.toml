@@ -1,0 +1,12 @@
+name = "syn"
+srcDir = "src"
+defaultTargets = ["Syn"]
+moreLeanArgs = ["--tstack=400000"]
+
+[leanOptions]
+autoImplicit = false
+maxHeartbeats = 4000000
+
+[[lean_lib]]
+name = "Syn"
+globs = ["Syn.+"]
