@@ -1,0 +1,64 @@
+{
+ "name": "narrow2-A0-c16-r1",
+ "project": "narrow",
+ "mode": "lake",
+ "hosts": [
+  "worker-2"
+ ],
+ "cores_per_host": 16,
+ "cores": [
+  16
+ ],
+ "project_dir": "src/syn2500",
+ "cpus": "32-47",
+ "priority": "bl",
+ "history": null,
+ "assign": null,
+ "fetch_delay_s": 0.0,
+ "started": "2026-11-25T05:22:44",
+ "load_before": {
+  "worker-2": [
+   "6.04",
+   "8.06",
+   "8.82"
+  ],
+  "worker-3": [
+   "4.83",
+   "4.31",
+   "4.78"
+  ]
+ },
+ "result": {
+  "ok": true,
+  "exit": 0,
+  "wall_s": 439.54,
+  "cpu_s": 1919.5,
+  "max_rss_bytes": 9727070208,
+  "threads": 16,
+  "build_dir": "/tmp/lakeshard-e1/runs/narrow2-A0-c16-r1/ref",
+  "modules_built": 2613,
+  "module_seconds_sum": 1960.06,
+  "history": "/tmp/lakeshard-e1/runs/narrow2-A0-c16-r1/ref.history.json",
+  "output_tail": "✔ [2613/2615] Built Syn.M2611 (726ms)\n✔ [2614/2615] Built Syn.M2612 (828ms)\nBuild completed successfully (2615 jobs).",
+  "started": 1795605798.7656527
+ },
+ "elapsed_s": 465.5,
+ "load_after": {
+  "worker-2": [
+   "10.56",
+   "9.49",
+   "9.36"
+  ],
+  "worker-3": [
+   "4.66",
+   "3.99",
+   "4.35"
+  ]
+ },
+ "summary": {
+  "wall_s": 439.54,
+  "ok": true,
+  "lower_bound": null,
+  "modules_built": 2613
+ }
+}

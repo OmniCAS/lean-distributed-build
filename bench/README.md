@@ -50,6 +50,8 @@ uv run --with numpy python e1_expected.py                                       
 | 仓库 | 上游 | 钉住的版本 | 用途 |
 |---|---|---|---|
 | [`OmniCAS/mathlib4`](https://github.com/OmniCAS/mathlib4) | leanprover-community/mathlib4 | 标签 `v4.34.0` = 提交 `5ed2965256430c3649e86755f9576b54eca72435`；工具链 `leanprover/lean4:v4.34.0` | **E2**（真实仓库的三机构建）；本仓库的 Mathlib trace（`study/data/mathlib.trace.json.gz`）就是用这个版本量的 |
+| [`OmniCAS/carleson`](https://github.com/OmniCAS/carleson) | fpvandoorn/carleson | 提交 `f7487cc9da4d1e73f009dc0280cd5b958f3e2c78`（2026-11-17）；工具链 `leanprover/lean4:v4.36.0-rc1`；Mathlib `d88814353fcbcc0461c55b2a4585d3f44d903df1` | **小仓库一档**（`TODO.md` 阶段 1，只验正确性）：默认目标 `Carleson` 125 个模块、约 4.95 万行、深 30，按行数估的可并行度约 3（2.9–3.1） |
+| [`OmniCAS/pfr`](https://github.com/OmniCAS/pfr) | teorth/pfr | 提交 `1899ce8ed95fc310cce53d4c7ecfa2beb20ebec4`（2026-11-23）；工具链 `leanprover/lean4:v4.37.0-rc1`；Mathlib `c47f9ad906c5ec32a953f99911b446cd26dcc123` | **小仓库一档**：默认目标 `PFR`、`PFRPalomar` 共 74 个模块；约 2.2 万行、深 20、按行数估的可并行度约 2.5（2.25–2.6）是按 2026-11-05 的副本 `1ef23c3c` 估的 |
 | [`OmniCAS/riemann-hypothesis`](https://github.com/OmniCAS/riemann-hypothesis) | leanprover-community/riemann-hypothesis | 原始提交 `40e56bab026552e089d7afcfeff08d2defb9c005`（2026-11-20，原样镜像所提交的归档） | **E4**（大集群）；导入图（`study/data/rh.trace.json.gz`）与 E1 三个实例的结构来源 |
 | [`OmniCAS/riemann-hypothesis-omega`](https://github.com/OmniCAS/riemann-hypothesis-omega) | the-omega-institute/riemann-hypothesis | 提交 `c7d25b3bfd7906388bb8eb0774e027a2b756a7b6`（2026-11-22） | **参考实现**：在 GitHub 托管 runner 上按内容哈希分片构建的脚本（`ci/`、`.github/workflows/`），机制见 `docs/research/precedents-omega-shards.md` |
 | [`OmniCAS/CFSG`](https://github.com/OmniCAS/CFSG) | AxiomMath/CFSG | 提交 `965a0775e82217494217503621b843e1b0e1e337`（2026-11-19） | **E4 之后**；尚未分析 |

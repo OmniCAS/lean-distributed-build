@@ -69,15 +69,37 @@ if os.path.exists(two_path):
         lines_.append(f"| `{r['run']}` | {r['inst']} | {D2.get(code, code)}{extra} | {r['c']} | {r['predicted_s'] / u:.0f} {unit} | "
                       f"{r['band_s'][0] / u:.0f}–{r['band_s'][1] / u:.0f} {unit} | {meas} | {err} |")
     pr = {r["run"]: r["predicted_s"] for r in two}
+    me = {r["run"]: r["measured_s"] for r in two if r.get("measured_s")}
+    done = [r for r in two if r.get("measured_s")]
+    n_in = sum(1 for r in done if r.get("within_band"))
 
-    def q(a, b):
-        return f"{pr[a] / pr[b]:.2f}" if a in pr and b in pr else "—"
-    TWO = ("\n".join(lines_) + "\n\n预测的两机 ÷ 单机加速比：宽图 16 核 " + q("wide2-A1-c16-r1", "wide2-B1-c16-r1") +
-           "、8 核 " + q("wide2-A1-c8-r1", "wide2-B1-c8-r1") + "、4 核 " + q("wide2-A1-c4-r1", "wide2-B1-c4-r1") +
-           "；窄图 16 核 " + q("narrow2-A1-c16-r1", "narrow2-B1-c16-r1") + "、4 核 " + q("narrow2-A1-c4-r1", "narrow2-B1-c4-r1") +
-           "；Mathlib 16 + 16 核 " + q("mathlib2-A1-c16-r1", "mathlib2-B1-c1616-r1") +
-           "。单机运行放在较慢的 worker-2 上（协调器也在那里），第二台 worker-3 快 1.28 倍，所以两机对单机的上限是 1 + 1.28 = 2.28 倍。"
-           "`wide2-B5`（原版 Lake 调度、只把 `lean` 转发出去）没有模型，不给预测。窄图的逐模块耗时来自 macOS，绝对值仅供参考。"
+    def q(a, b, src):
+        return f"{src[a] / src[b]:.2f}" if a in src and b in src else "待测"
+    R2 = [("单机 ÷ 两机（宽图 16 核，加速比）", "wide2-A1-c16-r1", "wide2-B1-c16-r1"),
+          ("单机 ÷ 两机（宽图 8 核）", "wide2-A1-c8-r1", "wide2-B1-c8-r1"),
+          ("单机 ÷ 两机（宽图 4 核）", "wide2-A1-c4-r1", "wide2-B1-c4-r1"),
+          ("单机 ÷ 两机（窄图 16 核）", "narrow2-A1-c16-r1", "narrow2-B1-c16-r1"),
+          ("单机 ÷ 两机（窄图 4 核）", "narrow2-A1-c4-r1", "narrow2-B1-c4-r1"),
+          ("先就绪先派 ÷ 剩余最长链（宽图两机 16 核）", "wide2-B4-c16-r1", "wide2-B1-c16-r1"),
+          ("先就绪先派 ÷ 剩余最长链（宽图两机 4 核）", "wide2-B4-c4-r1", "wide2-B1-c4-r1"),
+          ("只按图结构 ÷ 按耗时（宽图两机 16 核）", "wide2-B1s-c16-r1", "wide2-B1-c16-r1"),
+          ("按目录固定放置 ÷ 动态派发（宽图两机 16 核）", "wide2-B2-c16-r1", "wide2-B1-c16-r1"),
+          ("沿导入链固定放置 ÷ 动态派发（宽图两机 16 核）", "wide2-B3-c16-r1", "wide2-B1-c16-r1"),
+          ("单机 ÷ 两机（Mathlib 16 + 16 核）", "mathlib2-A1-c16-r1", "mathlib2-B1-c1616-r1")]
+    rtab = ["| 比较 | 预测 | 实测 |", "|---|---:|---:|"] + [f"| {n} | {q(a, b, pr)} | {q(a, b, me)} |" for n, a, b in R2]
+    rec_path = os.path.join(STUDY, "results", "e1-two-machines-recalibrated-wide.json")
+    REC = ""
+    if os.path.exists(rec_path):
+        rec = json.load(open(rec_path))
+        e = [x["error_pct"] for x in rec]
+        s2 = [x["speed_vs_reference"][0] for x in rec]
+        s3 = [x["speed_vs_reference"][1] for x in rec if x["run"].split("-")[1].startswith("B")]
+        REC = (f"\n\n**校准**：这批运行里 worker-2 只比参考机慢 {min(s2):.2f}–{max(s2):.2f} 倍（校准时是 1.438；两批记录的系统负载相近，变快的原因不明），"
+               f"worker-3 {min(s3):.2f}–{max(s3):.2f} 倍（原 1.122）。按每次运行自身记录里量出的速度重算（`python e1_two_machines.py --recalibrate`），"
+               f"宽图 {len(rec)} 格的误差是 {min(e):+.1f}% 到 {max(e):+.1f}%：模型本身没问题，偏差来自机器速度变了。"
+               "所以每次运行前都要当场量一次每台机器的速度。窄图的逐模块耗时来自 macOS，不能这样校准，只看比值。")
+    TWO = ("\n".join(lines_) + f"\n\n已测 {len(done)} 格，{n_in} 格在容差带内。\n\n" + "\n".join(rtab) + REC +
+           "\n\n说明：单机运行放在 worker-2 上（协调器也在那里）。`wide2-B5`（原版 Lake 调度、只把 `lean` 转发出去）没有模型，不给预测。"
            "Mathlib 的单机原版 Lake 就在本研究量 trace 的那台机器上，预测即那次实测的复现（47.7 分钟）；本工具每个 `lean` 1 线程，按 Mathlib 文件实测的 0.86 倍计。")
 doc = f"""# 预期效果：实验 E1–E4 每一格的预期值、容差与当前实测
 
@@ -125,7 +147,7 @@ doc = f"""# 预期效果：实验 E1–E4 每一格的预期值、容差与当�
 
 ## 两台机器（进行中）
 
-worker-1 的根盘掉线后（经过见 `docs/lessons.md` 第 10 节），实验改在 worker-2、worker-3 两台上继续，队列共 27 个运行（宽图 16、8、4 核，窄图，两种预先切块，加延迟，原版 Lake 加转发，Mathlib 16 + 16 核），正在跑。协调器、产物库和所有单机运行都在 worker-2 上（worker-3 不接受连入）。预测参数同上（worker-2 1.438、worker-3 1.122 倍耗时；Mathlib 的 trace 本来就在 worker-2 上量，worker-3 比它快 1.28 倍），由 `study/e1_two_machines.py` 按队列逐个运行算出；实测出来后照上一节的做法校准。
+worker-1 的根盘掉线后（经过见 `docs/lessons.md` 第 10 节），实验改在 worker-2、worker-3 两台上继续，队列共 27 个运行（宽图 16、8、4 核，窄图，两种预先切块，加延迟，原版 Lake 加转发，Mathlib 16 + 16 核）。协调器、产物库和所有单机运行都在 worker-2 上（worker-3 不接受连入）。预测参数同上（worker-2 1.438、worker-3 1.122 倍耗时；Mathlib 的 trace 本来就在 worker-2 上量，worker-3 比它快 1.28 倍），由 `study/e1_two_machines.py` 按队列逐个运行算出，都在运行之前给出。
 
 """ + TWO + """
 

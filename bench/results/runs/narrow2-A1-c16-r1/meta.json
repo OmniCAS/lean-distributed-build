@@ -1,0 +1,146 @@
+{
+ "name": "narrow2-A1-c16-r1",
+ "project": "narrow",
+ "mode": "tool",
+ "hosts": [
+  "worker-2"
+ ],
+ "cores_per_host": 16,
+ "cores": [
+  16
+ ],
+ "project_dir": "src/syn2500",
+ "cpus": "32-47",
+ "priority": "bl",
+ "history": "/tmp/lakeshard-e1/runs/narrow2-A0-c16-r1/ref.history.json",
+ "assign": null,
+ "fetch_delay_s": 0.0,
+ "started": "2026-11-25T05:31:34",
+ "load_before": {
+  "worker-2": [
+   "7.33",
+   "8.78",
+   "9.13"
+  ],
+  "worker-3": [
+   "3.72",
+   "3.82",
+   "4.27"
+  ]
+ },
+ "result": {
+  "ok": true,
+  "backend": "lean",
+  "from_store": 0,
+  "built": 2613,
+  "failed_modules": {},
+  "skipped_modules": [],
+  "skipped_count": 0,
+  "refused_workers": {},
+  "storage": "store",
+  "build_dir": "",
+  "store": "http://10.0.0.2:18765",
+  "wall_s": 439.06,
+  "modules": 2613,
+  "status": {
+   "done": 2613
+  },
+  "modules_built": 2613,
+  "slots": 16,
+  "lower_bound": {
+   "critical_path_s": 382.31,
+   "work_s": 1747.94,
+   "slots": 16,
+   "work_per_slot_s": 109.25,
+   "bound_s": 382.31,
+   "max_speedup": 4.57,
+   "ratio": 1.148
+  },
+  "totals": {
+   "attempts": 2613,
+   "failed_attempts": 0,
+   "stale_reports": 0,
+   "lean_s": 1747.944,
+   "cpu_s": 1842.007,
+   "max_rss_bytes": 9729789952,
+   "wait_s": 0.0,
+   "fetch_s": 0.342,
+   "fetched_bytes": 0,
+   "publish_s": 351.277,
+   "confirm_s": 0.695,
+   "output_bytes": 398673675
+  },
+  "workers": {
+   "worker-1": {
+    "slots": 16,
+    "threads": 1,
+    "host": "worker-2",
+    "pid": 1452122,
+    "tasks": 2613,
+    "failed": 0,
+    "lean_s": 1747.9442431926727,
+    "cpu_s": 1842.0068019999994,
+    "max_rss_bytes": 9729789952,
+    "clock_rtt_s": 0.0006439685821533203,
+    "clock_offset_estimate_s": -9.894371032714844e-05,
+    "clock_offset_s": 0.0
+   }
+  },
+  "store_server": {
+   "objects_put": 7839,
+   "bytes_put": 398673675,
+   "objects_get": 0,
+   "bytes_get": 0,
+   "puts_existing": 0
+  },
+  "failures": [],
+  "run_records": "/tmp/lakeshard-e1/runs/narrow2-A1-c16-r1/work/modules.jsonl",
+  "run_record_count": 2613,
+  "manifest": "/tmp/lakeshard-e1/runs/narrow2-A1-c16-r1/work/manifest.json",
+  "fingerprint": "aa71b85e26dcf15d67f0763fc4fc7441f55527784ab0025fa3e7c79e2023cd18",
+  "prepare_s": 0.15,
+  "finished": true,
+  "url": "http://10.0.0.2:18765",
+  "local_workers": 0,
+  "slots_per_worker": 3,
+  "threads_per_lean": 0,
+  "retries": 2,
+  "run_id": "20261125-193226-38aa8d",
+  "worker_exit_codes": [],
+  "store_root": "/tmp/lakeshard-e1/runs/narrow2-A1-c16-r1/work/store",
+  "priority": "bl",
+  "assigned": 0,
+  "fetch_delay_s": 0.0,
+  "history": "/tmp/lakeshard-e1/runs/narrow2-A1-c16-r1/work/history.json"
+ },
+ "worker_log_tail": {
+  "worker-1": ""
+ },
+ "elapsed_s": 507.3,
+ "load_after": {
+  "worker-2": [
+   "7.28",
+   "8.48",
+   "8.94"
+  ],
+  "worker-3": [
+   "3.43",
+   "3.58",
+   "3.94"
+  ]
+ },
+ "summary": {
+  "wall_s": 439.06,
+  "ok": true,
+  "lower_bound": {
+   "critical_path_s": 382.31,
+   "work_s": 1747.94,
+   "slots": 16,
+   "work_per_slot_s": 109.25,
+   "bound_s": 382.31,
+   "max_speedup": 4.57,
+   "ratio": 1.148
+  },
+  "modules_built": 2613
+ }
+}

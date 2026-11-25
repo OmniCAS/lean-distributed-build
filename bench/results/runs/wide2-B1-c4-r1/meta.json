@@ -1,0 +1,163 @@
+{
+ "name": "wide2-B1-c4-r1",
+ "project": "wide",
+ "mode": "tool",
+ "hosts": [
+  "worker-2",
+  "worker-3"
+ ],
+ "cores_per_host": 4,
+ "cores": [
+  4,
+  4
+ ],
+ "project_dir": "src/wide",
+ "cpus": "32-35",
+ "priority": "bl",
+ "history": "/tmp/lakeshard-e1/runs/wide2-A0-c16-r1/ref.history.json",
+ "assign": null,
+ "fetch_delay_s": 0.0,
+ "started": "2026-11-25T03:49:43",
+ "load_before": {
+  "worker-2": [
+   "11.93",
+   "17.23",
+   "17.91"
+  ],
+  "worker-3": [
+   "5.35",
+   "5.70",
+   "6.77"
+  ]
+ },
+ "result": {
+  "ok": true,
+  "backend": "lean",
+  "from_store": 0,
+  "built": 4333,
+  "failed_modules": {},
+  "skipped_modules": [],
+  "skipped_count": 0,
+  "refused_workers": {},
+  "storage": "store",
+  "build_dir": "",
+  "store": "http://10.0.0.2:18765",
+  "wall_s": 1304.64,
+  "modules": 4333,
+  "status": {
+   "done": 4333
+  },
+  "modules_built": 4333,
+  "slots": 8,
+  "lower_bound": {
+   "critical_path_s": 163.33,
+   "work_s": 9359.9,
+   "slots": 8,
+   "work_per_slot_s": 1169.99,
+   "bound_s": 1169.99,
+   "max_speedup": 57.31,
+   "ratio": 1.115
+  },
+  "totals": {
+   "attempts": 4333,
+   "failed_attempts": 0,
+   "stale_reports": 0,
+   "lean_s": 9359.876,
+   "cpu_s": 9314.784,
+   "max_rss_bytes": 6551687168,
+   "wait_s": 0.0,
+   "fetch_s": 205.925,
+   "fetched_bytes": 6058426040,
+   "publish_s": 652.608,
+   "confirm_s": 0.865,
+   "output_bytes": 6073665519
+  },
+  "workers": {
+   "worker-1": {
+    "slots": 4,
+    "threads": 1,
+    "host": "worker-2",
+    "pid": 1151494,
+    "tasks": 2164,
+    "failed": 0,
+    "lean_s": 4623.396784067154,
+    "cpu_s": 4579.716777999998,
+    "max_rss_bytes": 6551687168,
+    "clock_rtt_s": 0.0005583763122558594,
+    "clock_offset_estimate_s": -9.918212890625e-05,
+    "clock_offset_s": 0.0
+   },
+   "worker-2": {
+    "slots": 4,
+    "threads": 1,
+    "host": "worker-3",
+    "pid": 3143863,
+    "tasks": 2169,
+    "failed": 0,
+    "lean_s": 4736.479138851166,
+    "cpu_s": 4735.067440999993,
+    "max_rss_bytes": 4009332736,
+    "clock_rtt_s": 0.0007836818695068359,
+    "clock_offset_estimate_s": 0.007931232452392578,
+    "clock_offset_s": 0.0079
+   }
+  },
+  "store_server": {
+   "objects_put": 12999,
+   "bytes_put": 6073665519,
+   "objects_get": 12957,
+   "bytes_get": 6058426040,
+   "puts_existing": 0
+  },
+  "failures": [],
+  "run_records": "/tmp/lakeshard-e1/runs/wide2-B1-c4-r1/work/modules.jsonl",
+  "run_record_count": 4333,
+  "manifest": "/tmp/lakeshard-e1/runs/wide2-B1-c4-r1/work/manifest.json",
+  "fingerprint": "57eb20a7f46423317b8e847f0aef5ac848bf1f7bc5dd0d2fca719c05d90ed212",
+  "prepare_s": 0.24,
+  "finished": true,
+  "url": "http://10.0.0.2:18765",
+  "local_workers": 0,
+  "slots_per_worker": 3,
+  "threads_per_lean": 0,
+  "retries": 2,
+  "run_id": "20261125-175022-328b92",
+  "worker_exit_codes": [],
+  "store_root": "/tmp/lakeshard-e1/runs/wide2-B1-c4-r1/work/store",
+  "priority": "bl",
+  "assigned": 0,
+  "fetch_delay_s": 0.0,
+  "history": "/tmp/lakeshard-e1/runs/wide2-B1-c4-r1/work/history.json"
+ },
+ "worker_log_tail": {
+  "worker-1": "",
+  "worker-2": ""
+ },
+ "elapsed_s": 1380.0,
+ "load_after": {
+  "worker-2": [
+   "6.78",
+   "10.55",
+   "14.59"
+  ],
+  "worker-3": [
+   "4.37",
+   "6.39",
+   "7.01"
+  ]
+ },
+ "summary": {
+  "wall_s": 1304.64,
+  "ok": true,
+  "lower_bound": {
+   "critical_path_s": 163.33,
+   "work_s": 9359.9,
+   "slots": 8,
+   "work_per_slot_s": 1169.99,
+   "bound_s": 1169.99,
+   "max_speedup": 57.31,
+   "ratio": 1.115
+  },
+  "modules_built": 4333
+ }
+}

@@ -10,6 +10,7 @@ threads per lean), so worker-2 = 1.0 and worker-3 = 1.438/1.122 = 1.28 times fas
 each lean with 1 thread, which on Mathlib files took 0.86 of the time (single-file replays; the
 16-way direct comparison gave 0.75-0.81, so this is the conservative end).
 Usage: python e1_two_machines.py  ->  results/e1-two-machines.json
+       python e1_two_machines.py --recalibrate  ->  results/e1-two-machines-recalibrated-wide.json
 """
 from __future__ import annotations
 
@@ -100,6 +101,44 @@ def measured(run_name):
     return json.load(open(p)).get("result", {}).get("wall_s")
 
 
+def measured_speeds(run, a0="wide-A0-c16-r1"):
+    """Time ratio of each worker in `run` vs the reference A0 run (geometric mean over modules > 0.5 s),
+    plus the first start time per worker and the mean per-task overhead. The tool numbers workers by
+    position in --hosts: its "worker-1" is worker-2 (the coordinator's host), its "worker-2" is worker-3."""
+    import math
+    import t6_calibrate as T
+    ref = T.load_history(a0)
+    ok = [r for r in T.load_records(run) if r["ok"]]
+    by, first = {}, {}
+    for r in ok:
+        first[r["worker"]] = min(first.get(r["worker"], 1e9), r["start_t"])
+        if ref.get(r["module"], 0) > 0.5:
+            by.setdefault(r["worker"], []).append(math.log(r["lean_s"] / ref[r["module"]]))
+    return ({w: math.exp(sum(v) / len(v)) for w, v in by.items()}, first,
+            sum(r["wall_s"] - r["lean_s"] for r in ok) / len(ok))
+
+
+def recalibrate():
+    """Re-run the measured wide cells with the machine speeds measured in each run itself
+    (worker-2 was 1.16-1.19 instead of 1.438 during this queue). -> results/e1-two-machines-recalibrated-wide.json"""
+    t = instance("wide")
+    rows = []
+    for cell in CELLS:
+        m = measured(cell["run"])
+        if cell["inst"] != "wide" or cell["mode"] != "tool" or not m:
+            continue
+        sp, first, over = measured_speeds(cell["run"])
+        s2 = sp["worker-1"]
+        s3 = sp.get("worker-2", 1.122)
+        SPEED["e1"] = (1 / s2, 1 / s3)
+        r = run(t, cell, "e1", 10)
+        rows.append({"run": cell["run"], "speed_vs_reference": [round(s2, 3), round(s3, 3)],
+                     "predicted_s": r["predicted_s"], "measured_s": m,
+                     "error_pct": round(100 * (r["predicted_s"] - m) / m, 1)})
+        print(json.dumps(rows[-1]), flush=True)
+    json.dump(rows, open(os.path.join(HERE, "results", "e1-two-machines-recalibrated-wide.json"), "w"), indent=1)
+
+
 def main():
     insts = {"wide": instance("wide"), "narrow": instance("narrow"),
              "mathlib": Trace.load(os.path.join(HERE, "data", "mathlib.trace.json.gz"))}
@@ -117,4 +156,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    recalibrate() if sys.argv[1:] == ["--recalibrate"] else main()

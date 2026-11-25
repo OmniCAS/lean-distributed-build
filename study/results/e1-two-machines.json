@@ -23,7 +23,9 @@
    675.9,
    914.4
   ],
-  "measured_s": null
+  "measured_s": 671.27,
+  "error_pct": 18.5,
+  "within_band": false
  },
  {
   "inst": "wide",
@@ -36,7 +38,9 @@
    331.8,
    449.0
   ],
-  "measured_s": null
+  "measured_s": 358.57,
+  "error_pct": 8.9,
+  "within_band": true
  },
  {
   "inst": "wide",
@@ -50,7 +54,9 @@
    375.7,
    508.3
   ],
-  "measured_s": null
+  "measured_s": 441.69,
+  "error_pct": 0.1,
+  "within_band": true
  },
  {
   "inst": "wide",
@@ -64,7 +70,9 @@
    356.9,
    482.8
   ],
-  "measured_s": null
+  "measured_s": 382.81,
+  "error_pct": 9.7,
+  "within_band": true
  },
  {
   "inst": "wide",
@@ -77,7 +85,9 @@
    637.9,
    863.0
   ],
-  "measured_s": null
+  "measured_s": 674.89,
+  "error_pct": 11.2,
+  "within_band": true
  },
  {
   "inst": "wide",
@@ -90,7 +100,9 @@
    1333.0,
    1803.4
   ],
-  "measured_s": null
+  "measured_s": 1316.12,
+  "error_pct": 19.2,
+  "within_band": false
  },
  {
   "inst": "wide",
@@ -103,7 +115,9 @@
    1253.8,
    1696.3
   ],
-  "measured_s": null
+  "measured_s": 1304.64,
+  "error_pct": 13.1,
+  "within_band": true
  },
  {
   "inst": "wide",
@@ -117,7 +131,9 @@
    1283.3,
    1736.2
   ],
-  "measured_s": null
+  "measured_s": 1332.2,
+  "error_pct": 13.3,
+  "within_band": true
  },
  {
   "inst": "wide",
@@ -130,7 +146,9 @@
    2649.7,
    3584.9
   ],
-  "measured_s": null
+  "measured_s": 2503.88,
+  "error_pct": 24.5,
+  "within_band": false
  },
  {
   "inst": "narrow",
@@ -143,7 +161,9 @@
    310.4,
    420.0
   ],
-  "measured_s": null
+  "measured_s": 439.54,
+  "error_pct": -16.9,
+  "within_band": false
  },
  {
   "inst": "narrow",
@@ -156,7 +176,9 @@
    304.7,
    412.8
   ],
-  "measured_s": null
+  "measured_s": 439.06,
+  "error_pct": -18.3,
+  "within_band": false
  },
  {
   "inst": "narrow",
@@ -169,7 +191,9 @@
    288.7,
    408.5
   ],
-  "measured_s": null
+  "measured_s": 439.48,
+  "error_pct": -20.5,
+  "within_band": false
  },
  {
   "inst": "narrow",
@@ -182,7 +206,9 @@
    489.0,
    661.6
   ],
-  "measured_s": null
+  "measured_s": 688.6,
+  "error_pct": -16.5,
+  "within_band": false
  },
  {
   "inst": "narrow",
@@ -195,7 +221,9 @@
    388.0,
    524.9
   ],
-  "measured_s": null
+  "measured_s": 539.83,
+  "error_pct": -15.5,
+  "within_band": false
  },
  {
   "inst": "wide",
@@ -209,7 +237,9 @@
    349.8,
    473.2
   ],
-  "measured_s": null
+  "measured_s": 423.29,
+  "error_pct": -2.8,
+  "within_band": true
  },
  {
   "inst": "wide",
@@ -223,7 +253,9 @@
    354.5,
    479.7
   ],
-  "measured_s": null
+  "measured_s": 359.57,
+  "error_pct": 16.0,
+  "within_band": true
  },
  {
   "inst": "wide",
