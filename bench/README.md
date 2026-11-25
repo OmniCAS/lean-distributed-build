@@ -53,7 +53,7 @@ uv run --with numpy python e1_expected.py                                       
 | [`OmniCAS/riemann-hypothesis`](https://github.com/OmniCAS/riemann-hypothesis) | leanprover-community/riemann-hypothesis | 原始提交 `40e56bab026552e089d7afcfeff08d2defb9c005`（2026-11-20，原样镜像所提交的归档） | **E4**（大集群）；导入图（`study/data/rh.trace.json.gz`）与 E1 三个实例的结构来源 |
 | [`OmniCAS/riemann-hypothesis-omega`](https://github.com/OmniCAS/riemann-hypothesis-omega) | the-omega-institute/riemann-hypothesis | 提交 `c7d25b3bfd7906388bb8eb0774e027a2b756a7b6`（2026-11-22） | **参考实现**：在 GitHub 托管 runner 上按内容哈希分片构建的脚本（`ci/`、`.github/workflows/`），机制见 `docs/research/precedents-omega-shards.md` |
 | [`OmniCAS/CFSG`](https://github.com/OmniCAS/CFSG) | AxiomMath/CFSG | 提交 `965a0775e82217494217503621b843e1b0e1e337`（2026-11-19） | **E4 之后**；尚未分析 |
-| [`OmniCAS/TauCeti`](https://github.com/OmniCAS/TauCeti) | TauCetiProject/TauCeti | 提交 `5d7b2806e934a829dab114bb0fe9e6653b54fe66`（2026-11-25） | **候选**：34,782 个文件、深 50，按行数估的可并行度约 400（401–468；按 2026-11-19 的副本估计，钉住的版本更新） |
+| [`OmniCAS/TauCeti`](https://github.com/OmniCAS/TauCeti) | TauCetiProject/TauCeti | 提交 `5d7b2806e934a829dab114bb0fe9e6653b54fe66`（2026-11-25） | **候选（RH 之前的中间台阶）**：库内 34,760 个模块、深 50；按 Mathlib 校准的模型（`study/scripts/tauceti_model.py`，只读 import 头）预测 W ≈ 57 核·时、最长链 8–17 分钟、可并行度约 200–450，32 / 128 / 512 核约 1.8 小时 / 27 分钟 / 8–17 分钟（按 2026-11-19 的副本估计，钉住的版本更新） |
 | [`OmniCAS/Weil`](https://github.com/OmniCAS/Weil) | AxiomMath/Weil | 提交 `27cdb2049be62ee2911429b47f54774078450e32`（2026-11-06） | **候选**：980 个文件、深 17，按行数估的可并行度约 25（23–28；按 2026-11-19 的副本估计） |
 
 除 Mathlib 外，这些仓库都是第三方代码，其中黎曼猜想归档、TauCeti、Weil、CFSG 是 AI 生成的形式化。**它们只在隔离环境里构建**（容器或沙箱，无外网、无凭据）：编译会执行仓库里的元程序。可并行度的估计只读了 import 头，没有构建。

@@ -38,6 +38,8 @@
 | 模拟器对实测运行的预测误差（给定机器速度、开工时刻、每任务开销） | −7.0% 到 +7.7%（9 次运行，含单机与三机）；派发方式之间的比值，预测与实测相差 0.04–0.05 | 实测 vs 模拟 | `bench/expected.md` |
 | Mathlib 在 8 + 8 + 16 核上 | 21–24 分钟；核再多也约 20 分钟（每文件 2 线程约 14 分钟） | 预测 | `bench/expected.md` E2 |
 | 黎曼猜想归档（175,187 模块） | 约 475 核·时，最长链约 0.93 小时；128 核 3.9 小时，512 核 69 分钟，2,048 核 56 分钟 | 预测 | 3.7 |
+| Tau Ceti（34,760 模块，中间台阶） | 约 57 核·时，最长链 8–17 分钟，可并行度约 200–450；32 核 1.8 小时，128 核 27 分钟，512 核 8–17 分钟 | 预测 | 3.7 |
+| 只剩两台机器时（备用方案） | 宽图两机对单机 1.60–1.64 倍，Mathlib 1.66–1.71 倍，窄图两机反而更慢 | 预测 | `bench/expected.md` |
 
 （“3.x”指 `docs/study-report.md` 的节号。）**文档是独立的模块，从 [`docs/README.md`](docs/README.md) 开始读**：一页结论、问题定义与路线图、调度理论、完整报告、别人的做法，以及出处 [`REFERENCES.md`](REFERENCES.md)。
 
@@ -51,7 +53,7 @@ OmniCAS 下的 fork，版本钉死在下表的提交上（细节与用途见 `be
 | [`OmniCAS/riemann-hypothesis`](https://github.com/OmniCAS/riemann-hypothesis) | 原始提交 `40e56bab…` | E4：大集群；导入图与合成实例的结构来源 |
 | [`OmniCAS/riemann-hypothesis-omega`](https://github.com/OmniCAS/riemann-hypothesis-omega) | `c7d25b3b…` | 参考实现：Omega Institute 按内容哈希分片构建的脚本 |
 | [`OmniCAS/CFSG`](https://github.com/OmniCAS/CFSG) | `965a0775…` | E4 之后 |
-| [`OmniCAS/TauCeti`](https://github.com/OmniCAS/TauCeti) | `5d7b2806…` | 候选，按行数估的可并行度约 400 |
+| [`OmniCAS/TauCeti`](https://github.com/OmniCAS/TauCeti) | `5d7b2806…` | RH 之前的中间台阶：模型预测 W ≈ 57 核·时、可并行度约 200–450、128 核约 27 分钟（预测） |
 | [`OmniCAS/Weil`](https://github.com/OmniCAS/Weil) | `27cdb204…` | 候选，按行数估的可并行度约 25 |
 
 除 Mathlib 外都是第三方代码（多为 AI 生成的形式化），**只在隔离环境里构建**。
@@ -76,6 +78,7 @@ OmniCAS 下的 fork，版本钉死在下表的提交上（细节与用途见 `be
 | 位置 | 内容 |
 |---|---|
 | `docs/README.md` | 文档索引：每份讲什么、先读哪份 |
+| `docs/lessons.md` | 实践经验：在真实机器上做多机构建遇到的现象、原因与对策 |
 | `docs/problem-and-roadmap.md` | 问题定义、业界的标准解法、Lean 的技术事实、证据、目标架构、集群上怎么做、分阶段验收、待办 |
 | `docs/scheduling-theory.md` | 调度理论：标准形式、Graham 界与拐点、最优性与难度、带通信的粒度、可塑任务、真实系统，附文献核对记录 |
 | `docs/study-summary.md`、`docs/study-report.md` | 研究结论（一页）与完整报告（七个问题、最优性、校准） |
