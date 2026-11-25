@@ -13,7 +13,7 @@
 `write_narrow.py` 写出的源文件与原始实例逐字节相同（已核对）。规格文件本身是这样从归档的导入图得到的（要先取到归档源码，见第 4 节；只读 import 头，不执行代码）：
 
 ```bash
-python3 -I bench/gen/dag_stats.py RH_SRC OUT/rh-dag    # RH_SRC：归档里 Lean 源码的根目录（含 Main.lean 的那一层）；输出导入图 graph.bin，模块名中的一个禁用词遮成 S··d
+python3 -I bench/gen/dag_stats.py RH_SRC OUT/rh-dag    # RH_SRC：归档里 Lean 源码的根目录（含 Main.lean 的那一层）；输出导入图 graph.bin
 python3 -B bench/gen/e1_pick.py OUT/rh-dag/graph.bin pick.json --alpha 0.2 --kmax 2000   # 挑子闭包（mid 用 0.2，wide 用 1.0）
 python3 -B bench/gen/e1_gen.py spec OUT/rh-dag/graph.bin ROOT_ID mid.spec.json.gz       # ROOT_ID 见 specs/pick-*.json
 python3 -I bench/gen/gen_synthetic.py OUT/rh-dag/graph.bin OUT/narrow --target-closure 1500

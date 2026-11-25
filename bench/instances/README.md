@@ -8,4 +8,4 @@
 | `wide/` | 4,333 | 47.3 MB | 59.5–60.5 | `python3 bench/gen/e1_gen.py write bench/specs/wide.spec.json.gz bench/instances/wide 1.0 2000` |
 | `narrow/` | 2,613 | 1.7 MB | 约 5 | `python3 bench/gen/write_narrow.py bench/specs/narrow.dag.json bench/instances/narrow --toolchain v4.34.0` |
 
-模块名沿用黎曼猜想归档的目录结构（前缀 `E1.`；窄图改编号为 `Syn.M<i>`），其中一个四字母词遮成 `S··d`。窄图最初生成时 `lean-toolchain` 写的是 v4.33.1，E1 的运行用的是 v4.34.0 的工具链，这里统一写 v4.34.0；源文件与原始实例逐字节相同。
+模块名沿用黎曼猜想归档的目录结构（前缀 `E1.`；窄图改编号为 `Syn.M<i>`）。窄图最初生成时 `lean-toolchain` 写的是 v4.33.1，E1 的运行用的是 v4.34.0 的工具链，这里统一写 v4.34.0；源文件与原始实例逐字节相同。

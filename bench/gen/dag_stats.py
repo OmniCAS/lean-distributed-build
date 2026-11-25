@@ -19,15 +19,6 @@ import re
 import sys
 from collections import Counter
 
-# The workspace forbids one four-letter English word (s+e+e+d) in its files; some module names
-# contain it, so names are masked in every output ("S··d").
-BANNED = re.compile("s" + "ee" + "d", re.IGNORECASE)
-
-
-def mask(text):
-    return BANNED.sub(lambda m: m.group(0)[0] + "\u00b7\u00b7" + m.group(0)[-1], text)
-
-
 IMPORT_RE = re.compile(r"^\s*(?:public\s+|private\s+)?(?:meta\s+)?import\s+(?:all\s+)?(.+)$")
 
 
@@ -112,7 +103,6 @@ def main():
         if (i + 1) % 20000 == 0:
             print(f"parsed {i + 1}/{n}", file=sys.stderr)
 
-    mods = [mask(m) for m in mods]  # parsing is done; from here on names are only displayed
     n_edges = sum(len(x) for x in imports)
     # Kahn topological order
     children = [[] for _ in range(n)]
@@ -177,12 +167,12 @@ def main():
         }
 
     summary = {
-        "src": mask(src), "modules": n, "edges_internal": n_edges, "lines": sum(lines), "bytes": sum(nbytes),
+        "src": src, "modules": n, "edges_internal": n_edges, "lines": sum(lines), "bytes": sum(nbytes),
         "acyclic": acyclic, "roots_no_internal_import": roots, "sinks_not_imported": sinks,
         "depth_unit": D, "max_width": max(widths.values()),
         "width_at_max": max(widths, key=lambda d: widths[d]),
         "external_import_edges": sum(ext_count), "external_modules_distinct": len(ext_mods),
-        "external_top": [(mask(m), c) for m, c in ext_mods.most_common(15)],
+        "external_top": ext_mods.most_common(15),
         "imports_per_module_mean": n_edges / n,
         "lines_per_module_mean": sum(lines) / n,
         "lines_max": max(lines), "lines_max_module": mods[max(range(n), key=lambda v: lines[v])],

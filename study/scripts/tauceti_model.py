@@ -12,7 +12,7 @@ Per module:  cost = 0.39 s + 0.64 ms x (Mathlib modules it loads + project modul
     modules that are newer than v4.34.0) add nothing.
   * rate: seconds per line from Mathlib's measured per-file distribution (fixed part removed);
     "heavy" draws a rate per file, "mean" uses the mean.
-Writes data/tauceti-<mode>.trace.json.gz (module names masked like the RH archive's) and
+Writes data/tauceti-<mode>.trace.json.gz and
 results/tauceti-model.json.  Usage: python scripts/tauceti_model.py TAUCETI_REPO_DIR
 """
 import json
@@ -32,12 +32,7 @@ from sim.engine import Config, simulate  # noqa: E402
 from sim.trace import Trace  # noqa: E402
 
 IMPORT_RE = re.compile(r"^(?:(public)\s+|private\s+)?(?:(meta)\s+)?import\s+(?:(all)\s+)?(.+)$")
-BANNED = re.compile("s" + "ee" + "d", re.I)
 START, PER_MOD = 0.39, (6.1 - 0.39) / 8908
-
-
-def mask(t):
-    return BANNED.sub(lambda m: m.group(0)[0] + "··" + m.group(0)[-1], t)
 
 
 def header(text):
@@ -92,7 +87,7 @@ def main(repo):
     ext = [[u for u in mods[m][0] if u not in idx] for m in names]
     lines = np.array([mods[m][1] for m in names], dtype=np.float64)
     nbytes = np.array([mods[m][2] for m in names], dtype=np.float64)
-    t = Trace("tauceti", [mask(m) for m in names], imps, lines, nbytes, np.zeros(len(names)))
+    t = Trace("tauceti", list(names), imps, lines, nbytes, np.zeros(len(names)))
     order = t.order()
     # Mathlib closures (bitsets over Mathlib v4.34.0 modules, closure includes the module itself)
     ml = Trace.load(os.path.join(STUDY, "data", "mathlib.trace.json.gz"))
