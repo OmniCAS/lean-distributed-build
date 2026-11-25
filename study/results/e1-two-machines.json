@@ -10,7 +10,9 @@
    691.5,
    935.6
   ],
-  "measured_s": null
+  "measured_s": 696.63,
+  "error_pct": 16.8,
+  "within_band": true
  },
  {
   "inst": "wide",
@@ -350,7 +352,9 @@
    2402.4,
    3250.2
   ],
-  "measured_s": null
+  "measured_s": 2775.42,
+  "error_pct": 1.8,
+  "within_band": true
  },
  {
   "inst": "mathlib",
@@ -394,6 +398,8 @@
    1107.5,
    1498.4
   ],
-  "measured_s": null
+  "measured_s": 1766.4,
+  "error_pct": -26.2,
+  "within_band": false
  }
 ]

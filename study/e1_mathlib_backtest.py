@@ -151,6 +151,19 @@ def main():
         "on demand, one batched request per task (33 ms + bytes at 0.3 GB/s)": two("pull", latency=per_file[0], bandwidth=0.3e9),
         "on demand, 16 requests in parallel": two("pull", fetch_item_s=(item[0] / 16, item[1] / 16)),
     }
+    # after the Nagle fix (c28f197): 0.8 ms per request instead of ~40 (loopback, measured by the tool line)
+    rtt = 0.0008
+    rest1 = float(np.mean([r["wall_s"] - r["lean_s"] - r["fetch_s"] - r["publish_s"] for r in a1.values()]))
+    rest2 = float(np.mean([r["wall_s"] - r["lean_s"] - r["fetch_s"] - r["publish_s"] for r in b1.values()]))
+    up = fpm * rtt + float(ob.mean()) / 1.1e9
+    r1f = simulate(t, Config(ms1, task_overhead=rest1 + up), cost)
+    over2_saved = over2
+    over2 = rest2 + up  # used by two() for the root-on-hub estimate
+    fixed = two("pull", task_overhead=over2, fetch_item_s=fpm * rtt)
+    over2 = over2_saved
+    res["after_nagle_fix"] = {"request_s": rtt, "task_overhead_s": [round(rest1 + up, 3), round(rest2 + up, 3)],
+                              "one_machine_s": round(r1f["makespan_s"], 1), "two_machines": fixed}
+    print("after the Nagle fix", json.dumps(res["after_nagle_fix"]), flush=True)
     for k, v in res["two_machines"].items():
         print(k, json.dumps(v), flush=True)
     print(json.dumps(res["one_machine"]), json.dumps(res["measured"]))

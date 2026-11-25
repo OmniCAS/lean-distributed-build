@@ -90,5 +90,24 @@
    "lower_bound_s": 1145.5,
    "fetch_tasks": 2904
   }
+ },
+ "after_nagle_fix": {
+  "request_s": 0.0008,
+  "task_overhead_s": [
+   0.053,
+   0.055
+  ],
+  "one_machine_s": 2535.1,
+  "two_machines": {
+   "root_on_hub_missing_modules": 1068,
+   "root_ran_on": 1,
+   "root_on_hub_fetch_s": 6.9,
+   "makespan_if_root_on_hub_s": 1230.4,
+   "makespan_s": 1229.5,
+   "all_but_root_s": 1219.2,
+   "root_fetch_s": 6.2,
+   "lower_bound_s": 1145.5,
+   "fetch_tasks": 2899
+  }
  }
 }

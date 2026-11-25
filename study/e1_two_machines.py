@@ -94,8 +94,13 @@ CELLS = (
 )
 
 
+RERUN = {"wide2-A0-c16-r1": "wide2-A0-c16-r2"}  # the first timing of this run was lost; it was run again
+
+
 def measured(run_name):
     p = os.path.join(E1, "runs", run_name, "meta.json")
+    if not os.path.exists(p) and run_name in RERUN:
+        p = os.path.join(E1, "runs", RERUN[run_name], "meta.json")
     if not os.path.exists(p):
         return None
     return json.load(open(p)).get("result", {}).get("wall_s")

@@ -88,7 +88,12 @@ if os.path.exists(two_path):
           ("每次取产物加 0.1 秒 ÷ 不加（宽图两机 16 核）", "wide2-B1-c16-d0.1", "wide2-B1-c16-r1"),
           ("每次取产物加 1 秒 ÷ 不加（宽图两机 16 核）", "wide2-B1-c16-d1", "wide2-B1-c16-r1"),
           ("每次取产物加 10 秒 ÷ 不加（宽图两机 16 核）", "wide2-B1-c16-d10", "wide2-B1-c16-r1"),
-          ("单机 ÷ 两机（Mathlib 16 + 16 核）", "mathlib2-A1-c16-r1", "mathlib2-B1-c1616-r1")]
+          ("单机 ÷ 两机（Mathlib 16 + 16 核）", "mathlib2-A1-c16-r1", "mathlib2-B1-c1616-r1"),
+          ("原版 Lake ÷ 本工具两机（Mathlib 16 + 16 核）", "mathlib2-A0-c16-r1", "mathlib2-B1-c1616-r1"),
+          ("原版 Lake ÷ 本工具两机（宽图 16 核）", "wide2-A0-c16-r1", "wide2-B1-c16-r1"),
+          ("原版 Lake ÷ 本工具单机（Mathlib 16 核）", "mathlib2-A0-c16-r1", "mathlib2-A1-c16-r1"),
+          ("原版 Lake ÷ 本工具单机（宽图 16 核）", "wide2-A0-c16-r1", "wide2-A1-c16-r1"),
+          ("先就绪先派 ÷ 剩余最长链（Mathlib 两机）", "mathlib2-B4-c1616-r1", "mathlib2-B1-c1616-r1")]
     rtab = ["| 比较 | 预测 | 实测 |", "|---|---:|---:|"] + [f"| {n} | {q(a, b, pr)} | {q(a, b, me)} |" for n, a, b in R2]
     bt_path = os.path.join(STUDY, "results", "e1-delay-backtest.json")
     BT = ""
@@ -129,6 +134,13 @@ if os.path.exists(two_path):
               f"除根模块外 {tool['all_but_root_s']:,.0f} 秒；单机 {mb['one_machine']['simulated_s']:,.0f} 秒。"
               f"改成每任务一次成批取，预计 {fix['makespan_s']:,.0f} 秒（{fix['makespan_s'] / 60:.1f} 分钟，{me_['one_machine_s'] / fix['makespan_s']:.2f} 倍），修好后重测。"
               "细节见 `docs/study-report.md` 4.5 节。")
+        if "after_nagle_fix" in mb:
+            af = mb["after_nagle_fix"]
+            MB += (f"**根因**：HTTP 服务没关 Nagle，每次请求约 40 毫秒（修复后 0.8 毫秒）；每模块上传 0.3 秒和根模块的 250 秒都来自这里。"
+                   f"按修复后的参数预计单机 {af['one_machine_s']:,.0f} 秒（{af['one_machine_s'] / 60:.1f} 分钟），"
+                   f"两机 {af['two_machines']['makespan_if_root_on_hub_s']:,.0f} 秒（{af['two_machines']['makespan_if_root_on_hub_s'] / 60:.1f} 分钟）；修复版每格再跑两次，在跑。"
+                   "同一台机器上的原版 Lake 基线 2,775 秒；本工具单机 2,713 秒，与它基本持平，原先“快 15%–20%”的预测没有出现，原因见 4.6 节。"
+                   "Mathlib 两机先就绪先派 1,766 秒，慢 10%；除根模块外的部分慢 12.6%，预测 15%。")
     TWO = ("\n".join(lines_) + f"\n\n已测 {len(done)} 格，{n_in} 格在容差带内。\n\n" + "\n".join(rtab) + REC + MB +
            "\n\n说明：单机运行放在 worker-2 上（协调器也在那里）。`wide2-B5`（原版 Lake 调度、只把 `lean` 转发出去）没有模型，没给预测；实测 909 秒，比本工具两机慢 2.5 倍、比本工具单机还慢 35%，原因见 `docs/lessons.md` 第 12 节。"
            "Mathlib 的单机原版 Lake 就在本研究量 trace 的那台机器上，预测即那次实测的复现（47.7 分钟）；本工具每个 `lean` 1 线程，按 Mathlib 文件实测的 0.86 倍计。")
@@ -171,7 +183,7 @@ doc = f"""# 预期效果：实验 E1–E4 每一格的预期值、容差与当�
 """ + "\n".join(rrows) + """
 
 说明：
-- 宽图三机的产物与单机原版 `lake build` 逐字节一致（12,999 / 12,999 个文件，实测）。
+- 宽图三机的产物与单机原版 `lake build` 逐字节一致（12,999 / 12,999 个文件，实测）。两机：宽图 12,999 / 12,999、窄图 7,839 / 7,839 一致；Mathlib 59,707 / 59,710，不同的 3 个文件属于 `Mathlib.Combinatorics.SimpleGraph.Walk.Operations`，原版 Lean 自己编两次就不同（判法见 `TODO.md`）。
 - 窄图（反例）预测**三机比单机还慢**，因为模块平均只有 0.44 秒，而三机时每任务多 0.21 秒开销、两台机器更慢、开工更晚。这是一个可以被实测否定的预测；窄图的逐模块耗时来自 macOS，绝对值仅供参考。
 - B2、B3（预先固定放置）的预测用的是 `study/sim/partition.py` 里的划分近似（按目录第 3 层 / 沿导入链贪心），与工具实际生成的划分文件不完全相同。
 - 加延迟的几格：每次跨机取产物多等 0.1 / 1 / 10 秒。预测 0.1 秒、1 秒几乎无影响；10 秒时动态派发变慢，沿链固定放置反而占优（只有在这么慢的网络上预先聚类才划算）。这些预测用的是“产物建完即推送、派发看数据所在”的模型；两机实测表明它低估了工具按需取件的代价（下一节）。

@@ -2,7 +2,7 @@
 
 Inputs measured on the two-machine Mathlib run (e1_mathlib_backtest.py): 7.4 files per module,
 32.3 ms per file on the coordinator's host and 9.7 ms on the other machine when each file is one
-request; the root `Mathlib` still lacked 23% of the modules built on the other machine when it
+request (the servers had Nagle on: about 40 ms per request; 0.8 ms after the fix); the root `Mathlib` still lacked 23% of the modules built on the other machine when it
 started (1,017 of 4,346), the rest had been fetched by earlier tasks there.
 RH (import graph only, nothing built): import closure sizes from study/data/rh.trace.json.gz;
 artifact bytes from the model (59.4 GB in all) and from the public figure (about 94 GB of `.olean`
@@ -26,6 +26,7 @@ sys.path.insert(0, HERE)
 from sim.trace import Trace  # noqa: E402
 
 FILES, PER_FILE, Q = 7.4, (0.0323, 0.0097), (0.23, 1.0)
+FIXED = 0.0008  # per request after the Nagle fix (c28f197; loopback, measured by the tool line)
 
 
 def main():
@@ -47,7 +48,8 @@ def main():
             row = {"cores": cores, "machines": k, "q": q, "missing_modules": round(miss),
                    "files": round(miss * FILES),
                    "one_request_per_file_h": [round(miss * FILES * p / 3600, 2) for p in PER_FILE],
-                   "16_parallel_requests_min": [round(miss * FILES * p / 16 / 60, 1) for p in PER_FILE]}
+                   "16_parallel_requests_min": [round(miss * FILES * p / 16 / 60, 1) for p in PER_FILE],
+                   "one_request_per_file_after_nagle_fix_min": round(miss * FILES * FIXED / 60, 1)}
             for label, mb in out["mb_per_module"].items():
                 gb = miss * mb / 1e3
                 row[f"batched_{label}_GB"] = round(gb, 1)

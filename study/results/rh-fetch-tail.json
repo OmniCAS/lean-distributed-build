@@ -26,6 +26,7 @@
     5.0,
     1.5
    ],
+   "one_request_per_file_after_nagle_fix_min": 2.0,
    "batched_model_GB": 6.8,
    "batched_model_s_at_1.1GBps_0.3GBps": [
     6.0,
@@ -51,6 +52,7 @@
     21.8,
     6.5
    ],
+   "one_request_per_file_after_nagle_fix_min": 8.6,
    "batched_model_GB": 29.7,
    "batched_model_s_at_1.1GBps_0.3GBps": [
     27.0,
@@ -76,6 +78,7 @@
     8.8,
     2.6
    ],
+   "one_request_per_file_after_nagle_fix_min": 3.5,
    "batched_model_GB": 12.0,
    "batched_model_s_at_1.1GBps_0.3GBps": [
     11.0,
@@ -101,6 +104,7 @@
     38.2,
     11.5
    ],
+   "one_request_per_file_after_nagle_fix_min": 15.1,
    "batched_model_GB": 52.0,
    "batched_model_s_at_1.1GBps_0.3GBps": [
     47.0,
@@ -126,6 +130,7 @@
     9.7,
     2.9
    ],
+   "one_request_per_file_after_nagle_fix_min": 3.9,
    "batched_model_GB": 13.2,
    "batched_model_s_at_1.1GBps_0.3GBps": [
     12.0,
@@ -151,6 +156,7 @@
     42.3,
     12.7
    ],
+   "one_request_per_file_after_nagle_fix_min": 16.7,
    "batched_model_GB": 57.5,
    "batched_model_s_at_1.1GBps_0.3GBps": [
     52.0,

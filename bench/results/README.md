@@ -6,8 +6,10 @@
 
 | 运行 | 实例 | 方式 | 机器 | 每台核数 | 优先级 | 墙钟（秒） | W（秒） | CP（秒） | 模块 |
 |---|---|---|---|---|---|---:|---:|---:|---:|
+| `mathlib2-A0-c16-r1` | mathlib | lake | worker-2 | 16 | bl | 2775.42 |  |  | 8530 |
 | `mathlib2-A1-c16-r1` | mathlib | tool | worker-2 | 16 | bl | 2712.74 | 39747.76 | 1196.29 | 8530 |
 | `mathlib2-B1-c1616-r1` | mathlib | tool | worker-2, worker-3 | 16 | bl | 1606.05 | 37156.03 | 1119.4 | 8530 |
+| `mathlib2-B4-c1616-r1` | mathlib | tool | worker-2, worker-3 | 16 | fifo | 1766.4 | 35952.66 | 977.23 | 8530 |
 | `mid-A0-c16-r1` | mid | lake | worker-1 | 16 | bl | 732.98 |  |  | 3156 |
 | `mid-A1-c16-r1` | mid | tool | worker-1 | 16 | bl | 773.21 | 10809.2 | 343.1 | 3156 |
 | `mid-B1-c16-r1` | mid | tool | worker-1, worker-2, worker-3 | 16 | bl | 419.4 | 12096.34 | 384.33 | 3156 |
@@ -22,6 +24,7 @@
 | `wide-B1s-c16-r1` | wide | tool | worker-1, worker-2, worker-3 | 16 | structure | 273.38 | 9584.57 | 168.5 | 4333 |
 | `wide-B2-c16-r1` | wide | tool | worker-1, worker-2, worker-3 | 16 | bl | 327.02 | 9358.26 | 163.98 | 4333 |
 | `wide-B4-c16-r1` | wide | tool | worker-1, worker-2, worker-3 | 16 | fifo | 290.21 | 9672.4 | 154.23 | 4333 |
+| `wide2-A0-c16-r2` | wide | lake | worker-2 | 16 | bl | 696.63 |  |  | 4333 |
 | `wide2-A1-c16-r1` | wide | tool | worker-2 | 16 | bl | 671.27 | 9778.11 | 165.94 | 4333 |
 | `wide2-A1-c4-r1` | wide | tool | worker-2 | 4 | bl | 2503.88 | 9300.5 | 158.71 | 4333 |
 | `wide2-A1-c8-r1` | wide | tool | worker-2 | 8 | bl | 1316.12 | 9706.28 | 163.66 | 4333 |

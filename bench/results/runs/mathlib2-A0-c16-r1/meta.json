@@ -1,0 +1,64 @@
+{
+ "name": "mathlib2-A0-c16-r1",
+ "project": "mathlib",
+ "mode": "lake",
+ "hosts": [
+  "worker-2"
+ ],
+ "cores_per_host": 16,
+ "cores": [
+  16
+ ],
+ "project_dir": "/tmp/lakeshard-e2/mathlib4",
+ "cpus": "32-47",
+ "priority": "bl",
+ "history": null,
+ "assign": null,
+ "fetch_delay_s": 0.0,
+ "started": "2026-11-25T09:52:44",
+ "load_before": {
+  "worker-2": [
+   "10.34",
+   "14.30",
+   "22.44"
+  ],
+  "worker-3": [
+   "3.71",
+   "7.15",
+   "15.43"
+  ]
+ },
+ "result": {
+  "ok": true,
+  "exit": 0,
+  "wall_s": 2775.42,
+  "cpu_s": 42988.26,
+  "max_rss_bytes": 3102314496,
+  "threads": 16,
+  "build_dir": "/tmp/lakeshard-e1/runs/mathlib2-A0-c16-r1/ref",
+  "modules_built": 8530,
+  "module_seconds_sum": 41885.52,
+  "history": "/tmp/lakeshard-e1/runs/mathlib2-A0-c16-r1/ref.history.json",
+  "output_tail": "✔ [8921/8923] Built Mathlib.NumberTheory.ModularForms.RamanujanFormula (3.2s)\n✔ [8922/8923] Built Mathlib (3.0s)\nBuild completed successfully (8923 jobs).",
+  "started": 1795622008.9428766
+ },
+ "elapsed_s": 2806.8,
+ "load_after": {
+  "worker-2": [
+   "16.19",
+   "31.04",
+   "35.26"
+  ],
+  "worker-3": [
+   "5.97",
+   "5.28",
+   "4.69"
+  ]
+ },
+ "summary": {
+  "wall_s": 2775.42,
+  "ok": true,
+  "lower_bound": null,
+  "modules_built": 8530
+ }
+}
