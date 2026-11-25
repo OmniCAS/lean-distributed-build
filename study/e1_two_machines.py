@@ -1,13 +1,14 @@
-"""Backup plan (not measured): one machine vs two machines, for when only worker-2 and worker-3
-remain. Same model and calibration as e1_expected.py.
+"""Expected values for the two-machine queue (in progress since worker-1 became unavailable).
 
-  one machine  = worker-3 (the faster of the two): plain `lake build` and the tool, c cores;
-  two machines = worker-2 (runs the coordinator and store; worker-3 does not accept incoming
-                 connections) + worker-3, c cores each.
-Speeds vs the E1 reference machine (worker-1): worker-2 1.438, worker-3 1.122 times the time. For
-Mathlib the trace was measured on worker-2 itself, so worker-2 = 1.0 and worker-3 = 1.438/1.122.
-Start of the first task: 13.0 s on the coordinator's host, 22.4 s on the other (single machine
-14.6 s); per-task overhead 0.21 s (two machines), 0.044 s (one machine); noise sigma 0.12.
+Machines: worker-2 runs the coordinator, the store and every one-machine run (A0, A1);
+worker-3 (does not accept incoming connections) is the second machine. Same model and calibration
+as e1_expected.py: speed vs the E1 reference machine worker-1 = 1.438 (worker-2) and 1.122
+(worker-3) times the time; first task 13.0 s on the coordinator's host and 22.4 s on the other
+(one-machine runs 14.6 s); per-task overhead 0.21 s with two machines, 0.044 s with one; noise
+sigma 0.12 per module. Mathlib: the trace was measured on worker-2 itself (plain lake build, 16
+threads per lean), so worker-2 = 1.0 and worker-3 = 1.438/1.122 = 1.28 times faster; the tool runs
+each lean with 1 thread, which on Mathlib files took 0.86 of the time (single-file replays; the
+16-way direct comparison gave 0.75-0.81, so this is the conservative end).
 Usage: python e1_two_machines.py  ->  results/e1-two-machines.json
 """
 from __future__ import annotations
@@ -20,42 +21,98 @@ import numpy as np
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
-from e1_expected import SIGMA, instance  # noqa: E402
+from e1_expected import E1, SIGMA, instance  # noqa: E402
 from sim.engine import Config, Machine, simulate, simulate_ps  # noqa: E402
+from sim.partition import by_namespace, greedy_locality  # noqa: E402
 from sim.trace import Trace  # noqa: E402
 
+SPEED = {"e1": (1 / 1.438, 1 / 1.122), "mathlib": (1.0, 1.438 / 1.122)}
+TOOL_FACTOR = {"e1": 1.0, "mathlib": 0.86}
 
-def cell(t, cost, label, kind, c, s2, s3, reps):
+
+def run(t: Trace, cell: dict, kind: str, reps: int) -> dict:
+    s2, s3 = SPEED[kind]
     vals = []
+    blc = -t.bottom_level(np.ones(t.n))
     for k in range(reps):
-        x = cost * np.exp(np.random.default_rng(k).normal(0, SIGMA, t.n))
-        if kind == "lake-one":
-            vals.append(simulate_ps(t, x / s3, cores=c, max_jobs=c)["makespan_s"])
-        elif kind == "tool-one":
-            vals.append(simulate(t, Config([Machine(c, s3, start_at=14.6)], task_overhead=0.044), x)["makespan_s"])
+        x = t.cost * np.exp(np.random.default_rng(k).normal(0, SIGMA, t.n))
+        if cell["mode"] == "lake":
+            vals.append(simulate_ps(t, x / s2, cores=cell["c"], max_jobs=cell["c"])["makespan_s"])
+            continue
+        x = x * TOOL_FACTOR[kind]
+        if cell["hosts"] == 1:
+            ms, o = [Machine(cell["c"], s2, start_at=14.6)], 0.044
         else:
-            ms = [Machine(c, s2, start_at=13.0, name="worker-2"), Machine(c, s3, start_at=22.4, name="worker-3")]
-            vals.append(simulate(t, Config(ms, task_overhead=0.21, est_cost=cost, placement="est",
-                                           latency=0.0005, bandwidth=1.1e9), x)["makespan_s"])
+            ms = [Machine(cell["c"], s2, start_at=13.0, name="worker-2"), Machine(cell["c"], s3, start_at=22.4, name="worker-3")]
+            o = 0.21
+        kw = dict(task_overhead=o, est_cost=t.cost, latency=cell.get("delay", 0.0005), bandwidth=1.1e9)
+        if cell.get("priority") == "fifo":
+            kw["priority"] = "fifo"
+        elif cell.get("priority") == "structure":
+            kw["priority"], kw["plan_key"] = "plan", blc
+        if cell.get("assign") == "namespace":
+            kw["assign"] = by_namespace(t, t.cost, ms, level=3)
+        elif cell.get("assign") == "chains":
+            kw["assign"] = greedy_locality(t, t.cost, ms)
+        else:
+            kw["placement"] = "est"
+        vals.append(simulate(t, Config(ms, **kw), x)["makespan_s"])
     v = np.array(vals)
     med = float(np.median(v))
-    return {"instance": label, "config": kind, "c": c, "predicted_s": round(med, 1),
+    return {**cell, "predicted_s": round(med, 1),
             "band_s": [round(min(float(np.percentile(v, 5)), 0.85 * med), 1), round(max(float(np.percentile(v, 95)), 1.15 * med), 1)]}
 
 
+CELLS = (
+    [dict(inst="wide", run="wide2-A0-c16-r1", mode="lake", hosts=1, c=16),
+     dict(inst="wide", run="wide2-A1-c16-r1", mode="tool", hosts=1, c=16),
+     dict(inst="wide", run="wide2-B1-c16-r1", mode="tool", hosts=2, c=16),
+     dict(inst="wide", run="wide2-B4-c16-r1", mode="tool", hosts=2, c=16, priority="fifo"),
+     dict(inst="wide", run="wide2-B1s-c16-r1", mode="tool", hosts=2, c=16, priority="structure"),
+     dict(inst="wide", run="wide2-B1-c8-r1", mode="tool", hosts=2, c=8),
+     dict(inst="wide", run="wide2-A1-c8-r1", mode="tool", hosts=1, c=8),
+     dict(inst="wide", run="wide2-B1-c4-r1", mode="tool", hosts=2, c=4),
+     dict(inst="wide", run="wide2-B4-c4-r1", mode="tool", hosts=2, c=4, priority="fifo"),
+     dict(inst="wide", run="wide2-A1-c4-r1", mode="tool", hosts=1, c=4),
+     dict(inst="narrow", run="narrow2-A0-c16-r1", mode="lake", hosts=1, c=16),
+     dict(inst="narrow", run="narrow2-A1-c16-r1", mode="tool", hosts=1, c=16),
+     dict(inst="narrow", run="narrow2-B1-c16-r1", mode="tool", hosts=2, c=16),
+     dict(inst="narrow", run="narrow2-A1-c4-r1", mode="tool", hosts=1, c=4),
+     dict(inst="narrow", run="narrow2-B1-c4-r1", mode="tool", hosts=2, c=4),
+     dict(inst="wide", run="wide2-B2-c16-r1", mode="tool", hosts=2, c=16, assign="namespace"),
+     dict(inst="wide", run="wide2-B3-c16-r1", mode="tool", hosts=2, c=16, assign="chains"),
+     dict(inst="wide", run="wide2-B1-c16-d0.1", mode="tool", hosts=2, c=16, delay=0.1),
+     dict(inst="wide", run="wide2-B1-c16-d1", mode="tool", hosts=2, c=16, delay=1.0),
+     dict(inst="wide", run="wide2-B2-c16-d1", mode="tool", hosts=2, c=16, assign="namespace", delay=1.0),
+     dict(inst="wide", run="wide2-B1-c16-d10", mode="tool", hosts=2, c=16, delay=10.0),
+     dict(inst="wide", run="wide2-B2-c16-d10", mode="tool", hosts=2, c=16, assign="namespace", delay=10.0),
+     dict(inst="mathlib", run="mathlib2-A0-c16-r1", mode="lake", hosts=1, c=16),
+     dict(inst="mathlib", run="mathlib2-A1-c16-r1", mode="tool", hosts=1, c=16),
+     dict(inst="mathlib", run="mathlib2-B1-c1616-r1", mode="tool", hosts=2, c=16),
+     dict(inst="mathlib", run="mathlib2-B4-c1616-r1", mode="tool", hosts=2, c=16, priority="fifo")]
+)
+
+
+def measured(run_name):
+    p = os.path.join(E1, "runs", run_name, "meta.json")
+    if not os.path.exists(p):
+        return None
+    return json.load(open(p)).get("result", {}).get("wall_s")
+
+
 def main():
+    insts = {"wide": instance("wide"), "narrow": instance("narrow"),
+             "mathlib": Trace.load(os.path.join(HERE, "data", "mathlib.trace.json.gz"))}
     rows = []
-    for name in ("wide", "narrow"):
-        t = instance(name)
-        for c in (8, 16):
-            for kind in (["lake-one"] if c == 16 else []) + ["tool-one", "tool-two"]:
-                rows.append(cell(t, t.cost, name, kind, c, 1 / 1.438, 1 / 1.122, 10))
-                print(json.dumps(rows[-1]), flush=True)
-    ml = Trace.load(os.path.join(HERE, "data", "mathlib.trace.json.gz"))
-    for c in (8, 16):
-        for kind in (["lake-one"] if c == 16 else []) + ["tool-one", "tool-two"]:
-            rows.append(cell(ml, ml.cost, "mathlib", kind, c, 1.0, 1.438 / 1.122, 5))
-            print(json.dumps(rows[-1]), flush=True)
+    for cell in CELLS:
+        kind = "mathlib" if cell["inst"] == "mathlib" else "e1"
+        r = run(insts[cell["inst"]], cell, kind, 5 if kind == "mathlib" else 10)
+        r["measured_s"] = measured(cell["run"])
+        if r["measured_s"]:
+            r["error_pct"] = round(100 * (r["predicted_s"] - r["measured_s"]) / r["measured_s"], 1)
+            r["within_band"] = r["band_s"][0] <= r["measured_s"] <= r["band_s"][1]
+        rows.append(r)
+        print(json.dumps(r), flush=True)
     json.dump(rows, open(os.path.join(HERE, "results", "e1-two-machines.json"), "w"), indent=1)
 
 

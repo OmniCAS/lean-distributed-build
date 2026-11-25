@@ -57,17 +57,28 @@ two_path = os.path.join(STUDY, "results", "e1-two-machines.json")
 TWO = ""
 if os.path.exists(two_path):
     two = json.load(open(two_path))
-    names = {"lake-one": "单机原版 `lake build`（worker-3）", "tool-one": "本工具单机（worker-3）", "tool-two": "本工具两机（worker-2 + worker-3）"}
-    units = {"mathlib": 60.0}
-    lines_ = ["| 实例 | 每台核数 | 配置 | 预测 | 容差带 | 两机 ÷ 单机 |", "|---|---:|---|---:|---:|---:|"]
-    one = {(r["instance"], r["c"]): r["predicted_s"] for r in two if r["config"] == "tool-one"}
+    D2 = {"A0": "单机原版 `lake build`（worker-2）", "A1": "本工具单机（worker-2）", "B1": "本工具两机，剩余最长链优先",
+          "B4": "两机，先就绪先派", "B1s": "两机，只按图结构", "B2": "两机，按目录固定放置", "B3": "两机，沿导入链固定放置"}
+    lines_ = ["| 运行 | 实例 | 做法 | 每台核数 | 预测 | 容差带 | 实测 | 误差 |", "|---|---|---|---:|---:|---:|---:|---:|"]
     for r in two:
-        u = units.get(r["instance"], 1.0)
-        unit = "分钟" if u == 60 else "秒"
-        ratio = f"{one[(r['instance'], r['c'])] / r['predicted_s']:.2f}" if r["config"] == "tool-two" else ""
-        lines_.append(f"| {r['instance']} | {r['c']} | {names[r['config']]} | {r['predicted_s'] / u:.0f} {unit} | "
-                      f"{r['band_s'][0] / u:.0f}–{r['band_s'][1] / u:.0f} {unit} | {ratio} |")
-    TWO = "\n".join(lines_) + "\n\n窄图（反例）在两机上预测比单机更慢：模块太小，每任务 0.21 秒的开销与第二台机器较晚开工抵掉了多出来的核。窄图的逐模块耗时来自 macOS，绝对值仅供参考。Mathlib 的单机原版 Lake 在 worker-3 上预测约 37 分钟（在 worker-2 上实测 47.7 分钟），前提是 E1 测到的机器速度比也适用于 Mathlib。"
+        code = r["run"].split("-")[1]
+        extra = f"，每次取产物人为加 {r['run'].split('-d')[1]} 秒" if "-d" in r["run"] else ""
+        u, unit = (60.0, "分钟") if r["inst"] == "mathlib" else (1.0, "秒")
+        meas = f"{r['measured_s'] / u:.0f} {unit}" if r.get("measured_s") else "待测"
+        err = f"{r['error_pct']:+.1f}%" if r.get("error_pct") is not None else ""
+        lines_.append(f"| `{r['run']}` | {r['inst']} | {D2.get(code, code)}{extra} | {r['c']} | {r['predicted_s'] / u:.0f} {unit} | "
+                      f"{r['band_s'][0] / u:.0f}–{r['band_s'][1] / u:.0f} {unit} | {meas} | {err} |")
+    pr = {r["run"]: r["predicted_s"] for r in two}
+
+    def q(a, b):
+        return f"{pr[a] / pr[b]:.2f}" if a in pr and b in pr else "—"
+    TWO = ("\n".join(lines_) + "\n\n预测的两机 ÷ 单机加速比：宽图 16 核 " + q("wide2-A1-c16-r1", "wide2-B1-c16-r1") +
+           "、8 核 " + q("wide2-A1-c8-r1", "wide2-B1-c8-r1") + "、4 核 " + q("wide2-A1-c4-r1", "wide2-B1-c4-r1") +
+           "；窄图 16 核 " + q("narrow2-A1-c16-r1", "narrow2-B1-c16-r1") + "、4 核 " + q("narrow2-A1-c4-r1", "narrow2-B1-c4-r1") +
+           "；Mathlib 16 + 16 核 " + q("mathlib2-A1-c16-r1", "mathlib2-B1-c1616-r1") +
+           "。单机运行放在较慢的 worker-2 上（协调器也在那里），第二台 worker-3 快 1.28 倍，所以两机对单机的上限是 1 + 1.28 = 2.28 倍。"
+           "`wide2-B5`（原版 Lake 调度、只把 `lean` 转发出去）没有模型，不给预测。窄图的逐模块耗时来自 macOS，绝对值仅供参考。"
+           "Mathlib 的单机原版 Lake 就在本研究量 trace 的那台机器上，预测即那次实测的复现（47.7 分钟）；本工具每个 `lean` 1 线程，按 Mathlib 文件实测的 0.86 倍计。")
 doc = f"""# 预期效果：实验 E1–E4 每一格的预期值、容差与当前实测
 
 标记：**预测**（模拟器 + 校准参数，在运行之前给出）、**实测**（`bench/results/` 里的运行记录）。预测怎么算的见 `study/e1_expected.py`、`study/q7_extrapolate.py`、`study/rh_import_sensitivity.py`；校准见 `docs/study-report.md` 第 4.2 节。本文件由 `study/scripts/write_expected_md.py` 生成，每来一批新结果重新生成一次。
@@ -112,9 +123,9 @@ doc = f"""# 预期效果：实验 E1–E4 每一格的预期值、容差与当�
 - B2、B3（预先固定放置）的预测用的是 `study/sim/partition.py` 里的划分近似（按目录第 3 层 / 沿导入链贪心），与工具实际生成的划分文件不完全相同。
 - 加延迟的几格：每次跨机取产物多等 0.1 / 1 / 10 秒。预测 0.1 秒、1 秒几乎无影响；10 秒时动态派发变慢，沿链固定放置反而占优（只有在这么慢的网络上预先聚类才划算）。
 
-## 备用方案（未测）：只用两台机器
+## 两台机器（进行中）
 
-若之后只在 worker-2、worker-3 两台上继续（worker-1 不可用），主表变成“单机对两机”。单机用较快的 worker-3；两机时协调器与产物库放 worker-2（worker-3 不接受连入）。参数同上（worker-2 1.438、worker-3 1.122 倍耗时；Mathlib 的 trace 本来就在 worker-2 上量，所以 worker-3 比它快 1.28 倍），由 `study/e1_two_machines.py` 算出。两台机器快慢差 1.28 倍，所以即使完美均衡，两机对单机最多也只有 1 + 1/1.28 ≈ 1.78 倍。
+worker-1 的根盘掉线后（经过见 `docs/lessons.md` 第 10 节），实验改在 worker-2、worker-3 两台上继续，队列共 27 个运行（宽图 16、8、4 核，窄图，两种预先切块，加延迟，原版 Lake 加转发，Mathlib 16 + 16 核），正在跑。协调器、产物库和所有单机运行都在 worker-2 上（worker-3 不接受连入）。预测参数同上（worker-2 1.438、worker-3 1.122 倍耗时；Mathlib 的 trace 本来就在 worker-2 上量，worker-3 比它快 1.28 倍），由 `study/e1_two_machines.py` 按队列逐个运行算出；实测出来后照上一节的做法校准。
 
 """ + TWO + """
 
