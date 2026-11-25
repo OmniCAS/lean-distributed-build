@@ -125,8 +125,8 @@ def recalibrate():
     rows = []
     for cell in CELLS:
         m = measured(cell["run"])
-        if cell["inst"] != "wide" or cell["mode"] != "tool" or not m:
-            continue
+        if cell["inst"] != "wide" or cell["mode"] != "tool" or not m or cell.get("delay"):
+            continue  # the fetch-delay cells need the on-demand fetch model: e1_delay_backtest.py
         sp, first, over = measured_speeds(cell["run"])
         s2 = sp["worker-1"]
         s3 = sp.get("worker-2", 1.122)

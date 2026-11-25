@@ -291,3 +291,40 @@ def test_eft_wait_holds_critical_module_for_fast_machine():
     # priority index: x first (takes the fast machine), then c
     assert simulate(t, Config(ms, priority="index"))["makespan_s"] == pytest.approx(4)
     assert simulate(t, Config(ms, priority="index", placement="eft_wait"))["makespan_s"] == pytest.approx(2.5)
+
+
+def test_pull_fetch_pays_latency_per_task():
+    # a(1), d(10) roots; b(1) imports a and d. 2 machines x 1 core, latency 5.
+    # d -> machine 0, a -> machine 1 at t=0; b ready at 10, goes to machine 0 (tie -> first).
+    # push: a's artifact reached machine 0 at 6, so b runs 10-11.
+    # pull: b fetches a when it starts: 10 + 5 -> runs 15-16; one fetching task.
+    t = from_edges(3, [(2, 0), (2, 1)], [1, 10, 1])
+    ms = [Machine(1), Machine(1)]
+    assert simulate(t, Config(ms, latency=5.0))["makespan_s"] == pytest.approx(11)
+    r = simulate(t, Config(ms, latency=5.0, fetch="pull"))
+    assert r["makespan_s"] == pytest.approx(16)
+    assert r["fetch_tasks"] == 1
+
+
+def test_pull_fetch_artifacts_stay():
+    # a(1), b(1) and c(1) import a, e(20) a root. blevel: e -> machine 0, a -> machine 1.
+    # At 1, b and c are ready and only machine 1 is free: b runs 1-2, c 2-3, both where a is: no fetch.
+    t = from_edges(4, [(1, 0), (2, 0)], [1, 1, 1, 20])
+    r = simulate(t, Config([Machine(1), Machine(1)], latency=5.0, fetch="pull"))
+    assert r["makespan_s"] == pytest.approx(20)
+    assert r["fetch_tasks"] == 0
+    # 2 cores on machine 0: e and a both start there; at 1 both machines have one free core,
+    # b -> machine 0 (tie -> first, has a), c -> machine 1, which fetches a: 1 + 5 -> runs 6-7.
+    r = simulate(t, Config([Machine(2), Machine(1)], latency=5.0, fetch="pull", record=True))
+    assert r["fetch_tasks"] == 1
+    assert r["start"][2] == pytest.approx(6)
+
+
+def test_pull_est_prefers_machine_with_imports():
+    # d(1) root, b(1) imports d. Machine 0 joins at 0.5, so d runs on machine 1 (0-1).
+    # At 1 both machines are free: most_free takes machine 0 (tie -> first) and fetches d: 1 + 5 -> 7;
+    # est (earliest data-ready) takes machine 1, which has d: 1-2.
+    t = from_edges(2, [(1, 0)], [1, 1])
+    ms = [Machine(1, start_at=0.5), Machine(1)]
+    assert simulate(t, Config(ms, latency=5.0, fetch="pull"))["makespan_s"] == pytest.approx(7)
+    assert simulate(t, Config(ms, latency=5.0, fetch="pull", placement="est"))["makespan_s"] == pytest.approx(2)

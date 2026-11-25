@@ -1,0 +1,60 @@
+{
+ "name": "wide2-B5-c16-r1",
+ "project": "wide",
+ "mode": "forward",
+ "hosts": [
+  "worker-2",
+  "worker-3"
+ ],
+ "cores_per_host": 16,
+ "cores": [
+  16,
+  16
+ ],
+ "project_dir": "src/wide",
+ "cpus": "32-47",
+ "priority": "bl",
+ "history": null,
+ "assign": null,
+ "fetch_delay_s": 0.0,
+ "started": "2026-11-25T07:32:56",
+ "load_before": {
+  "worker-2": [
+   "10.93",
+   "16.02",
+   "16.98"
+  ],
+  "worker-3": [
+   "11.82",
+   "15.19",
+   "17.81"
+  ]
+ },
+ "result": {
+  "ok": true,
+  "wall_s": 908.57,
+  "lake_cpu_s": 472.68,
+  "lake_max_rss_kb": 307564,
+  "slots": 32,
+  "build_dir": "/shared/lakeshard-b5/wide2-B5-c16-r1/build"
+ },
+ "elapsed_s": 1000.5,
+ "load_after": {
+  "worker-2": [
+   "12.87",
+   "23.92",
+   "24.17"
+  ],
+  "worker-3": [
+   "12.90",
+   "17.94",
+   "19.04"
+  ]
+ },
+ "summary": {
+  "wall_s": 908.57,
+  "ok": true,
+  "lower_bound": null,
+  "modules_built": null
+ }
+}

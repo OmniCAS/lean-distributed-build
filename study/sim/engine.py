@@ -12,6 +12,10 @@ Model
   link. A module can start on machine j once the artifacts of its whole import closure are there
   (tracked as `avail[m, j]` = arrival of m's closure on j). The slot is held while waiting
   ("transfer wait").
+  With `fetch="pull"` (what the tool does) nothing is pushed: when a task starts on machine j it
+  fetches every artifact of its import closure that is not already on j (built or fetched there
+  earlier), paying `latency` once per task plus the bytes over `bandwidth`, with its slot held;
+  the fetched artifacts then stay on j.
 * Release: with `release="module"` each module's artifacts are published when it finishes;
   with `release="batch"` only when the whole batch is done (Lake-style batch).
 * Scheduling is decided with *estimated* costs (`est_cost`), timing uses the actual `cost`.
@@ -89,6 +93,7 @@ class Config:
     etf_window: int = 64  # placement="etf": how many top-priority ready modules are considered
     delay: float = math.inf  # placement="est": defer a module whose best free machine must wait more than
     #                          this for data while a busy machine already has it (delay scheduling)
+    fetch: str = "push"  # "push": artifacts sent to every machine when built; "pull": fetched on demand per task
 
 
 @dataclass
@@ -133,7 +138,27 @@ def simulate(trace: Trace, cfg: Config, cost: np.ndarray | None = None) -> dict:
     gen = np.random.default_rng(cfg.rng_key)
     rnd = gen.random(n) if cfg.priority == "random" else None
 
-    net = cfg.latency > 0 or math.isfinite(cfg.bandwidth)
+    pull = cfg.fetch == "pull" and M > 1
+    if pull:
+        # import closure (without the module itself) as a bool matrix; which artifacts each machine has
+        clo = np.zeros((n, n), dtype=bool)
+        for m in trace.order():
+            m = int(m)
+            for u in imps[m]:
+                clo[m, u] = True
+                clo[m] |= clo[u]
+        have = np.zeros((n, M), dtype=bool)
+        obp = np.nan_to_num(trace.out_bytes, nan=0.0) if trace.out_bytes is not None else np.zeros(n)
+        bw = cfg.bandwidth if math.isfinite(cfg.bandwidth) else math.inf
+        st.stats["fetch_tasks"] = 0
+
+    def pull_wait(m, j):
+        miss = clo[m] & ~have[:, j]
+        if not miss.any():
+            return 0.0, miss
+        return cfg.latency + (float(obp[miss].sum()) / bw if math.isfinite(bw) else 0.0), miss
+
+    net = (cfg.latency > 0 or math.isfinite(cfg.bandwidth)) and not pull
     if net and M > 1:
         avail = np.full((n, M), np.inf)
         link_free = np.zeros(M)
@@ -193,6 +218,8 @@ def simulate(trace: Trace, cfg: Config, cost: np.ndarray | None = None) -> dict:
     rerank_count = 0
 
     def data_ready(m, j):
+        if pull:
+            return st.now + pull_wait(m, j)[0]
         if avail is None or not imps[m]:
             return 0.0
         return float(max(avail[u, j] for u in imps[m]))
@@ -215,10 +242,19 @@ def simulate(trace: Trace, cfg: Config, cost: np.ndarray | None = None) -> dict:
         acc["overhead"] += cfg.task_overhead * k
         fin_times = []
         for b in batch:
-            dr = data_ready(b, j)
-            if dr > t:
-                acc["transfer_wait"] += (dr - t) * k
-                t = dr
+            if pull:
+                w, miss = pull_wait(b, j)
+                if w > 0:
+                    acc["transfer_wait"] += w * k
+                    t += w
+                    have[miss, j] = True
+                    st.stats["fetch_tasks"] += 1
+                have[b, j] = True
+            else:
+                dr = data_ready(b, j)
+                if dr > t:
+                    acc["transfer_wait"] += (dr - t) * k
+                    t = dr
             t += cfg.module_overhead
             acc["overhead"] += cfg.module_overhead * k
             d = cost[b] / cfg.speedup(b, k) / speed[j]
@@ -254,7 +290,7 @@ def simulate(trace: Trace, cfg: Config, cost: np.ndarray | None = None) -> dict:
             dispatch_fixed()
             return
         deferred = []
-        if cfg.placement == "etf" and avail is not None:
+        if cfg.placement == "etf" and (avail is not None or pull):
             # ETF (Hwang et al. 1989): among the best `etf_window` ready modules and all machines
             # with a free core, start the pair that can begin earliest; ties -> priority order
             while ready and free.max() > 0:
@@ -315,7 +351,7 @@ def simulate(trace: Trace, cfg: Config, cost: np.ndarray | None = None) -> dict:
                     deferred.append(item)  # hold it for the faster machine that frees up soon
                     continue
                 j = best[1]
-            elif cfg.placement == "est" and avail is not None:
+            elif cfg.placement == "est" and (avail is not None or pull):
                 dr = np.array([data_ready(m, j) for j in cand])
                 # earliest data-ready; ties -> faster machine, then more free cores
                 order = np.lexsort((-free[cand], -speed[cand], dr))
@@ -427,6 +463,8 @@ def simulate(trace: Trace, cfg: Config, cost: np.ndarray | None = None) -> dict:
         "core_s": {k: round(v, 2) for k, v in acc.items()},
         "idle_core_s": total_cores * mk - acc["compute"] - acc["overhead"] - acc["transfer_wait"],
     }
+    if pull:
+        res["fetch_tasks"] = st.stats["fetch_tasks"]
     if cfg.record:
         res["start"], res["finish"], res["machine"], res["threads"] = st.start, st.finish, st.machine, st.threads
     return res

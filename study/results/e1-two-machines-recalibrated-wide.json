@@ -108,25 +108,5 @@
   "predicted_s": 374.4,
   "measured_s": 359.57,
   "error_pct": 4.1
- },
- {
-  "run": "wide2-B1-c16-d0.1",
-  "speed_vs_reference": [
-   1.163,
-   1.104
-  ],
-  "predicted_s": 353.8,
-  "measured_s": 370.17,
-  "error_pct": -4.4
- },
- {
-  "run": "wide2-B1-c16-d1",
-  "speed_vs_reference": [
-   1.154,
-   1.105
-  ],
-  "predicted_s": 355.5,
-  "measured_s": 405.85,
-  "error_pct": -12.4
  }
 ]

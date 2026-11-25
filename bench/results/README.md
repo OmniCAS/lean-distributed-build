@@ -25,13 +25,17 @@
 | `wide2-A1-c8-r1` | wide | tool | worker-2 | 8 | bl | 1316.12 | 9706.28 | 163.66 | 4333 |
 | `wide2-B1-c16-d0.1` | wide | tool | worker-2, worker-3 | 16 | bl | 370.17 | 9355.99 | 159.56 | 4333 |
 | `wide2-B1-c16-d1` | wide | tool | worker-2, worker-3 | 16 | bl | 405.85 | 9299.69 | 159.01 | 4333 |
+| `wide2-B1-c16-d10` | wide | tool | worker-2, worker-3 | 16 | bl | 894.23 | 9067.64 | 153.32 | 4333 |
 | `wide2-B1-c16-r1` | wide | tool | worker-2, worker-3 | 16 | bl | 358.57 | 9447.36 | 161.78 | 4333 |
 | `wide2-B1-c4-r1` | wide | tool | worker-2, worker-3 | 4 | bl | 1304.64 | 9359.9 | 163.33 | 4333 |
 | `wide2-B1-c8-r1` | wide | tool | worker-2, worker-3 | 8 | bl | 674.89 | 9428.76 | 160.94 | 4333 |
 | `wide2-B1s-c16-r1` | wide | tool | worker-2, worker-3 | 16 | structure | 382.81 | 9593.94 | 163.4 | 4333 |
+| `wide2-B2-c16-d1` | wide | tool | worker-2, worker-3 | 16 | bl | 440.05 | 9585.06 | 161.46 | 4333 |
+| `wide2-B2-c16-d10` | wide | tool | worker-2, worker-3 | 16 | bl | 580.27 | 9549.85 | 160.86 | 4333 |
 | `wide2-B2-c16-r1` | wide | tool | worker-2, worker-3 | 16 | bl | 423.29 | 9455.23 | 158.68 | 4333 |
 | `wide2-B3-c16-r1` | wide | tool | worker-2, worker-3 | 16 | bl | 359.57 | 9377.62 | 159.76 | 4333 |
 | `wide2-B4-c16-r1` | wide | tool | worker-2, worker-3 | 16 | fifo | 441.69 | 9777.48 | 163.61 | 4333 |
 | `wide2-B4-c4-r1` | wide | tool | worker-2, worker-3 | 4 | fifo | 1332.2 | 9223.46 | 156.42 | 4333 |
+| `wide2-B5-c16-r1` | wide | forward | worker-2, worker-3 | 16 | bl | 908.57 |  |  | None |
 
 “W”“CP”是该次运行里实测的逐模块 `lean` 秒数算出的总工作量与最长链（单机原版 Lake 的运行没有这一栏，它的逐模块秒数在 `ref.history.json`）。预测与容差见 `bench/expected.md`，回测见 `study/t6_calibrate.py`。阶段 1 在 PFR 上的验收输出在 [`step1-pfr/`](step1-pfr/)。

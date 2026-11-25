@@ -90,6 +90,17 @@ if os.path.exists(two_path):
           ("每次取产物加 10 秒 ÷ 不加（宽图两机 16 核）", "wide2-B1-c16-d10", "wide2-B1-c16-r1"),
           ("单机 ÷ 两机（Mathlib 16 + 16 核）", "mathlib2-A1-c16-r1", "mathlib2-B1-c1616-r1")]
     rtab = ["| 比较 | 预测 | 实测 |", "|---|---:|---:|"] + [f"| {n} | {q(a, b, pr)} | {q(a, b, me)} |" for n, a, b in R2]
+    bt_path = os.path.join(STUDY, "results", "e1-delay-backtest.json")
+    BT = ""
+    if os.path.exists(bt_path):
+        bt = json.load(open(bt_path))["backtest"]
+        dl = [x for x in bt if x["delay_s"] > 0]
+        BT = ("加延迟的格：上面的预测用的是“产物建完即推送、派发看数据所在”的模型，误差 " +
+              "、".join(f"{x['dispatch']} {x['delay_s']:g} 秒 {x['push-est']['error_pct']:+.1f}%" for x in dl) +
+              "。工具其实是派发不看数据所在、每个任务开工时才取件；按这个做法回测（`python e1_delay_backtest.py`）误差 " +
+              "、".join(f"{x['pull-blind']['error_pct']:+.1f}%" for x in dl) +
+              "，要取件的任务数也对得上（模拟 " + "、".join(f"{x['pull-blind']['fetch_tasks']:,}" for x in dl) +
+              "，实测 " + "、".join(f"{x['measured_fetch_tasks']:,}" for x in dl) + "）。B1 是动态派发，B2 是按目录固定切分。细节与对策见 `docs/study-report.md` 4.4 节。")
     rec_path = os.path.join(STUDY, "results", "e1-two-machines-recalibrated-wide.json")
     REC = ""
     if os.path.exists(rec_path):
@@ -101,10 +112,10 @@ if os.path.exists(two_path):
         REC = (f"\n\n**校准**：这批运行里 worker-2 只比参考机慢 {min(s2):.2f}–{max(s2):.2f} 倍（校准时是 1.438；两批记录的系统负载相近，变快的原因不明），"
                f"worker-3 {min(s3):.2f}–{max(s3):.2f} 倍（原 1.122）。按每次运行自身记录里量出的速度重算（`python e1_two_machines.py --recalibrate`），"
                f"宽图不加延迟的 {len(e)} 格误差是 {min(e):+.1f}% 到 {max(e):+.1f}%：模型本身没问题，偏差来自机器速度变了。"
-               + ("加延迟的几格：" + "、".join(f"每次加 {d} 秒 {v:+.1f}%" for d, v in ed) + "，模型低估了跨机取产物变慢的代价。" if ed else "") +
+               + BT +
                "所以每次运行前都要当场量一次每台机器的速度。窄图的逐模块耗时来自 macOS，不能这样校准，只看比值。")
     TWO = ("\n".join(lines_) + f"\n\n已测 {len(done)} 格，{n_in} 格在容差带内。\n\n" + "\n".join(rtab) + REC +
-           "\n\n说明：单机运行放在 worker-2 上（协调器也在那里）。`wide2-B5`（原版 Lake 调度、只把 `lean` 转发出去）没有模型，不给预测。"
+           "\n\n说明：单机运行放在 worker-2 上（协调器也在那里）。`wide2-B5`（原版 Lake 调度、只把 `lean` 转发出去）没有模型，没给预测；实测 909 秒，比本工具两机慢 2.5 倍、比本工具单机还慢 35%，原因见 `docs/lessons.md` 第 12 节。"
            "Mathlib 的单机原版 Lake 就在本研究量 trace 的那台机器上，预测即那次实测的复现（47.7 分钟）；本工具每个 `lean` 1 线程，按 Mathlib 文件实测的 0.86 倍计。")
 doc = f"""# 预期效果：实验 E1–E4 每一格的预期值、容差与当前实测
 
@@ -148,7 +159,7 @@ doc = f"""# 预期效果：实验 E1–E4 每一格的预期值、容差与当�
 - 宽图三机的产物与单机原版 `lake build` 逐字节一致（12,999 / 12,999 个文件，实测）。
 - 窄图（反例）预测**三机比单机还慢**，因为模块平均只有 0.44 秒，而三机时每任务多 0.21 秒开销、两台机器更慢、开工更晚。这是一个可以被实测否定的预测；窄图的逐模块耗时来自 macOS，绝对值仅供参考。
 - B2、B3（预先固定放置）的预测用的是 `study/sim/partition.py` 里的划分近似（按目录第 3 层 / 沿导入链贪心），与工具实际生成的划分文件不完全相同。
-- 加延迟的几格：每次跨机取产物多等 0.1 / 1 / 10 秒。预测 0.1 秒、1 秒几乎无影响；10 秒时动态派发变慢，沿链固定放置反而占优（只有在这么慢的网络上预先聚类才划算）。
+- 加延迟的几格：每次跨机取产物多等 0.1 / 1 / 10 秒。预测 0.1 秒、1 秒几乎无影响；10 秒时动态派发变慢，沿链固定放置反而占优（只有在这么慢的网络上预先聚类才划算）。这些预测用的是“产物建完即推送、派发看数据所在”的模型；两机实测表明它低估了工具按需取件的代价（下一节）。
 
 ## 两台机器（进行中）
 
