@@ -1,0 +1,176 @@
+{
+ "work_s": 1710442.3102305068,
+ "critical_path_s": 3349.2485140508825,
+ "max_speedup": 510.69435518290163,
+ "cp_modules": 144,
+ "cp_top10": [
+  {
+   "module": "Formalism.SizeWindowBrackets.ChainSlopeWindows.TruncatedLatticeHolds",
+   "seconds": 382.4926621261398,
+   "lines": 763,
+   "share_of_cp": 0.11420253245511447
+  },
+  {
+   "module": "Supplements.Kernels.MainTheorems",
+   "seconds": 118.65513094882652,
+   "lines": 16,
+   "share_of_cp": 0.03542738929375961
+  },
+  {
+   "module": "Main",
+   "seconds": 118.59341557814878,
+   "lines": 12,
+   "share_of_cp": 0.035408962661510966
+  },
+  {
+   "module": "Supplements.Kernels.MainTheoremsCritical",
+   "seconds": 118.47026653025337,
+   "lines": 4,
+   "share_of_cp": 0.03537219350348081
+  },
+  {
+   "module": "Development.AutomorphicArithmetic.CharacterBoxes.MainConclusion",
+   "seconds": 118.43011071129504,
+   "lines": 14,
+   "share_of_cp": 0.03536020400231663
+  },
+  {
+   "module": "Supplements.Kernels.MainTheoremsAll",
+   "seconds": 118.40842302608714,
+   "lines": 2,
+   "share_of_cp": 0.03535372861384757
+  },
+  {
+   "module": "Development.AutomorphicArithmetic.AutomorphicVarieties.ModularityArgument.ThresholdArguments.DenseThresholdCases.TopMainZj",
+   "seconds": 108.7464889238138,
+   "lines": 75,
+   "share_of_cp": 0.032468922048512316
+  },
+  {
+   "module": "Development.AutomorphicArithmetic.AutomorphicVarieties.ModularityArgument.ThresholdArguments.DenseThresholdCases.TemperedProductOfSquareIntegrable",
+   "seconds": 107.92079459875553,
+   "lines": 344,
+   "share_of_cp": 0.03222239082767448
+  },
+  {
+   "module": "Development.AutomorphicArithmetic.AutomorphicVarieties.ModularityArgument.ThresholdArguments.DenseThresholdCases.VwinOfRow",
+   "seconds": 107.26625283257276,
+   "lines": 5,
+   "share_of_cp": 0.03202696138628283
+  },
+  {
+   "module": "Development.AutomorphicArithmetic.ThetaCorrespondence.FockModels.EveryCharacterE",
+   "seconds": 72.03376417581899,
+   "lines": 88,
+   "share_of_cp": 0.02150744081056406
+  }
+ ],
+ "cp_by_package": {
+  "Formalism": 591.9763768319579,
+  "Development": 2283.1449011356085,
+  "Supplements": 355.533820505167,
+  "Main": 118.59341557814878
+ },
+ "cp_small_modules_s": 433.4344913307186,
+ "depth": 203,
+ "depth_floor_s": 1238.2999999999995,
+ "split": [
+  {
+   "parts": 4,
+   "k": 0,
+   "cp_s": 3349.2485140508825,
+   "max_speedup": 510.69435518290163,
+   "last_split": ""
+  },
+  {
+   "parts": 4,
+   "k": 1,
+   "cp_s": 3348.1848306519623,
+   "max_speedup": 510.8620631010517,
+   "last_split": "Formalism.SizeWindowBrackets.ChainSlopeWindows.TruncatedLatticeHolds"
+  },
+  {
+   "parts": 4,
+   "k": 10,
+   "cp_s": 2737.5717349244273,
+   "max_speedup": 624.8695836559439,
+   "last_split": "Development.AutomorphicArithmetic.AutomorphicVarieties.ModularityArgument.ThresholdArguments.DenseThresholdCases.TopMainZj"
+  },
+  {
+   "parts": 4,
+   "k": 50,
+   "cp_s": 2332.340582726073,
+   "max_speedup": 733.7510322914537,
+   "last_split": "Development.AutomorphicArithmetic.ThetaCorrespondence.ThetaPairLifts.ThirdPlaceSeries.FittedFunctionAtZeroClose"
+  },
+  {
+   "parts": 4,
+   "k": 200,
+   "cp_s": 1931.324727977939,
+   "max_speedup": 887.5267247394177,
+   "last_split": "Development.AbelianVarietyTheory.Proofs.DivisorProofs.RigidBoundaryChartsForFanUnitaryDatumStatement"
+  }
+ ],
+ "edge_removal": [
+  {
+   "removed": 1,
+   "edge": "Supplements.Kernels.MainTheorems -> Development.AutomorphicArithmetic.CharacterBoxes.MainConclusion",
+   "cp_s": 3002.606575097984,
+   "max_speedup": 569.6524894123667
+  },
+  {
+   "removed": 2,
+   "edge": "Development.AbelianVarietyTheory.Proofs.DivisorProofs.ExistsWeilRepHermitianPairRationalSchrodingerStatement -> Development.AbelianVarietyTheory.Proofs.DivisorProofs.ExistsWeilRepHermitianPairRationalSchrodinger",
+   "cp_s": 2841.9193582347575,
+   "max_speedup": 601.8616627084516
+  },
+  {
+   "removed": 3,
+   "edge": "Supplements.Kernels.MainTheoremsAll -> Development.AutomorphicArithmetic.AutomorphicVarieties.SmallClassNumbers.CorGKOf",
+   "cp_s": 2700.503745957248,
+   "max_speedup": 633.3789807887143
+  },
+  {
+   "removed": 4,
+   "edge": "Development.AutomorphicArithmetic.AutomorphicVarieties.ModularityArgument.ThresholdArguments.DenseThresholdCases.VwinOfRow -> Development.AutomorphicArithmetic.AutomorphicVarieties.ModularityArgument.ThresholdArguments.DenseThresholdCases.TopMainZj",
+   "cp_s": 2607.167808271767,
+   "max_speedup": 656.0537855690695
+  },
+  {
+   "removed": 5,
+   "edge": "ReciprocityTheory.ReductiveGroups.ArithmeticGeometry.BirationalGeometry.ToroidalCompactification.RigidArc -> ReciprocityTheory.ReductiveGroups.ArithmeticGeometry.BirationalGeometry.ToroidalCompactification.HasArcDataIff",
+   "cp_s": 2590.9872044834297,
+   "max_speedup": 660.1508132771814
+  },
+  {
+   "removed": 6,
+   "edge": "Development.AbelianVarietyTheory.Proofs.DivisorProofs.DiagonalSiegelHeisenbergInvariantFormUnique -> Development.AbelianVarietyTheory.Proofs.TwistedOperators.ExistsGoodPlace",
+   "cp_s": 2577.9580154803507,
+   "max_speedup": 663.4872639350568
+  },
+  {
+   "removed": 7,
+   "edge": "Development.AbelianVarietyTheory.Proofs.ModuliProofs.PartOneOfSemistableReductionPadicPolarized -> Development.AbelianVarietyTheory.Proofs.ModuliProofs.PartIOfSemistableReductionOfArcFam",
+   "cp_s": 2504.405825696223,
+   "max_speedup": 682.9732995669762
+  },
+  {
+   "removed": 8,
+   "edge": "Formalism.LatticeSlopes.LatticeSlopesProofs.GramDetLe -> Formalism.LatticeSlopes.Statement",
+   "cp_s": 2504.224460297305,
+   "max_speedup": 683.0227630742976
+  },
+  {
+   "removed": 9,
+   "edge": "ReciprocityTheory.ReductiveGroups.ArithmeticGeometry.SemiabelianSchemes.AbelianSchemeQuotients.IsAbelianScheme -> ReciprocityTheory.ReductiveGroups.ArithmeticGeometry.SemiabelianSchemes.SplitTori.SplitTorusAff",
+   "cp_s": 2501.466891129614,
+   "max_speedup": 683.7757142802335
+  },
+  {
+   "removed": 10,
+   "edge": "Formalism.TameInertiaTowers.CentralOrderTwo.TwoAdic -> Formalism.TameInertiaTowers.StatementGroup",
+   "cp_s": 2498.853657436052,
+   "max_speedup": 684.4907884623807
+  }
+ ]
+}

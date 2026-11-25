@@ -1,0 +1,29 @@
+# E1 run queue: one run_e1.py argument line each (NAME first). Paths are on the machines (BASE = /tmp/lakeshard-e1).
+# reference runs (plain lake build, one machine, 16 cores)
+mid-A0-c16-r1 --project mid --mode lake --hosts worker-1 --cores 16
+wide-A0-c16-r1 --project wide --mode lake --hosts worker-1 --cores 16
+narrow-A0-c16-r1 --project narrow --mode lake --hosts worker-1 --cores 16
+# the tool on one machine (A1) and on three machines (B1); priorities from the reference run
+mid-A1-c16-r1 --project mid --mode tool --hosts worker-1 --cores 16 --history /tmp/lakeshard-e1/runs/mid-A0-c16-r1/ref.history.json
+mid-B1-c16-r1 --project mid --mode tool --hosts worker-1,worker-2,worker-3 --cores 16 --history /tmp/lakeshard-e1/runs/mid-A0-c16-r1/ref.history.json
+wide-A1-c16-r1 --project wide --mode tool --hosts worker-1 --cores 16 --history /tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json
+wide-B1-c16-r1 --project wide --mode tool --hosts worker-1,worker-2,worker-3 --cores 16 --history /tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json
+wide-A1-c8-r1 --project wide --mode tool --hosts worker-1 --cores 8 --history /tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json
+wide-B1-c8-r1 --project wide --mode tool --hosts worker-1,worker-2,worker-3 --cores 8 --history /tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json
+wide-A1-c4-r1 --project wide --mode tool --hosts worker-1 --cores 4 --history /tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json
+wide-B1-c4-r1 --project wide --mode tool --hosts worker-1,worker-2,worker-3 --cores 4 --history /tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json
+narrow-A1-c16-r1 --project narrow --mode tool --hosts worker-1 --cores 16 --history /tmp/lakeshard-e1/runs/narrow-A0-c16-r1/ref.history.json
+narrow-B1-c16-r1 --project narrow --mode tool --hosts worker-1,worker-2,worker-3 --cores 16 --history /tmp/lakeshard-e1/runs/narrow-A0-c16-r1/ref.history.json
+narrow-A1-c4-r1 --project narrow --mode tool --hosts worker-1 --cores 4 --history /tmp/lakeshard-e1/runs/narrow-A0-c16-r1/ref.history.json
+narrow-B1-c4-r1 --project narrow --mode tool --hosts worker-1,worker-2,worker-3 --cores 4 --history /tmp/lakeshard-e1/runs/narrow-A0-c16-r1/ref.history.json
+# controls on the wide graph (three machines, 16 cores each)
+wide-B1s-c16-r1 --project wide --mode tool --hosts worker-1,worker-2,worker-3 --cores 16 --priority structure
+wide-B4-c16-r1 --project wide --mode tool --hosts worker-1,worker-2,worker-3 --cores 16 --history /tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json --priority fifo
+wide-B4-c4-r1 --project wide --mode tool --hosts worker-1,worker-2,worker-3 --cores 4 --history /tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json --priority fifo
+wide-B2-c16-r1 --project wide --mode tool --hosts worker-1,worker-2,worker-3 --cores 16 --history /tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json --assign /tmp/lakeshard-e1/assign-wide-ns.json
+wide-B3-c16-r1 --project wide --mode tool --hosts worker-1,worker-2,worker-3 --cores 16 --history /tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json --assign /tmp/lakeshard-e1/assign-wide-chains.json
+wide-B1-c16-d0.1 --project wide --mode tool --hosts worker-1,worker-2,worker-3 --cores 16 --history /tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json --fetch-delay 0.1
+wide-B1-c16-d1 --project wide --mode tool --hosts worker-1,worker-2,worker-3 --cores 16 --history /tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json --fetch-delay 1
+wide-B1-c16-d10 --project wide --mode tool --hosts worker-1,worker-2,worker-3 --cores 16 --history /tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json --fetch-delay 10
+wide-B3-c16-d1 --project wide --mode tool --hosts worker-1,worker-2,worker-3 --cores 16 --history /tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json --assign /tmp/lakeshard-e1/assign-wide-chains.json --fetch-delay 1
+wide-B3-c16-d10 --project wide --mode tool --hosts worker-1,worker-2,worker-3 --cores 16 --history /tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json --assign /tmp/lakeshard-e1/assign-wide-chains.json --fetch-delay 10

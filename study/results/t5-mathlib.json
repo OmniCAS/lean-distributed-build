@@ -1,0 +1,1091 @@
+{
+ "cp_s": 1183.5970000000004,
+ "cp_modules": 154,
+ "near_critical": {
+  "slack<=0%": 43,
+  "slack<=2%": 496,
+  "slack<=5%": 805,
+  "slack<=10%": 1441
+ },
+ "n": 8908,
+ "fixed_part_on_cp_s": 192.24048,
+ "rows": [
+  {
+   "module": "Batteries.Tactic.Lint.Basic",
+   "seconds": 6.5,
+   "threads2_cp": 1181.6019230082725,
+   "split4_cp": 1181.3370000000004
+  },
+  {
+   "module": "Batteries.Tactic.Lint.Misc",
+   "seconds": 2.5,
+   "threads2_cp": 1183.3161979435383,
+   "split4_cp": 1182.0149800000004,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Batteries.Util.ProofWanted",
+   "seconds": 4.7,
+   "threads2_cp": 1182.2424195317235,
+   "split4_cp": 1181.3370000000004,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Batteries.Tactic.Basic",
+   "seconds": 0.705,
+   "threads2_cp": 1183.5970000000004,
+   "split4_cp": 1183.3665100000005,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Batteries.Classes.Order",
+   "seconds": 1.0,
+   "threads2_cp": 1183.5970000000004,
+   "split4_cp": 1183.1457400000004,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Batteries.Data.UInt",
+   "seconds": 1.2,
+   "threads2_cp": 1183.5970000000004,
+   "split4_cp": 1182.9962200000004,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Batteries.Data.Array.Basic",
+   "seconds": 3.0,
+   "threads2_cp": 1183.1184328276015,
+   "split4_cp": 1181.6476600000003,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Aesop.Forward.RuleInfo",
+   "seconds": 1.0,
+   "threads2_cp": 1183.5970000000004,
+   "split4_cp": 1183.1563000000006,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Aesop.Rule.Forward",
+   "seconds": 1.1,
+   "threads2_cp": 1183.5970000000004,
+   "split4_cp": 1183.0827400000005,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Aesop.Forward.Match.Types",
+   "seconds": 0.9470000000000001,
+   "threads2_cp": 1183.5970000000004,
+   "split4_cp": 1183.1979700000004,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Aesop.RuleTac.Descr",
+   "seconds": 1.7,
+   "threads2_cp": 1183.5550405877634,
+   "split4_cp": 1182.6413800000005,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Aesop.Rule.Basic",
+   "seconds": 0.745,
+   "threads2_cp": 1183.5970000000004,
+   "split4_cp": 1183.3581100000004,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Aesop.Rule",
+   "seconds": 1.2,
+   "threads2_cp": 1183.5970000000004,
+   "split4_cp": 1183.0173400000006,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Aesop.Forward.Match",
+   "seconds": 2.0,
+   "threads2_cp": 1183.4779958557278,
+   "split4_cp": 1182.4231000000004,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Aesop.Forward.State",
+   "seconds": 6.9,
+   "threads2_cp": 1181.479149039551,
+   "split4_cp": 1181.3370000000004,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Aesop.Tree.Data",
+   "seconds": 2.3,
+   "threads2_cp": 1183.38558031997,
+   "split4_cp": 1182.2440000000004,
+   "cut_edge_cp": 1182.2440000000004
+  },
+  {
+   "module": "Aesop.Tree.TreeM",
+   "seconds": 1.6,
+   "threads2_cp": 1183.5770076688107,
+   "split4_cp": 1182.7870000000005,
+   "cut_edge_cp": 1182.7870000000005
+  },
+  {
+   "module": "Aesop.Search.SearchM",
+   "seconds": 1.2,
+   "threads2_cp": 1183.5970000000004,
+   "split4_cp": 1183.0341400000004,
+   "cut_edge_cp": 1182.7870000000005
+  },
+  {
+   "module": "Aesop.Search.RuleSelection",
+   "seconds": 1.1,
+   "threads2_cp": 1183.5970000000004,
+   "split4_cp": 1183.1101000000006,
+   "cut_edge_cp": 1182.4970000000003
+  },
+  {
+   "module": "Aesop.Search.Expansion.Norm",
+   "seconds": 4.9,
+   "threads2_cp": 1182.12306398837,
+   "split4_cp": 1181.3370000000004,
+   "cut_edge_cp": 1182.4970000000003
+  },
+  {
+   "module": "Aesop.Search.Expansion",
+   "seconds": 2.7,
+   "threads2_cp": 1183.2410760685766,
+   "split4_cp": 1181.9177800000004,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Aesop.Search.ExpandSafePrefix",
+   "seconds": 1.4,
+   "threads2_cp": 1183.5970000000004,
+   "split4_cp": 1182.8937400000004,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Aesop.Search.Main",
+   "seconds": 3.8,
+   "threads2_cp": 1182.7403949671107,
+   "split4_cp": 1181.3370000000004,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Aesop.Main",
+   "seconds": 1.6,
+   "threads2_cp": 1183.5770076688107,
+   "split4_cp": 1182.7605400000004,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Mathlib.Data.Set.Operations",
+   "seconds": 2.3,
+   "threads2_cp": 1183.38558031997,
+   "split4_cp": 1182.2945800000005,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Mathlib.Order.Monotone.Defs",
+   "seconds": 2.5,
+   "threads2_cp": 1183.3161979435383,
+   "split4_cp": 1182.1613800000005,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Mathlib.Order.Monotone.Basic",
+   "seconds": 2.4,
+   "threads2_cp": 1183.3516310186349,
+   "split4_cp": 1182.2527000000005,
+   "cut_edge_cp": 1181.3370000000004
+  },
+  {
+   "module": "Mathlib.Order.Lattice",
+   "seconds": 7.6,
+   "threads2_cp": 1181.2642945942878,
+   "split4_cp": 1178.3565400000005,
+   "cut_edge_cp": 1177.0370000000005
+  },
+  {
+   "module": "Mathlib.Order.BoundedOrder.Lattice",
+   "seconds": 1.7,
+   "threads2_cp": 1183.5550405877634,
+   "split4_cp": 1182.7858600000004,
+   "cut_edge_cp": 1172.9370000000004
+  },
+  {
+   "module": "Mathlib.Order.Disjoint",
+   "seconds": 3.7,
+   "threads2_cp": 1182.791304201913,
+   "split4_cp": 1181.2863400000003,
+   "cut_edge_cp": 1168.1970000000003
+  },
+  {
+   "module": "Mathlib.Order.PropInstances",
+   "seconds": 1.7,
+   "threads2_cp": 1183.5550405877634,
+   "split4_cp": 1182.7868200000005,
+   "cut_edge_cp": 1168.1970000000003
+  },
+  {
+   "module": "Mathlib.Order.Heyting.Basic",
+   "seconds": 8.3,
+   "threads2_cp": 1181.0494401490248,
+   "split4_cp": 1179.2970000000005,
+   "cut_edge_cp": 1179.2970000000005
+  },
+  {
+   "module": "Mathlib.Order.BooleanAlgebra.Defs",
+   "seconds": 1.8,
+   "threads2_cp": 1183.5311709767777,
+   "split4_cp": 1182.7137400000004,
+   "cut_edge_cp": 1179.2970000000005
+  },
+  {
+   "module": "Mathlib.Order.BooleanAlgebra.Basic",
+   "seconds": 4.4,
+   "threads2_cp": 1182.415854128079,
+   "split4_cp": 1180.7642200000005,
+   "cut_edge_cp": 1179.2970000000005
+  },
+  {
+   "module": "Mathlib.Order.BooleanAlgebra.Set",
+   "seconds": 4.5,
+   "threads2_cp": 1183.3970000000004,
+   "split4_cp": 1183.3970000000004,
+   "cut_edge_cp": 1183.3970000000004
+  },
+  {
+   "module": "Mathlib.Data.Set.SymmDiff",
+   "seconds": 2.4,
+   "threads2_cp": 1183.3516310186349,
+   "split4_cp": 1182.2738200000003,
+   "cut_edge_cp": 1183.3970000000004
+  },
+  {
+   "module": "Mathlib.Data.Set.Image",
+   "seconds": 7.4,
+   "threads2_cp": 1181.3256815786488,
+   "split4_cp": 1178.5267000000003,
+   "cut_edge_cp": 1174.6970000000003
+  },
+  {
+   "module": "Mathlib.Data.Set.Prod",
+   "seconds": 5.9,
+   "threads2_cp": 1181.7860839613552,
+   "split4_cp": 1180.3970000000004,
+   "cut_edge_cp": 1180.3970000000004
+  },
+  {
+   "module": "Mathlib.Data.Set.Function",
+   "seconds": 5.4,
+   "threads2_cp": 1181.9395514222572,
+   "split4_cp": 1180.0286200000005,
+   "cut_edge_cp": 1180.3970000000004
+  },
+  {
+   "module": "Mathlib.Logic.Equiv.Set",
+   "seconds": 4.7,
+   "threads2_cp": 1183.3970000000004,
+   "split4_cp": 1183.3970000000004,
+   "cut_edge_cp": 1183.3970000000004
+  },
+  {
+   "module": "Mathlib.Order.Hom.Set",
+   "seconds": 4.5,
+   "threads2_cp": 1182.3588164784157,
+   "split4_cp": 1180.7084200000004,
+   "cut_edge_cp": 1183.3970000000004
+  },
+  {
+   "module": "Mathlib.Order.CompleteLattice.Basic",
+   "seconds": 8.3,
+   "threads2_cp": 1181.0494401490248,
+   "split4_cp": 1177.8685000000005,
+   "cut_edge_cp": 1178.4970000000003
+  },
+  {
+   "module": "Mathlib.Order.GaloisConnection.Basic",
+   "seconds": 4.0,
+   "threads2_cp": 1182.6357451734068,
+   "split4_cp": 1182.0970000000004,
+   "cut_edge_cp": 1182.0970000000004
+  },
+  {
+   "module": "Mathlib.Order.CompleteBooleanAlgebra",
+   "seconds": 8.5,
+   "threads2_cp": 1180.988053164664,
+   "split4_cp": 1177.7228200000004,
+   "cut_edge_cp": 1182.0970000000004
+  },
+  {
+   "module": "Mathlib.Data.Set.BooleanAlgebra",
+   "seconds": 1.7,
+   "threads2_cp": 1183.5550405877634,
+   "split4_cp": 1182.8233000000005,
+   "cut_edge_cp": 1171.8970000000004
+  },
+  {
+   "module": "Mathlib.Data.Set.Lattice.Indexed",
+   "seconds": 3.8,
+   "threads2_cp": 1182.7403949671107,
+   "split4_cp": 1181.2487800000004,
+   "cut_edge_cp": 1171.8970000000004
+  },
+  {
+   "module": "Mathlib.Data.Set.Lattice.Bounded",
+   "seconds": 4.4,
+   "threads2_cp": 1182.415854128079,
+   "split4_cp": 1180.7992600000005,
+   "cut_edge_cp": 1171.8970000000004
+  },
+  {
+   "module": "Mathlib.Order.Filter.Basic",
+   "seconds": 6.0,
+   "threads2_cp": 1182.7970000000005,
+   "split4_cp": 1182.7970000000005,
+   "cut_edge_cp": 1182.7970000000005
+  },
+  {
+   "module": "Mathlib.Order.Filter.Map",
+   "seconds": 4.2,
+   "threads2_cp": 1182.5274983000656,
+   "split4_cp": 1180.9569400000005,
+   "cut_edge_cp": 1182.7970000000005
+  },
+  {
+   "module": "Mathlib.Order.Filter.Tendsto",
+   "seconds": 2.2,
+   "threads2_cp": 1183.4179941064567,
+   "split4_cp": 1182.4574200000004,
+   "cut_edge_cp": 1180.0970000000004
+  },
+  {
+   "module": "Mathlib.Order.Filter.Prod",
+   "seconds": 4.3,
+   "threads2_cp": 1182.4720889733962,
+   "split4_cp": 1180.8829000000003,
+   "cut_edge_cp": 1180.0970000000004
+  },
+  {
+   "module": "Mathlib.Order.Filter.Lift",
+   "seconds": 2.7,
+   "threads2_cp": 1183.2410760685766,
+   "split4_cp": 1182.0862600000005,
+   "cut_edge_cp": 1180.0970000000004
+  },
+  {
+   "module": "Mathlib.Topology.Closure",
+   "seconds": 3.9,
+   "threads2_cp": 1182.6885327974767,
+   "split4_cp": 1181.2933000000005,
+   "cut_edge_cp": 1178.8970000000004
+  },
+  {
+   "module": "Mathlib.Topology.Neighborhoods",
+   "seconds": 2.7,
+   "threads2_cp": 1183.2410760685766,
+   "split4_cp": 1182.1976200000004,
+   "cut_edge_cp": 1178.8970000000004
+  },
+  {
+   "module": "Mathlib.Topology.ClusterPt",
+   "seconds": 3.1,
+   "threads2_cp": 1183.0750633334164,
+   "split4_cp": 1181.8981000000003,
+   "cut_edge_cp": 1175.6970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Continuous",
+   "seconds": 2.4,
+   "threads2_cp": 1183.3516310186349,
+   "split4_cp": 1182.4235800000004,
+   "cut_edge_cp": 1175.6970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Order",
+   "seconds": 4.9,
+   "threads2_cp": 1182.12306398837,
+   "split4_cp": 1180.5495400000004,
+   "cut_edge_cp": 1175.6970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Maps.Basic",
+   "seconds": 4.1,
+   "threads2_cp": 1182.5820585287313,
+   "split4_cp": 1181.1509800000003,
+   "cut_edge_cp": 1175.6970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Maps.OpenQuotient",
+   "seconds": 2.2,
+   "threads2_cp": 1183.4179941064567,
+   "split4_cp": 1182.5764600000005,
+   "cut_edge_cp": 1170.9970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Homeomorph.Defs",
+   "seconds": 4.5,
+   "threads2_cp": 1182.3588164784157,
+   "split4_cp": 1180.8524200000004,
+   "cut_edge_cp": 1179.0970000000004
+  },
+  {
+   "module": "Mathlib.Topology.Constructions.SumProd",
+   "seconds": 6.8,
+   "threads2_cp": 1181.5098425317312,
+   "split4_cp": 1179.1283800000003,
+   "cut_edge_cp": 1179.0970000000004
+  },
+  {
+   "module": "Mathlib.Topology.Constructions",
+   "seconds": 7.8,
+   "threads2_cp": 1181.202907609927,
+   "split4_cp": 1178.4326200000003,
+   "cut_edge_cp": 1159.8970000000004
+  },
+  {
+   "module": "Mathlib.Topology.NhdsWithin",
+   "seconds": 4.3,
+   "threads2_cp": 1182.4720889733962,
+   "split4_cp": 1181.0581000000004,
+   "cut_edge_cp": 1171.8970000000002
+  },
+  {
+   "module": "Mathlib.Topology.ContinuousOn",
+   "seconds": 4.9,
+   "threads2_cp": 1182.12306398837,
+   "split4_cp": 1180.6085800000003,
+   "cut_edge_cp": 1176.1970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Compactness.Compact",
+   "seconds": 7.5,
+   "threads2_cp": 1181.2949880864683,
+   "split4_cp": 1181.0970000000004,
+   "cut_edge_cp": 1181.0970000000004
+  },
+  {
+   "module": "Mathlib.Topology.Compactness.LocallyCompact",
+   "seconds": 2.7,
+   "threads2_cp": 1183.2410760685766,
+   "split4_cp": 1182.2787400000004,
+   "cut_edge_cp": 1181.0970000000004
+  },
+  {
+   "module": "Mathlib.Topology.Separation.Basic",
+   "seconds": 5.3,
+   "threads2_cp": 1181.9702449144377,
+   "split4_cp": 1180.3364200000003,
+   "cut_edge_cp": 1181.0970000000004
+  },
+  {
+   "module": "Mathlib.Topology.DiscreteSubset",
+   "seconds": 5.2,
+   "threads2_cp": 1182.0009384066182,
+   "split4_cp": 1180.4128600000004,
+   "cut_edge_cp": 1175.3970000000002
+  },
+  {
+   "module": "Mathlib.Topology.Irreducible",
+   "seconds": 3.0,
+   "threads2_cp": 1183.1184328276015,
+   "split4_cp": 1182.0633400000004,
+   "cut_edge_cp": 1175.3970000000002
+  },
+  {
+   "module": "Mathlib.Topology.Separation.Hausdorff",
+   "seconds": 3.6,
+   "threads2_cp": 1182.8412319226086,
+   "split4_cp": 1181.6162200000003,
+   "cut_edge_cp": 1175.3970000000002
+  },
+  {
+   "module": "Mathlib.Topology.Order.OrderClosed",
+   "seconds": 7.3,
+   "threads2_cp": 1181.3563750708292,
+   "split4_cp": 1178.8421800000003,
+   "cut_edge_cp": 1166.8970000000004
+  },
+  {
+   "module": "Mathlib.Topology.Connected.Basic",
+   "seconds": 4.0,
+   "threads2_cp": 1182.6357451734068,
+   "split4_cp": 1181.3186200000005,
+   "cut_edge_cp": 1166.8970000000004
+  },
+  {
+   "module": "Mathlib.Topology.Connected.Clopen",
+   "seconds": 5.4,
+   "threads2_cp": 1181.9395514222574,
+   "split4_cp": 1180.2724600000004,
+   "cut_edge_cp": 1172.9970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Separation.Regular",
+   "seconds": 5.1,
+   "threads2_cp": 1182.0316318987987,
+   "split4_cp": 1180.4989000000003,
+   "cut_edge_cp": 1178.6970000000003
+  },
+  {
+   "module": "Mathlib.Topology.DenseEmbedding",
+   "seconds": 3.2,
+   "threads2_cp": 1183.0305144140375,
+   "split4_cp": 1181.9243800000004,
+   "cut_edge_cp": 1178.6970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Homeomorph.Lemmas",
+   "seconds": 5.1,
+   "threads2_cp": 1182.0316318987987,
+   "split4_cp": 1180.5022600000004,
+   "cut_edge_cp": 1178.6970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Constructions",
+   "seconds": 3.8,
+   "threads2_cp": 1182.7403949671107,
+   "split4_cp": 1181.4777400000005,
+   "cut_edge_cp": 1154.2970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.ConstMulAction",
+   "seconds": 10.0,
+   "threads2_cp": 1180.5276507819576,
+   "split4_cp": 1176.8896600000005,
+   "cut_edge_cp": 1173.5970000000004
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.MulAction",
+   "seconds": 5.5,
+   "threads2_cp": 1181.908857930077,
+   "split4_cp": 1180.2728200000004,
+   "cut_edge_cp": 1173.5970000000004
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Monoid",
+   "seconds": 11.0,
+   "threads2_cp": 1180.2207158601534,
+   "split4_cp": 1176.2011000000005,
+   "cut_edge_cp": 1138.5970000000002
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Group.ContinuousInv",
+   "seconds": 3.7,
+   "threads2_cp": 1182.791304201913,
+   "split4_cp": 1181.6765800000005,
+   "cut_edge_cp": 1153.2970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Group.Basic",
+   "seconds": 6.4,
+   "threads2_cp": 1181.632616500453,
+   "split4_cp": 1179.6621400000004,
+   "cut_edge_cp": 1153.2970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Group.Neighborhood",
+   "seconds": 4.8,
+   "threads2_cp": 1182.1831016813273,
+   "split4_cp": 1180.8626200000003,
+   "cut_edge_cp": 1178.1970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Group.ContinuousDiv",
+   "seconds": 3.7,
+   "threads2_cp": 1182.791304201913,
+   "split4_cp": 1181.6881000000005,
+   "cut_edge_cp": 1178.1970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Group.Pointwise",
+   "seconds": 6.8,
+   "threads2_cp": 1181.5098425317312,
+   "split4_cp": 1179.3645400000005,
+   "cut_edge_cp": 1178.1970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Group.Quotient",
+   "seconds": 3.1,
+   "threads2_cp": 1183.0750633334164,
+   "split4_cp": 1182.1515400000003,
+   "cut_edge_cp": 1175.3970000000002
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Module.Basic",
+   "seconds": 4.2,
+   "threads2_cp": 1182.5274983000656,
+   "split4_cp": 1181.3855800000003,
+   "cut_edge_cp": 1175.3970000000002
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Module.ContinuousLinearMap.Basic",
+   "seconds": 18.0,
+   "threads2_cp": 1178.0774784162775,
+   "split4_cp": 1171.0399000000004,
+   "cut_edge_cp": 1175.3970000000002
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Module.ContinuousLinearMap.PiProd",
+   "seconds": 5.7,
+   "threads2_cp": 1181.847470945716,
+   "split4_cp": 1181.3970000000004,
+   "cut_edge_cp": 1181.3970000000004
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Module.Equiv",
+   "seconds": 22.0,
+   "threads2_cp": 1177.2379168081497,
+   "split4_cp": 1168.0413400000004,
+   "cut_edge_cp": 1181.3970000000004
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Module.ClosedSubmodule",
+   "seconds": 6.0,
+   "threads2_cp": 1181.7553904691747,
+   "split4_cp": 1180.0437400000003,
+   "cut_edge_cp": 1156.9970000000003
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Group.Submodule",
+   "seconds": 3.3,
+   "threads2_cp": 1182.9848225349963,
+   "split4_cp": 1182.1369000000004,
+   "cut_edge_cp": 1156.9970000000003
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Ring.Basic",
+   "seconds": 15.0,
+   "threads2_cp": 1178.80557608949,
+   "split4_cp": 1173.3700600000004,
+   "cut_edge_cp": 1156.9970000000003
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Field.Basic",
+   "seconds": 5.0,
+   "threads2_cp": 1182.062325390979,
+   "split4_cp": 1180.8719800000003,
+   "cut_edge_cp": 1179.3970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.MulAction",
+   "seconds": 4.7,
+   "threads2_cp": 1182.2424195317235,
+   "split4_cp": 1181.1128200000005,
+   "cut_edge_cp": 1179.3970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Field.Lemmas",
+   "seconds": 6.4,
+   "threads2_cp": 1181.632616500453,
+   "split4_cp": 1179.8911000000005,
+   "cut_edge_cp": 1179.3970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.LocallyConvex.Basic",
+   "seconds": 5.3,
+   "threads2_cp": 1181.9702449144377,
+   "split4_cp": 1180.7353000000005,
+   "cut_edge_cp": 1177.1970000000003
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Module.Seminorm.Basic",
+   "seconds": 19.0,
+   "threads2_cp": 1176.796842333465,
+   "split4_cp": 1170.4622200000003,
+   "cut_edge_cp": 1168.7970000000003
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Module.Seminorm.Norm",
+   "seconds": 3.0,
+   "threads2_cp": 1183.1184328276017,
+   "split4_cp": 1182.4646200000004,
+   "cut_edge_cp": 1168.7970000000003
+  },
+  {
+   "module": "Mathlib.Analysis.LocallyConvex.Bounded",
+   "seconds": 6.8,
+   "threads2_cp": 1181.5098425317312,
+   "split4_cp": 1179.6165400000004,
+   "cut_edge_cp": 1165.9970000000003
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Module.UniformConvergence",
+   "seconds": 3.0,
+   "threads2_cp": 1183.1184328276017,
+   "split4_cp": 1182.4679800000004,
+   "cut_edge_cp": 1180.5970000000004
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Module.Spaces.UniformConvergenceCLM",
+   "seconds": 14.0,
+   "threads2_cp": 1179.0229864287514,
+   "split4_cp": 1174.2472600000003,
+   "cut_edge_cp": 1180.5970000000004
+  },
+  {
+   "module": "Mathlib.Topology.Algebra.Module.Spaces.ContinuousLinearMap",
+   "seconds": 21.0,
+   "threads2_cp": 1179.108557362131,
+   "split4_cp": 1169.0049400000003,
+   "cut_edge_cp": 1161.5970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Operator.Basic",
+   "seconds": 12.0,
+   "threads2_cp": 1179.913780938349,
+   "split4_cp": 1175.7919000000004,
+   "cut_edge_cp": 1161.5970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Operator.NNNorm",
+   "seconds": 6.1,
+   "threads2_cp": 1181.7246969769942,
+   "split4_cp": 1180.2173800000003,
+   "cut_edge_cp": 1154.4970000000003
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Operator.Bilinear",
+   "seconds": 25.0,
+   "threads2_cp": 1175.9162623752693,
+   "split4_cp": 1166.0428600000002,
+   "cut_edge_cp": 1154.4970000000003
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Module.Multilinear.Basic",
+   "seconds": 36.0,
+   "threads2_cp": 1169.350623188406,
+   "split4_cp": 1157.7981400000003,
+   "cut_edge_cp": 1157.5970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Module.Multilinear.Curry",
+   "seconds": 26.0,
+   "threads2_cp": 1174.0703524355304,
+   "split4_cp": 1165.3005400000004,
+   "cut_edge_cp": 1157.5970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Calculus.FormalMultilinearSeries",
+   "seconds": 14.0,
+   "threads2_cp": 1179.819710037917,
+   "split4_cp": 1174.3010200000003,
+   "cut_edge_cp": 1104.5970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Analytic.ConvergenceRadius",
+   "seconds": 15.0,
+   "threads2_cp": 1178.4703904035684,
+   "split4_cp": 1173.5774200000003,
+   "cut_edge_cp": 1104.5970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Analytic.Basic",
+   "seconds": 29.0,
+   "threads2_cp": 1173.0866339902743,
+   "split4_cp": 1163.0779000000005,
+   "cut_edge_cp": 1109.5970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Analytic.ChangeOrigin",
+   "seconds": 12.0,
+   "threads2_cp": 1179.913780938349,
+   "split4_cp": 1175.8283800000002,
+   "cut_edge_cp": 1154.5970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Analytic.CPolynomialDef",
+   "seconds": 17.0,
+   "threads2_cp": 1178.5449641831394,
+   "split4_cp": 1172.0788600000003,
+   "cut_edge_cp": 1154.5970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Analytic.Composition",
+   "seconds": 23.0,
+   "threads2_cp": 1174.8831836490872,
+   "split4_cp": 1167.5798200000002,
+   "cut_edge_cp": 1166.5970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Analytic.Constructions",
+   "seconds": 36.0,
+   "threads2_cp": 1172.593645318695,
+   "split4_cp": 1157.8331800000003,
+   "cut_edge_cp": 1166.5970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Analytic.CPolynomial",
+   "seconds": 15.0,
+   "threads2_cp": 1179.4987265362904,
+   "split4_cp": 1173.5836600000005,
+   "cut_edge_cp": 1172.1970000000003
+  },
+  {
+   "module": "Mathlib.Analysis.Calculus.FDeriv.Analytic",
+   "seconds": 22.0,
+   "threads2_cp": 1174.26471572626,
+   "split4_cp": 1168.3571800000002,
+   "cut_edge_cp": 1172.1970000000003
+  },
+  {
+   "module": "Mathlib.Analysis.Calculus.ContDiff.Defs",
+   "seconds": 23.0,
+   "threads2_cp": 1174.5873129944814,
+   "split4_cp": 1169.5970000000004,
+   "cut_edge_cp": 1169.5970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Calculus.ContDiff.Basic",
+   "seconds": 15.0,
+   "threads2_cp": 1178.3282443507085,
+   "split4_cp": 1173.6100600000002,
+   "cut_edge_cp": 1169.5970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Calculus.ContDiff.Comp",
+   "seconds": 10.0,
+   "threads2_cp": 1180.5276507819576,
+   "split4_cp": 1177.3610200000003,
+   "cut_edge_cp": 1169.5970000000004
+  },
+  {
+   "module": "Mathlib.Analysis.Calculus.ContDiff.Operations",
+   "seconds": 24.0,
+   "threads2_cp": 1177.5538162574094,
+   "split4_cp": 1166.8639000000003,
+   "cut_edge_cp": 1090.4970000000003
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.IsManifold.Basic",
+   "seconds": 8.4,
+   "threads2_cp": 1181.0187466568445,
+   "split4_cp": 1178.5893400000004,
+   "cut_edge_cp": 1093.1970000000003
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.IsManifold.ExtChartAt",
+   "seconds": 6.0,
+   "threads2_cp": 1181.7553904691747,
+   "split4_cp": 1180.5395800000003,
+   "cut_edge_cp": 1093.1970000000003
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.ContMDiff.Defs",
+   "seconds": 6.1,
+   "threads2_cp": 1181.7246969769942,
+   "split4_cp": 1180.7970000000003,
+   "cut_edge_cp": 1180.7970000000003
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.Notation",
+   "seconds": 11.0,
+   "threads2_cp": 1180.2207158601534,
+   "split4_cp": 1176.7915000000003,
+   "cut_edge_cp": 1180.7970000000003
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.MFDeriv.Basic",
+   "seconds": 23.0,
+   "threads2_cp": 1175.3970000000002,
+   "split4_cp": 1175.3970000000002,
+   "cut_edge_cp": 1175.3970000000002
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.MFDeriv.FDeriv",
+   "seconds": 4.6,
+   "threads2_cp": 1182.3009979129642,
+   "split4_cp": 1181.5929400000005,
+   "cut_edge_cp": 1175.3970000000002
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.MFDeriv.SpecificFunctions",
+   "seconds": 33.0,
+   "threads2_cp": 1175.3970000000002,
+   "split4_cp": 1175.3970000000002,
+   "cut_edge_cp": 1175.3970000000002
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.MFDeriv.Atlas",
+   "seconds": 8.7,
+   "threads2_cp": 1180.926666180303,
+   "split4_cp": 1178.5256200000003,
+   "cut_edge_cp": 1175.3970000000002
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.MFDeriv.UniqueDifferential",
+   "seconds": 4.7,
+   "threads2_cp": 1182.2424195317235,
+   "split4_cp": 1181.5261000000003,
+   "cut_edge_cp": 1156.6970000000003
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.Diffeomorph",
+   "seconds": 15.0,
+   "threads2_cp": 1179.6444744686728,
+   "split4_cp": 1173.8020600000002,
+   "cut_edge_cp": 1134.8970000000002
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.Algebra.SMul",
+   "seconds": 9.0,
+   "threads2_cp": 1180.8345857037618,
+   "split4_cp": 1178.3030200000003,
+   "cut_edge_cp": 1129.8970000000002
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.VectorBundle.ContMDiffSection",
+   "seconds": 10.0,
+   "threads2_cp": 1180.5970000000004,
+   "split4_cp": 1180.5970000000004,
+   "cut_edge_cp": 1180.5970000000004
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.PartitionOfUnity",
+   "seconds": 12.0,
+   "threads2_cp": 1179.913780938349,
+   "split4_cp": 1176.2296600000002,
+   "cut_edge_cp": 1180.5970000000004
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.SmoothApprox",
+   "seconds": 5.8,
+   "threads2_cp": 1181.8167774535357,
+   "split4_cp": 1180.8801400000004,
+   "cut_edge_cp": 1134.8970000000002
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Lp.SmoothApprox",
+   "seconds": 5.4,
+   "threads2_cp": 1181.9395514222572,
+   "split4_cp": 1181.1815800000004,
+   "cut_edge_cp": 1134.8970000000002
+  },
+  {
+   "module": "Mathlib.Analysis.Distribution.SchwartzSpace.Basic",
+   "seconds": 55.0,
+   "threads2_cp": 1168.965102544554,
+   "split4_cp": 1144.1126200000003,
+   "cut_edge_cp": 1134.8970000000002
+  },
+  {
+   "module": "Mathlib.Analysis.Distribution.SchwartzSpace.Deriv",
+   "seconds": 13.0,
+   "threads2_cp": 1179.6068460165448,
+   "split4_cp": 1175.6227000000003,
+   "cut_edge_cp": 1134.8970000000002
+  },
+  {
+   "module": "Mathlib.Analysis.Distribution.SchwartzSpace.Fourier",
+   "seconds": 11.0,
+   "threads2_cp": 1180.2207158601534,
+   "split4_cp": 1177.1563000000003,
+   "cut_edge_cp": 1134.8970000000002
+  },
+  {
+   "module": "Mathlib.Analysis.Fourier.PoissonSummation",
+   "seconds": 3.1,
+   "threads2_cp": 1183.0750633334164,
+   "split4_cp": 1183.0837000000006,
+   "cut_edge_cp": 1155.6970000000003
+  },
+  {
+   "module": "Mathlib.Analysis.SpecialFunctions.Gaussian.PoissonSummation",
+   "seconds": 2.9,
+   "threads2_cp": 1183.1605848631689,
+   "split4_cp": 1183.2341800000004,
+   "cut_edge_cp": 1155.6970000000003
+  },
+  {
+   "module": "Mathlib.NumberTheory.ModularForms.JacobiTheta.TwoVariable",
+   "seconds": 4.4,
+   "threads2_cp": 1182.4158541280788,
+   "split4_cp": 1182.1106200000004,
+   "cut_edge_cp": 1155.6970000000003
+  },
+  {
+   "module": "Mathlib.NumberTheory.ModularForms.JacobiTheta.Bounds",
+   "seconds": 2.0,
+   "threads2_cp": 1183.4779958557278,
+   "split4_cp": 1184.0158000000004,
+   "cut_edge_cp": 1155.6970000000003
+  },
+  {
+   "module": "Mathlib.NumberTheory.LSeries.HurwitzZetaEven",
+   "seconds": 4.5,
+   "threads2_cp": 1182.9970000000005,
+   "split4_cp": 1182.9970000000005,
+   "cut_edge_cp": 1182.9970000000005
+  },
+  {
+   "module": "Mathlib.NumberTheory.LSeries.HurwitzZeta",
+   "seconds": 2.8,
+   "threads2_cp": 1183.2014797536185,
+   "split4_cp": 1183.3183000000006,
+   "cut_edge_cp": 1182.9970000000005
+  },
+  {
+   "module": "Mathlib.NumberTheory.LSeries.RiemannZeta",
+   "seconds": 3.2,
+   "threads2_cp": 1183.0305144140373,
+   "split4_cp": 1183.0192600000005,
+   "cut_edge_cp": 1155.6970000000003
+  },
+  {
+   "module": "Mathlib.NumberTheory.LSeries.Dirichlet",
+   "seconds": 3.4,
+   "threads2_cp": 1183.4970000000003,
+   "split4_cp": 1183.4970000000003,
+   "cut_edge_cp": 1183.4970000000003
+  },
+  {
+   "module": "Mathlib.NumberTheory.ModularForms.EisensteinSeries.QExpansion",
+   "seconds": 14.0,
+   "threads2_cp": 1180.5383578759702,
+   "split4_cp": 1175.0440600000004,
+   "cut_edge_cp": 1183.4970000000003
+  },
+  {
+   "module": "Mathlib.NumberTheory.ModularForms.EisensteinSeries.E2.Summable",
+   "seconds": 12.0,
+   "threads2_cp": 1179.913780938349,
+   "split4_cp": 1176.5464600000005,
+   "cut_edge_cp": 1169.7970000000003
+  },
+  {
+   "module": "Mathlib.NumberTheory.ModularForms.DedekindEta",
+   "seconds": 4.6,
+   "threads2_cp": 1182.4970000000005,
+   "split4_cp": 1182.4970000000005,
+   "cut_edge_cp": 1182.4970000000005
+  },
+  {
+   "module": "Mathlib.NumberTheory.ModularForms.Discriminant",
+   "seconds": 4.2,
+   "threads2_cp": 1182.5274983000656,
+   "split4_cp": 1182.3998200000003,
+   "cut_edge_cp": 1182.4970000000005
+  },
+  {
+   "module": "Mathlib.NumberTheory.ModularForms.LevelOne.DimensionFormula",
+   "seconds": 4.9,
+   "threads2_cp": 1182.12306398837,
+   "split4_cp": 1181.8970000000004,
+   "cut_edge_cp": 1181.8970000000004
+  },
+  {
+   "module": "Mathlib.NumberTheory.ModularForms.RamanujanFormula",
+   "seconds": 3.5,
+   "threads2_cp": 1182.9970000000005,
+   "split4_cp": 1182.9970000000005,
+   "cut_edge_cp": 1182.9970000000005
+  },
+  {
+   "module": "Mathlib",
+   "seconds": 5.0,
+   "threads2_cp": 1182.0623253909791,
+   "split4_cp": 1184.6874800000005,
+   "cut_edge_cp": 1182.9970000000005
+  }
+ ]
+}

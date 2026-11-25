@@ -1,0 +1,70 @@
+{
+ "name": "wide-A0-c16-r1",
+ "project": "wide",
+ "mode": "lake",
+ "hosts": [
+  "worker-1"
+ ],
+ "cores_per_host": 16,
+ "cpus": "32-47",
+ "priority": "bl",
+ "history": null,
+ "assign": null,
+ "fetch_delay_s": 0.0,
+ "started": "2026-11-25T00:41:42",
+ "load_before": {
+  "worker-1": [
+   "7.40",
+   "22.91",
+   "24.01"
+  ],
+  "worker-2": [
+   "14.05",
+   "13.28",
+   "13.80"
+  ],
+  "worker-3": [
+   "12.94",
+   "10.10",
+   "8.41"
+  ]
+ },
+ "result": {
+  "ok": true,
+  "exit": 0,
+  "wall_s": 569.93,
+  "cpu_s": 8414.18,
+  "max_rss_bytes": 6556934144,
+  "threads": 16,
+  "build_dir": "/tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref",
+  "modules_built": 4333,
+  "module_seconds_sum": 8424.07,
+  "history": "/tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json",
+  "output_tail": "✔ [4333/4335] Built E1.Development.AbelianVarietyTheory.Definitions.ExistenceOfLattices.ExistsCtxOkOfPins (4.1s)\n✔ [4334/4335] Built E1.Development.AbelianVarietyTheory.Proofs.SiegelThetaTransformation.HostElementIdempotentModTwo (1.9s)\nBuild completed successfully (4335 jobs).",
+  "started": 1795588939.4346266
+ },
+ "elapsed_s": 585.6,
+ "load_after": {
+  "worker-1": [
+   "17.44",
+   "27.87",
+   "27.04"
+  ],
+  "worker-2": [
+   "12.08",
+   "12.55",
+   "13.16"
+  ],
+  "worker-3": [
+   "11.21",
+   "11.68",
+   "10.21"
+  ]
+ },
+ "summary": {
+  "wall_s": 569.93,
+  "ok": true,
+  "lower_bound": null,
+  "modules_built": 4333
+ }
+}

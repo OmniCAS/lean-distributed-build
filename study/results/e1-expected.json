@@ -1,0 +1,387 @@
+{
+ "params": {
+  "speed": {
+   "worker-1": 1.022,
+   "worker-2": 1.438,
+   "worker-3": 1.122
+  },
+  "join_s": {
+   "worker-1": 13.0,
+   "worker-2": 22.4,
+   "worker-3": 29.3
+  },
+  "join_single_s": 14.6,
+  "overhead_three_s": 0.21,
+  "overhead_single_s": 0.044
+ },
+ "instances": {
+  "mid": {
+   "modules": 3156,
+   "W_s": 10552.993999999999,
+   "CP_s": 333.1
+  },
+  "wide": {
+   "modules": 4333,
+   "W_s": 8424.071,
+   "CP_s": 139.16500000000005
+  },
+  "narrow": {
+   "modules": 2613,
+   "W_s": 1146.3220000000001,
+   "CP_s": 229.81599999999997
+  }
+ },
+ "cells": [
+  {
+   "inst": "mid",
+   "run": "mid-A0-c16-r1",
+   "mode": "lake",
+   "hosts": 1,
+   "c": 16,
+   "predicted_s": 726.9,
+   "band_s": [
+    617.9,
+    836.0
+   ],
+   "measured_s": 732.98,
+   "error_pct": -0.8,
+   "within_band": true
+  },
+  {
+   "inst": "mid",
+   "run": "mid-A1-c16-r1",
+   "mode": "tool",
+   "hosts": 1,
+   "c": 16,
+   "predicted_s": 719.4,
+   "band_s": [
+    611.5,
+    827.3
+   ],
+   "measured_s": 773.21,
+   "error_pct": -7.0,
+   "within_band": true
+  },
+  {
+   "inst": "mid",
+   "run": "mid-B1-c16-r1",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 16,
+   "predicted_s": 451.6,
+   "band_s": [
+    383.8,
+    519.3
+   ],
+   "measured_s": 419.4,
+   "error_pct": 7.7,
+   "within_band": true
+  },
+  {
+   "inst": "wide",
+   "run": "wide-A0-c16-r1",
+   "mode": "lake",
+   "hosts": 1,
+   "c": 16,
+   "predicted_s": 565.8,
+   "band_s": [
+    480.9,
+    650.6
+   ],
+   "measured_s": 569.93,
+   "error_pct": -0.7,
+   "within_band": true
+  },
+  {
+   "inst": "wide",
+   "run": "wide-A1-c16-r1",
+   "mode": "tool",
+   "hosts": 1,
+   "c": 16,
+   "predicted_s": 572.9,
+   "band_s": [
+    486.9,
+    658.8
+   ],
+   "measured_s": 564.08,
+   "error_pct": 1.6,
+   "within_band": true
+  },
+  {
+   "inst": "wide",
+   "run": "wide-A1-c8-r1",
+   "mode": "tool",
+   "hosts": 1,
+   "c": 8,
+   "predicted_s": 1125.6,
+   "band_s": [
+    956.8,
+    1294.5
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "wide",
+   "run": "wide-A1-c4-r1",
+   "mode": "tool",
+   "hosts": 1,
+   "c": 4,
+   "predicted_s": 2233.5,
+   "band_s": [
+    1898.5,
+    2568.5
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "wide",
+   "run": "wide-B1-c16-r1",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 16,
+   "predicted_s": 258.7,
+   "band_s": [
+    219.9,
+    297.5
+   ],
+   "measured_s": 248.78,
+   "error_pct": 4.0,
+   "within_band": true
+  },
+  {
+   "inst": "wide",
+   "run": "wide-B1-c8-r1",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 8,
+   "predicted_s": 480.8,
+   "band_s": [
+    408.7,
+    552.9
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "wide",
+   "run": "wide-B1-c4-r1",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 4,
+   "predicted_s": 931.5,
+   "band_s": [
+    791.8,
+    1071.3
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "wide",
+   "run": "wide-B1s-c16-r1",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 16,
+   "priority": "structure",
+   "predicted_s": 294.3,
+   "band_s": [
+    250.2,
+    338.4
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "wide",
+   "run": "wide-B4-c16-r1",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 16,
+   "priority": "fifo",
+   "predicted_s": 312.6,
+   "band_s": [
+    265.7,
+    359.5
+   ],
+   "measured_s": 290.21,
+   "error_pct": 7.7,
+   "within_band": true
+  },
+  {
+   "inst": "wide",
+   "run": "wide-B4-c4-r1",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 4,
+   "priority": "fifo",
+   "predicted_s": 965.9,
+   "band_s": [
+    821.0,
+    1110.7
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "wide",
+   "run": "wide-B2-c16-r1",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 16,
+   "assign": "namespace",
+   "predicted_s": 350.8,
+   "band_s": [
+    298.2,
+    403.4
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "wide",
+   "run": "wide-B3-c16-r1",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 16,
+   "assign": "chains",
+   "predicted_s": 265.8,
+   "band_s": [
+    225.9,
+    305.6
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "wide",
+   "run": "wide-B1-c16-d0.1",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 16,
+   "delay": 0.1,
+   "predicted_s": 258.7,
+   "band_s": [
+    219.9,
+    297.5
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "wide",
+   "run": "wide-B1-c16-d1",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 16,
+   "delay": 1.0,
+   "predicted_s": 262.0,
+   "band_s": [
+    222.7,
+    301.3
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "wide",
+   "run": "wide-B1-c16-d10",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 16,
+   "delay": 10.0,
+   "predicted_s": 439.2,
+   "band_s": [
+    373.4,
+    505.1
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "wide",
+   "run": "wide-B3-c16-d1",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 16,
+   "assign": "chains",
+   "delay": 1.0,
+   "predicted_s": 271.5,
+   "band_s": [
+    230.8,
+    312.2
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "wide",
+   "run": "wide-B3-c16-d10",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 16,
+   "assign": "chains",
+   "delay": 10.0,
+   "predicted_s": 358.2,
+   "band_s": [
+    304.5,
+    412.0
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "narrow",
+   "run": "narrow-A0-c16-r1",
+   "mode": "lake",
+   "hosts": 1,
+   "c": 16,
+   "predicted_s": 253.9,
+   "band_s": [
+    215.9,
+    292.1
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "narrow",
+   "run": "narrow-A1-c16-r1",
+   "mode": "tool",
+   "hosts": 1,
+   "c": 16,
+   "predicted_s": 260.6,
+   "band_s": [
+    221.5,
+    299.7
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "narrow",
+   "run": "narrow-B1-c16-r1",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 16,
+   "predicted_s": 349.0,
+   "band_s": [
+    296.7,
+    402.9
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "narrow",
+   "run": "narrow-A1-c4-r1",
+   "mode": "tool",
+   "hosts": 1,
+   "c": 4,
+   "predicted_s": 419.3,
+   "band_s": [
+    356.4,
+    482.2
+   ],
+   "measured_s": null
+  },
+  {
+   "inst": "narrow",
+   "run": "narrow-B1-c4-r1",
+   "mode": "tool",
+   "hosts": 3,
+   "c": 4,
+   "predicted_s": 390.4,
+   "band_s": [
+    330.5,
+    449.0
+   ],
+   "measured_s": null
+  }
+ ]
+}

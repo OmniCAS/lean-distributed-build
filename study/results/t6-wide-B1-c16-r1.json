@@ -1,0 +1,68 @@
+{
+ "measured_s": 248.7849,
+ "W_ref_s": 8424.071,
+ "CP_ref_s": 139.16500000000005,
+ "x_three": 0.7929562796894758,
+ "speed_ratio_vs_reference": {
+  "worker-1": 1.033,
+  "worker-2": 1.383,
+  "worker-3": 1.134
+ },
+ "first_task_s": {
+  "worker-1": 15.7,
+  "worker-2": 22.3,
+  "worker-3": 30.6
+ },
+ "per_task_overhead_mean_s": 0.16440369259173798,
+ "ladder": [
+  {
+   "step": "0 reference-run times, 3 x 16 identical cores, no overhead",
+   "predicted_s": 181.4,
+   "error_pct": -27.1
+  },
+  {
+   "step": "1 + measured speed of each machine",
+   "predicted_s": 213.6,
+   "error_pct": -14.1
+  },
+  {
+   "step": "2 + late joining (first task on each machine)",
+   "predicted_s": 236.2,
+   "error_pct": -5.1
+  },
+  {
+   "step": "3 + per-task overhead (0.164 s, measured mean)",
+   "predicted_s": 251.8,
+   "error_pct": 1.2
+  },
+  {
+   "step": "4 + realized per-module times (oracle)",
+   "predicted_s": 248.9,
+   "error_pct": 0.1
+  }
+ ],
+ "single_machine": {
+  "tool, one machine (measured)": 564.1,
+  "tool, one machine (predicted)": 549.3,
+  "lake, one machine (measured)": 569.9,
+  "lake, one machine (predicted: OS sharing, 16 jobs)": 563.4,
+  "tool, one machine (oracle: realized times)": 560.1
+ },
+ "critical_chain_of_real_run": {
+  "total_s": 248.7849,
+  "modules_on_chain": 16,
+  "hosts_on_chain": {
+   "worker-1": 5,
+   "worker-3": 3,
+   "worker-2": 8
+  },
+  "compile": 35.26,
+  "task_overhead": 4.28,
+  "dispatch_latency": 0.1,
+  "queue": 209.12,
+  "release": 0.03,
+  "release_gap": -0.0,
+  "start": 0.0,
+  "check_sum": 248.78
+ }
+}

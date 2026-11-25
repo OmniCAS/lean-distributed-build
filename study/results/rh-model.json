@@ -1,0 +1,34 @@
+{
+ "mathlib_rate_mean": 0.016848240514312177,
+ "mathlib_rate_median": 0.013146913616534289,
+ "mathlib_rate_p99": 0.06533234756779233,
+ "mathlib_closure_mean": 1231.2094746295465,
+ "artifact_per_source_byte": 57.59684487389076,
+ "rh_loads_mathlib": 175187,
+ "rh_closure_mean": 3116.3398140272966,
+ "rh_fixed_core_h": 393.56557747623856,
+ "mean": {
+  "modules": 175187,
+  "edges": 753261,
+  "depth": 203,
+  "work_s": 1709561.0,
+  "critical_path_s": 3187.7,
+  "max_speedup": 536.3,
+  "cp_modules": 177,
+  "work_core_h": 474.87805555555553,
+  "cp_h": 0.8854722222222222,
+  "lines_core_h": 81.31248696315843
+ },
+ "heavy": {
+  "modules": 175187,
+  "edges": 753261,
+  "depth": 203,
+  "work_s": 1710442.3,
+  "critical_path_s": 3349.2,
+  "max_speedup": 510.69,
+  "cp_modules": 144,
+  "work_core_h": 475.12286111111115,
+  "cp_h": 0.9303333333333332,
+  "lines_core_h": 81.55728647667998
+ }
+}

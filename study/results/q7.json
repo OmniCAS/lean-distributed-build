@@ -1,0 +1,396 @@
+{
+ "rows": [
+  {
+   "trace": "Mathlib",
+   "cores": 32,
+   "x": 0.8745262707085811,
+   "config": "Lake-like",
+   "hours": 0.46435333333333295,
+   "minutes": 27.86119999999998,
+   "ratio_to_1thread_LB": 1.2351510522652167,
+   "bound": "W/C",
+   "utilization": 0.8096175752480145
+  },
+  {
+   "trace": "Mathlib",
+   "cores": 32,
+   "x": 0.8745262707085811,
+   "config": "recommended",
+   "hours": 0.3891872222222203,
+   "minutes": 23.351233333333216,
+   "ratio_to_1thread_LB": 1.0352138609735815,
+   "bound": "W/C",
+   "utilization": 0.9659839746151908
+  },
+  {
+   "trace": "Mathlib",
+   "cores": 32,
+   "x": 0.8745262707085811,
+   "config": "recommended+threads",
+   "hours": 0.38676646845727286,
+   "minutes": 23.205988107436372,
+   "ratio_to_1thread_LB": 1.0287748061732502,
+   "bound": "W/C",
+   "utilization": 0.9803797355016215
+  },
+  {
+   "trace": "Mathlib",
+   "cores": 128,
+   "x": 3.4981050828343245,
+   "config": "Lake-like",
+   "hours": 0.33305472222222215,
+   "minutes": 19.98328333333333,
+   "ratio_to_1thread_LB": 1.0130111853950283,
+   "bound": "CP",
+   "utilization": 0.28219733478273884
+  },
+  {
+   "trace": "Mathlib",
+   "cores": 128,
+   "x": 3.4981050828343245,
+   "config": "recommended",
+   "hours": 0.33091583333333296,
+   "minutes": 19.854949999999977,
+   "ratio_to_1thread_LB": 1.0065055926975128,
+   "bound": "CP",
+   "utilization": 0.2840213295362112
+  },
+  {
+   "trace": "Mathlib",
+   "cores": 128,
+   "x": 3.4981050828343245,
+   "config": "recommended+threads",
+   "hours": 0.246403405220985,
+   "minutes": 14.7842043132591,
+   "ratio_to_1thread_LB": 0.7494546359914276,
+   "bound": "CP",
+   "utilization": 0.5322149466741667
+  },
+  {
+   "trace": "Mathlib",
+   "cores": 512,
+   "x": 13.992420331337298,
+   "config": "Lake-like",
+   "hours": 0.33305472222222215,
+   "minutes": 19.98328333333333,
+   "ratio_to_1thread_LB": 1.0130111853950283,
+   "bound": "CP",
+   "utilization": 0.07054933369568471
+  },
+  {
+   "trace": "Mathlib",
+   "cores": 512,
+   "x": 13.992420331337298,
+   "config": "recommended",
+   "hours": 0.33091583333333296,
+   "minutes": 19.854949999999977,
+   "ratio_to_1thread_LB": 1.0065055926975128,
+   "bound": "CP",
+   "utilization": 0.0710053323840528
+  },
+  {
+   "trace": "Mathlib",
+   "cores": 512,
+   "x": 13.992420331337298,
+   "config": "recommended+threads",
+   "hours": 0.2343010989338311,
+   "minutes": 14.058065936029866,
+   "ratio_to_1thread_LB": 0.7126445539839926,
+   "bound": "CP",
+   "utilization": 0.15004546406377026
+  },
+  {
+   "trace": "Mathlib",
+   "cores": 2048,
+   "x": 55.96968132534919,
+   "config": "Lake-like",
+   "hours": 0.33305472222222215,
+   "minutes": 19.98328333333333,
+   "ratio_to_1thread_LB": 1.0130111853950283,
+   "bound": "CP",
+   "utilization": 0.017637333423921178
+  },
+  {
+   "trace": "Mathlib",
+   "cores": 2048,
+   "x": 55.96968132534919,
+   "config": "recommended",
+   "hours": 0.33091583333333296,
+   "minutes": 19.854949999999977,
+   "ratio_to_1thread_LB": 1.0065055926975128,
+   "bound": "CP",
+   "utilization": 0.0177513330960132
+  },
+  {
+   "trace": "Mathlib",
+   "cores": 2048,
+   "x": 55.96968132534919,
+   "config": "recommended+threads",
+   "hours": 0.2343010989338311,
+   "minutes": 14.058065936029866,
+   "ratio_to_1thread_LB": 0.7126445539839926,
+   "bound": "CP",
+   "utilization": 0.037511366015942564
+  },
+  {
+   "trace": "RH (model)",
+   "cores": 32,
+   "x": 0.06265978794408139,
+   "config": "Lake-like",
+   "hours": 15.336540731318706,
+   "minutes": 920.1924438791224,
+   "ratio_to_1thread_LB": 1.0329313544692527,
+   "bound": "W/C",
+   "utilization": 0.9681185450255148
+  },
+  {
+   "trace": "RH (model)",
+   "cores": 32,
+   "x": 0.06265978794408139,
+   "config": "recommended",
+   "hours": 15.106524889532299,
+   "minutes": 906.3914933719378,
+   "ratio_to_1thread_LB": 1.0174395575139825,
+   "bound": "W/C",
+   "utilization": 0.9828593675317797
+  },
+  {
+   "trace": "RH (model)",
+   "cores": 32,
+   "x": 0.06265978794408139,
+   "config": "recommended+threads",
+   "hours": 15.106246372125604,
+   "minutes": 906.3747823275363,
+   "ratio_to_1thread_LB": 1.01742079908813,
+   "bound": "W/C",
+   "utilization": 0.9834345843269592
+  },
+  {
+   "trace": "RH (model)",
+   "cores": 128,
+   "x": 0.25063915177632556,
+   "config": "Lake-like",
+   "hours": 4.171308142857373,
+   "minutes": 250.27848857144235,
+   "ratio_to_1thread_LB": 1.1237670985639039,
+   "bound": "W/C",
+   "utilization": 0.8898641019815752
+  },
+  {
+   "trace": "RH (model)",
+   "cores": 128,
+   "x": 0.25063915177632556,
+   "config": "recommended",
+   "hours": 3.9303131008011825,
+   "minutes": 235.81878604807096,
+   "ratio_to_1thread_LB": 1.0588420702742758,
+   "bound": "W/C",
+   "utilization": 0.9444279067424785
+  },
+  {
+   "trace": "RH (model)",
+   "cores": 128,
+   "x": 0.25063915177632556,
+   "config": "recommended+threads",
+   "hours": 3.930140997860546,
+   "minutes": 235.80845987163275,
+   "ratio_to_1thread_LB": 1.0587957050536712,
+   "bound": "W/C",
+   "utilization": 0.9454818143516677
+  },
+  {
+   "trace": "RH (model)",
+   "cores": 512,
+   "x": 1.0025566071053023,
+   "config": "Lake-like",
+   "hours": 1.441957256351545,
+   "minutes": 86.51743538109271,
+   "ratio_to_1thread_LB": 1.5499136899181734,
+   "bound": "CP",
+   "utilization": 0.6435519080544878
+  },
+  {
+   "trace": "RH (model)",
+   "cores": 512,
+   "x": 1.0025566071053023,
+   "config": "recommended",
+   "hours": 1.1495978425469127,
+   "minutes": 68.97587055281475,
+   "ratio_to_1thread_LB": 1.2356659160425656,
+   "bound": "CP",
+   "utilization": 0.8072164972075283
+  },
+  {
+   "trace": "RH (model)",
+   "cores": 512,
+   "x": 1.0025566071053023,
+   "config": "recommended+threads",
+   "hours": 1.1494409851921048,
+   "minutes": 68.96645911152629,
+   "ratio_to_1thread_LB": 1.235497315093744,
+   "bound": "CP",
+   "utilization": 0.8101004389646977
+  },
+  {
+   "trace": "RH (model)",
+   "cores": 2048,
+   "x": 4.010226428421209,
+   "config": "Lake-like",
+   "hours": 0.9466156847082842,
+   "minutes": 56.79694108249705,
+   "ratio_to_1thread_LB": 1.0174868931502796,
+   "bound": "CP",
+   "utilization": 0.2450768455056859
+  },
+  {
+   "trace": "RH (model)",
+   "cores": 2048,
+   "x": 4.010226428421209,
+   "config": "recommended",
+   "hours": 0.9323468094585782,
+   "minutes": 55.940808567514686,
+   "ratio_to_1thread_LB": 1.0021497359690668,
+   "bound": "CP",
+   "utilization": 0.24882756455104035
+  },
+  {
+   "trace": "RH (model)",
+   "cores": 2048,
+   "x": 4.010226428421209,
+   "config": "recommended+threads",
+   "hours": 0.913420309332008,
+   "minutes": 54.80521855992048,
+   "ratio_to_1thread_LB": 0.9818062469237456,
+   "bound": "CP",
+   "utilization": 0.3706232270399793
+  }
+ ],
+ "s4_mathlib_predictions": [
+  {
+   "costs": "costs as in the 16-thread reference build",
+   "setup": "8+8+16 slots, 1 thread",
+   "overhead_s": 0.004,
+   "blevel_min": 22.43374905660369,
+   "fifo_min": 26.699625368738683
+  },
+  {
+   "costs": "costs as in the 16-thread reference build",
+   "setup": "8+8+16 slots, 1 thread",
+   "overhead_s": 0.05,
+   "blevel_min": 22.659172012578537,
+   "fifo_min": 26.910152830188558
+  },
+  {
+   "costs": "costs as in the 16-thread reference build",
+   "setup": "8+8+16 slots, 1 thread",
+   "overhead_s": 0.2,
+   "blevel_min": 23.326682389937204,
+   "fifo_min": 27.535849685534686
+  },
+  {
+   "costs": "costs as in the 16-thread reference build",
+   "setup": "single machine, 16 slots",
+   "overhead_s": 0.004,
+   "blevel_min": 45.23538333333287,
+   "fifo_min": 46.76729999999963
+  },
+  {
+   "costs": "costs as in the 16-thread reference build",
+   "setup": "single machine, 16 slots",
+   "overhead_s": 0.05,
+   "blevel_min": 45.66263333333368,
+   "fifo_min": 47.26261666666676
+  },
+  {
+   "costs": "costs as in the 16-thread reference build",
+   "setup": "single machine, 16 slots",
+   "overhead_s": 0.2,
+   "blevel_min": 47.055383333332934,
+   "fifo_min": 48.61574999999983
+  },
+  {
+   "costs": "costs as in the 16-thread reference build",
+   "setup": "single machine, 32 slots",
+   "overhead_s": 0.004,
+   "blevel_min": 23.135149999999914,
+   "fifo_min": 27.325249999999944
+  },
+  {
+   "costs": "costs as in the 16-thread reference build",
+   "setup": "single machine, 32 slots",
+   "overhead_s": 0.05,
+   "blevel_min": 23.351233333333216,
+   "fifo_min": 27.537599999999895
+  },
+  {
+   "costs": "costs as in the 16-thread reference build",
+   "setup": "single machine, 32 slots",
+   "overhead_s": 0.2,
+   "blevel_min": 24.031233333333446,
+   "fifo_min": 28.199250000000106
+  },
+  {
+   "costs": "each lean with 1 thread (replay: 0.86 x)",
+   "setup": "8+8+16 slots, 1 thread",
+   "overhead_s": 0.004,
+   "blevel_min": 19.289453773584857,
+   "fifo_min": 22.854194213836468
+  },
+  {
+   "costs": "each lean with 1 thread (replay: 0.86 x)",
+   "setup": "8+8+16 slots, 1 thread",
+   "overhead_s": 0.05,
+   "blevel_min": 19.52077168553448,
+   "fifo_min": 22.97402210062885
+  },
+  {
+   "costs": "each lean with 1 thread (replay: 0.86 x)",
+   "setup": "8+8+16 slots, 1 thread",
+   "overhead_s": 0.2,
+   "blevel_min": 20.180814150943498,
+   "fifo_min": 23.882335490566128
+  },
+  {
+   "costs": "each lean with 1 thread (replay: 0.86 x)",
+   "setup": "single machine, 16 slots",
+   "overhead_s": 0.004,
+   "blevel_min": 38.907719999999586,
+   "fifo_min": 40.308058333333065
+  },
+  {
+   "costs": "each lean with 1 thread (replay: 0.86 x)",
+   "setup": "single machine, 16 slots",
+   "overhead_s": 0.05,
+   "blevel_min": 39.33493633333352,
+   "fifo_min": 40.702683333333326
+  },
+  {
+   "costs": "each lean with 1 thread (replay: 0.86 x)",
+   "setup": "single machine, 16 slots",
+   "overhead_s": 0.2,
+   "blevel_min": 40.728170666666415,
+   "fifo_min": 42.07656666666665
+  },
+  {
+   "costs": "each lean with 1 thread (replay: 0.86 x)",
+   "setup": "single machine, 32 slots",
+   "overhead_s": 0.004,
+   "blevel_min": 19.89402366666663,
+   "fifo_min": 23.469337999999976
+  },
+  {
+   "costs": "each lean with 1 thread (replay: 0.86 x)",
+   "setup": "single machine, 32 slots",
+   "overhead_s": 0.05,
+   "blevel_min": 20.110223666666567,
+   "fifo_min": 23.70185266666659
+  },
+  {
+   "costs": "each lean with 1 thread (replay: 0.86 x)",
+   "setup": "single machine, 32 slots",
+   "overhead_s": 0.2,
+   "blevel_min": 20.791497000000085,
+   "fifo_min": 24.46868200000008
+  }
+ ]
+}

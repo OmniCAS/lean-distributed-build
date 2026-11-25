@@ -1,0 +1,176 @@
+{
+ "work_s": 1709561.031981829,
+ "critical_path_s": 3187.7211102213673,
+ "max_speedup": 536.2956710673823,
+ "cp_modules": 177,
+ "cp_top10": [
+  {
+   "module": "Supplements.Kernels.MainTheorems",
+   "seconds": 118.64811922137673,
+   "lines": 16,
+   "share_of_cp": 0.03722035746506612
+  },
+  {
+   "module": "Development.AutomorphicArithmetic.CharacterBoxes.MainConclusion",
+   "seconds": 118.6112177560643,
+   "lines": 14,
+   "share_of_cp": 0.03720878133778381
+  },
+  {
+   "module": "Main",
+   "seconds": 118.58585423417355,
+   "lines": 12,
+   "share_of_cp": 0.03720082470638045
+  },
+  {
+   "module": "Supplements.Kernels.MainTheoremsCritical",
+   "seconds": 118.44850432263202,
+   "lines": 4,
+   "share_of_cp": 0.03715773752692139
+  },
+  {
+   "module": "Supplements.Kernels.MainTheoremsAll",
+   "seconds": 118.41608983531691,
+   "lines": 2,
+   "share_of_cp": 0.03714756898136978
+  },
+  {
+   "module": "Development.AutomorphicArithmetic.AutomorphicVarieties.ModularityArgument.ThresholdArguments.DenseThresholdCases.TopMainZj",
+   "seconds": 108.37600465734306,
+   "lines": 75,
+   "share_of_cp": 0.03399795681932069
+  },
+  {
+   "module": "Development.AutomorphicArithmetic.AutomorphicVarieties.ModularityArgument.ThresholdArguments.DenseThresholdCases.VwinOfRow",
+   "seconds": 107.19726881819797,
+   "lines": 5,
+   "share_of_cp": 0.03362818299081182
+  },
+  {
+   "module": "Development.AutomorphicArithmetic.AutomorphicVarieties.ModularityArgument.ThresholdArguments.DenseThresholdCases.TemperedProductOfSquareIntegrable",
+   "seconds": 105.89567574276083,
+   "lines": 344,
+   "share_of_cp": 0.033219868389116086
+  },
+  {
+   "module": "Development.AutomorphicArithmetic.ThetaCorrespondence.FockModels.EveryCharacterE",
+   "seconds": 72.13513057163577,
+   "lines": 88,
+   "share_of_cp": 0.022629059468325458
+  },
+  {
+   "module": "Development.AbelianVarietyTheory.Proofs.DivisorProofs.Fun0FitOfJoin",
+   "seconds": 33.772602794405834,
+   "lines": 45,
+   "share_of_cp": 0.010594591442179375
+  }
+ ],
+ "cp_by_package": {
+  "ReciprocityTheory": 266.0696113692078,
+  "Development": 2447.55293123866,
+  "Supplements": 355.51271337932565,
+  "Main": 118.58585423417355
+ },
+ "cp_small_modules_s": 745.0485728333915,
+ "depth": 203,
+ "depth_floor_s": 1238.2999999999995,
+ "split": [
+  {
+   "parts": 4,
+   "k": 0,
+   "cp_s": 3187.7211102213673,
+   "max_speedup": 536.2956710673823,
+   "last_split": ""
+  },
+  {
+   "parts": 4,
+   "k": 1,
+   "cp_s": 3103.3100208053347,
+   "max_speedup": 550.8889928883673,
+   "last_split": "Supplements.Kernels.MainTheorems"
+  },
+  {
+   "parts": 4,
+   "k": 10,
+   "cp_s": 2613.533816087539,
+   "max_speedup": 654.1886014474136,
+   "last_split": "Development.AutomorphicArithmetic.Foundations.GaloisRepresentations.IntegralStructures.RowSrc"
+  },
+  {
+   "parts": 4,
+   "k": 50,
+   "cp_s": 2301.7095891461277,
+   "max_speedup": 743.1328609168152,
+   "last_split": "Development.AutomorphicArithmetic.AutomorphicVarieties.ModularityArgument.ThresholdArguments.DenseThresholdCases.TemperedProductOfSquareIntegrable"
+  },
+  {
+   "parts": 4,
+   "k": 200,
+   "cp_s": 1937.8948315334383,
+   "max_speedup": 884.0629553803873,
+   "last_split": "Development.AbelianVarietyTheory.Proofs.DivisorProofs.PoincareDeRhamDualityAbelianSchemeStatement"
+  }
+ ],
+ "edge_removal": [
+  {
+   "removed": 1,
+   "edge": "Supplements.Kernels.MainTheorems -> Development.AutomorphicArithmetic.CharacterBoxes.MainConclusion",
+   "cp_s": 2840.8134035234534,
+   "max_speedup": 601.785752581097
+  },
+  {
+   "removed": 2,
+   "edge": "Supplements.Kernels.MainTheoremsAll -> Development.AutomorphicArithmetic.AutomorphicVarieties.SmallClassNumbers.CorGKOf",
+   "cp_s": 2713.622542607868,
+   "max_speedup": 629.9921986714087
+  },
+  {
+   "removed": 3,
+   "edge": "Development.AbelianVarietyTheory.Proofs.DivisorProofs.ExistsWeilRepHermitianPairRationalSchrodingerStatement -> Development.AbelianVarietyTheory.Proofs.DivisorProofs.ExistsWeilRepHermitianPairRationalSchrodinger",
+   "cp_s": 2589.1313332315085,
+   "max_speedup": 660.2836287366376
+  },
+  {
+   "removed": 4,
+   "edge": "ReciprocityTheory.ReductiveGroups.ArithmeticGeometry.BirationalGeometry.ToroidalCompactification.AmplePt -> ReciprocityTheory.ReductiveGroups.ArithmeticGeometry.BirationalGeometry.ToroidalCompactification.ThetaCore",
+   "cp_s": 2535.8365182017033,
+   "max_speedup": 674.160585554691
+  },
+  {
+   "removed": 5,
+   "edge": "Development.AbelianVarietyTheory.Proofs.DivisorProofs.DiagonalSiegelHeisenbergInvariantFormUnique -> Development.AbelianVarietyTheory.Proofs.TwistedOperators.ExistsGoodPlace",
+   "cp_s": 2499.4151905364856,
+   "max_speedup": 683.9844130157828
+  },
+  {
+   "removed": 6,
+   "edge": "Development.AbelianVarietyTheory.Proofs.ModuliProofs.CompactifiedModuliPartOne -> Development.AbelianVarietyTheory.Proofs.ModuliProofs.PartOneOfSemistableReductionPadicPolarized",
+   "cp_s": 2448.7261146657584,
+   "max_speedup": 698.1430147467421
+  },
+  {
+   "removed": 7,
+   "edge": "Development.AbelianVarietyTheory.Proofs.TwistedOperators.RegularisingTranslateCombinationStatement -> Development.AbelianVarietyTheory.Proofs.TwistedOperators.RegularisingTranslateCombination",
+   "cp_s": 2415.095117889425,
+   "max_speedup": 707.8648866947448
+  },
+  {
+   "removed": 8,
+   "edge": "Development.AbelianVarietyTheory.Proofs.ModuliProofs.SectionsCountSqEqDetFormOnTorsionStatement -> Development.AbelianVarietyTheory.Proofs.ModuliProofs.SectionsCountSqEqDetFormOnTorsion",
+   "cp_s": 2374.9916220813175,
+   "max_speedup": 719.817710549926
+  },
+  {
+   "removed": 9,
+   "edge": "Formalism.FormalDegreeBessel.StatementIO -> Formalism.RealPlaceAnalysis.QuotientSettingHolds",
+   "cp_s": 2369.1753399425447,
+   "max_speedup": 721.5848498673331
+  },
+  {
+   "removed": 10,
+   "edge": "ReciprocityTheory.ReductiveGroups.ArithmeticGeometry.ExtensionDescent.QkToAkU -> ReciprocityTheory.ReductiveGroups.ArithmeticGeometry.ExtensionDescent.DegExpF",
+   "cp_s": 2363.572710878368,
+   "max_speedup": 723.2952995749006
+  }
+ ]
+}

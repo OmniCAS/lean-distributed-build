@@ -1,0 +1,72 @@
+{
+ "name": "mid-A0-c16-r1",
+ "project": "mid",
+ "mode": "lake",
+ "hosts": [
+  "worker-1"
+ ],
+ "cores_per_host": 16,
+ "cpus": "32-47",
+ "priority": "bl",
+ "history": null,
+ "assign": null,
+ "fetch_delay_s": 0.0,
+ "started": "2026-11-25T00:00:05",
+ "load_before": {
+  "worker-1": [
+   "5.14",
+   "5.55",
+   "4.93"
+  ],
+  "worker-2": [
+   "11.18",
+   "13.59",
+   "14.78"
+  ],
+  "worker-3": [
+   "4.68",
+   "4.66",
+   "4.51"
+  ]
+ },
+ "result": {
+  "ok": true,
+  "exit": 0,
+  "wall_s": 732.98,
+  "cpu_s": 10618.45,
+  "max_rss_bytes": 8294514688,
+  "threads": 16,
+  "build_dir": "/tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref",
+  "modules_built": 3156,
+  "module_seconds_sum": 10552.99,
+  "history": "/tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json",
+  "output_tail": "✔ [3156/3158] Built E1.Formalism.LocalToGlobal.SiegelLatticeTheory.FlagStabilizerTensors.RootLatticeThresholds.LoopBTheta (1.5s)\n✔ [3157/3158] Built E1.Formalism.LocalToGlobal.SiegelLatticeTheory.FlagStabilizerTensors.RootLatticeThresholds.LoopLocPf (2.1s)\nBuild completed successfully (3158 jobs).",
+  "started": 1795586446.6857011
+ },
+ "elapsed_s": 749.6,
+ "load_after": {
+  "worker-1": [
+   "11.91",
+   "24.72",
+   "19.12"
+  ],
+  "worker-2": [
+   "15.09",
+   "18.85",
+   "16.67"
+  ],
+  "worker-3": [
+   "3.97",
+   "4.74",
+   "4.94"
+  ]
+ },
+ "summary": {
+  "wall_s": 732.98,
+  "ok": true,
+  "lower_bound": null,
+  "modules_built": 3156
+ },
+ "remote_name": "wide-A0-c16-r1",
+ "instance_note": "first instance; W/CP 32 measured (pick script bug); called mid"
+}

@@ -1,0 +1,190 @@
+{
+ "name": "wide-B1s-c16-r1",
+ "project": "wide",
+ "mode": "tool",
+ "hosts": [
+  "worker-1",
+  "worker-2",
+  "worker-3"
+ ],
+ "cores_per_host": 16,
+ "cores": [
+  16,
+  16,
+  16
+ ],
+ "project_dir": "src/wide",
+ "cpus": "32-47",
+ "priority": "structure",
+ "history": null,
+ "assign": null,
+ "fetch_delay_s": 0.0,
+ "started": "2026-11-25T01:17:52",
+ "load_before": {
+  "worker-1": [
+   "6.51",
+   "15.68",
+   "20.83"
+  ],
+  "worker-2": [
+   "16.45",
+   "18.37",
+   "16.68"
+  ],
+  "worker-3": [
+   "5.68",
+   "10.90",
+   "12.06"
+  ]
+ },
+ "result": {
+  "ok": true,
+  "backend": "lean",
+  "from_store": 0,
+  "built": 4333,
+  "failed_modules": {},
+  "skipped_modules": [],
+  "skipped_count": 0,
+  "refused_workers": {},
+  "storage": "store",
+  "build_dir": "",
+  "store": "http://10.0.0.1:18765",
+  "wall_s": 273.38,
+  "modules": 4333,
+  "status": {
+   "done": 4333
+  },
+  "modules_built": 4333,
+  "slots": 48,
+  "lower_bound": {
+   "critical_path_s": 168.5,
+   "work_s": 9584.57,
+   "slots": 48,
+   "work_per_slot_s": 199.68,
+   "bound_s": 199.68,
+   "max_speedup": 56.88,
+   "ratio": 1.369
+  },
+  "totals": {
+   "attempts": 4333,
+   "failed_attempts": 0,
+   "stale_reports": 0,
+   "lean_s": 9584.586,
+   "cpu_s": 9510.049,
+   "max_rss_bytes": 6550216704,
+   "wait_s": 0.0,
+   "fetch_s": 95.918,
+   "fetched_bytes": 12303243835,
+   "publish_s": 438.785,
+   "confirm_s": 1.116,
+   "output_bytes": 6073665519
+  },
+  "workers": {
+   "worker-1": {
+    "slots": 16,
+    "threads": 1,
+    "host": "worker-1",
+    "pid": 3320850,
+    "tasks": 1717,
+    "failed": 0,
+    "lean_s": 3451.5054681301117,
+    "cpu_s": 3389.6265960000023,
+    "max_rss_bytes": 4694360064,
+    "clock_rtt_s": 0.0006070137023925781,
+    "clock_offset_estimate_s": -0.00010371208190917969,
+    "clock_offset_s": 0.0
+   },
+   "worker-2": {
+    "slots": 16,
+    "threads": 1,
+    "host": "worker-2",
+    "pid": 626933,
+    "tasks": 1171,
+    "failed": 0,
+    "lean_s": 3113.8621892929077,
+    "cpu_s": 3100.4496249999997,
+    "max_rss_bytes": 6550216704,
+    "clock_rtt_s": 0.0007140636444091797,
+    "clock_offset_estimate_s": 0.032546281814575195,
+    "clock_offset_s": 0.0325
+   },
+   "worker-3": {
+    "slots": 16,
+    "threads": 1,
+    "host": "worker-3",
+    "pid": 2490622,
+    "tasks": 1445,
+    "failed": 0,
+    "lean_s": 3019.218102455139,
+    "cpu_s": 3019.9723379999964,
+    "max_rss_bytes": 2795212800,
+    "clock_rtt_s": 0.0007910728454589844,
+    "clock_offset_estimate_s": 0.04214882850646973,
+    "clock_offset_s": 0.0421
+   }
+  },
+  "store_server": {
+   "objects_put": 12999,
+   "bytes_put": 6073665519,
+   "objects_get": 26052,
+   "bytes_get": 12303243835,
+   "puts_existing": 0
+  },
+  "failures": [],
+  "run_records": "/tmp/lakeshard-e1/runs/wide-B1s-c16-r1/work/modules.jsonl",
+  "run_record_count": 4333,
+  "manifest": "/tmp/lakeshard-e1/runs/wide-B1s-c16-r1/work/manifest.json",
+  "fingerprint": "57eb20a7f46423317b8e847f0aef5ac848bf1f7bc5dd0d2fca719c05d90ed212",
+  "prepare_s": 0.2,
+  "finished": true,
+  "url": "http://10.0.0.1:18765",
+  "local_workers": 0,
+  "slots_per_worker": 3,
+  "threads_per_lean": 0,
+  "retries": 2,
+  "run_id": "20261125-151847-25267f",
+  "worker_exit_codes": [],
+  "store_root": "/tmp/lakeshard-e1/runs/wide-B1s-c16-r1/work/store",
+  "priority": "structure",
+  "assigned": 0,
+  "fetch_delay_s": 0.0,
+  "history": "/tmp/lakeshard-e1/runs/wide-B1s-c16-r1/work/history.json"
+ },
+ "worker_log_tail": {
+  "worker-1": "",
+  "worker-2": "",
+  "worker-3": ""
+ },
+ "elapsed_s": 338.7,
+ "load_after": {
+  "worker-1": [
+   "8.80",
+   "17.61",
+   "20.47"
+  ],
+  "worker-2": [
+   "13.45",
+   "19.13",
+   "17.98"
+  ],
+  "worker-3": [
+   "6.82",
+   "11.87",
+   "12.41"
+  ]
+ },
+ "summary": {
+  "wall_s": 273.38,
+  "ok": true,
+  "lower_bound": {
+   "critical_path_s": 168.5,
+   "work_s": 9584.57,
+   "slots": 48,
+   "work_per_slot_s": 199.68,
+   "bound_s": 199.68,
+   "max_speedup": 56.88,
+   "ratio": 1.369
+  },
+  "modules_built": 4333
+ }
+}

@@ -1,0 +1,134 @@
+[
+ {
+  "speeds": "speeds from clock rates (1.06, 1.06, 1.0)",
+  "workers_start_s": 0.0,
+  "placement": "est",
+  "priority": "blevel",
+  "median_min": 24.1,
+  "range_min": [
+   24.0,
+   24.2
+  ]
+ },
+ {
+  "speeds": "speeds from clock rates (1.06, 1.06, 1.0)",
+  "workers_start_s": 0.0,
+  "placement": "eft",
+  "priority": "blevel",
+  "median_min": 24.1,
+  "range_min": [
+   23.9,
+   24.2
+  ]
+ },
+ {
+  "speeds": "speeds from clock rates (1.06, 1.06, 1.0)",
+  "workers_start_s": 0.0,
+  "placement": "est",
+  "priority": "fifo",
+  "median_min": 28.9,
+  "range_min": [
+   27.7,
+   29.0
+  ]
+ },
+ {
+  "speeds": "speeds from clock rates (1.06, 1.06, 1.0)",
+  "workers_start_s": 20.0,
+  "placement": "est",
+  "priority": "blevel",
+  "median_min": 24.5,
+  "range_min": [
+   24.3,
+   24.6
+  ]
+ },
+ {
+  "speeds": "speeds from clock rates (1.06, 1.06, 1.0)",
+  "workers_start_s": 20.0,
+  "placement": "eft",
+  "priority": "blevel",
+  "median_min": 24.5,
+  "range_min": [
+   24.2,
+   24.6
+  ]
+ },
+ {
+  "speeds": "speeds from clock rates (1.06, 1.06, 1.0)",
+  "workers_start_s": 20.0,
+  "placement": "est",
+  "priority": "fifo",
+  "median_min": 29.2,
+  "range_min": [
+   28.0,
+   29.4
+  ]
+ },
+ {
+  "speeds": "speeds measured in E1 (1.28, 1.41, 1.0)",
+  "workers_start_s": 0.0,
+  "placement": "est",
+  "priority": "blevel",
+  "median_min": 21.5,
+  "range_min": [
+   21.0,
+   21.9
+  ]
+ },
+ {
+  "speeds": "speeds measured in E1 (1.28, 1.41, 1.0)",
+  "workers_start_s": 0.0,
+  "placement": "eft",
+  "priority": "blevel",
+  "median_min": 21.1,
+  "range_min": [
+   21.0,
+   21.3
+  ]
+ },
+ {
+  "speeds": "speeds measured in E1 (1.28, 1.41, 1.0)",
+  "workers_start_s": 0.0,
+  "placement": "est",
+  "priority": "fifo",
+  "median_min": 24.7,
+  "range_min": [
+   24.2,
+   26.2
+  ]
+ },
+ {
+  "speeds": "speeds measured in E1 (1.28, 1.41, 1.0)",
+  "workers_start_s": 20.0,
+  "placement": "est",
+  "priority": "blevel",
+  "median_min": 21.8,
+  "range_min": [
+   21.4,
+   22.2
+  ]
+ },
+ {
+  "speeds": "speeds measured in E1 (1.28, 1.41, 1.0)",
+  "workers_start_s": 20.0,
+  "placement": "eft",
+  "priority": "blevel",
+  "median_min": 21.5,
+  "range_min": [
+   21.3,
+   21.7
+  ]
+ },
+ {
+  "speeds": "speeds measured in E1 (1.28, 1.41, 1.0)",
+  "workers_start_s": 20.0,
+  "placement": "est",
+  "priority": "fifo",
+  "median_min": 25.1,
+  "range_min": [
+   24.5,
+   26.5
+  ]
+ }
+]

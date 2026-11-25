@@ -1,0 +1,590 @@
+[
+ {
+  "instance": "narrow (2,613-module synthetic, own times)",
+  "c": 4,
+  "x_one": [
+   0.626,
+   0.751,
+   0.967
+  ],
+  "x_three": [
+   1.878,
+   2.254,
+   2.901
+  ],
+  "T_one_s": [
+   338.839,
+   391.265,
+   494.538
+  ],
+  "T_three_s": [
+   206.29,
+   254.026,
+   342.83
+  ],
+  "speedup_three_vs_one": [
+   1.412,
+   1.536,
+   1.65
+  ],
+  "one_over_lb": [
+   1.217,
+   1.339,
+   1.533
+  ],
+  "three_over_lb": [
+   1.113,
+   1.144,
+   1.208
+  ],
+  "fifo_over_blevel_three": [
+   1.069,
+   1.089,
+   1.11
+  ],
+  "fixed_namespace_over_dynamic_three": [
+   1.056,
+   1.063,
+   1.069
+  ]
+ },
+ {
+  "instance": "narrow (2,613-module synthetic, own times)",
+  "c": 8,
+  "x_one": [
+   1.238,
+   1.682,
+   1.93
+  ],
+  "x_three": [
+   3.715,
+   5.045,
+   5.789
+  ],
+  "T_one_s": [
+   238.293,
+   320.66,
+   366.567
+  ],
+  "T_three_s": [
+   180.096,
+   259.781,
+   307.083
+  ],
+  "speedup_three_vs_one": [
+   1.195,
+   1.236,
+   1.323
+  ],
+  "one_over_lb": [
+   1.22,
+   1.273,
+   1.387
+  ],
+  "three_over_lb": [
+   1.017,
+   1.028,
+   1.064
+  ],
+  "fifo_over_blevel_three": [
+   1.043,
+   1.051,
+   1.069
+  ],
+  "fixed_namespace_over_dynamic_three": [
+   1.017,
+   1.021,
+   1.024
+  ]
+ },
+ {
+  "instance": "narrow (2,613-module synthetic, own times)",
+  "c": 16,
+  "x_one": [
+   2.287,
+   3.102,
+   3.657
+  ],
+  "x_three": [
+   6.86,
+   9.307,
+   10.972
+  ],
+  "T_one_s": [
+   171.681,
+   247.545,
+   301.669
+  ],
+  "T_three_s": [
+   158.054,
+   231.627,
+   285.213
+  ],
+  "speedup_three_vs_one": [
+   1.051,
+   1.062,
+   1.086
+  ],
+  "one_over_lb": [
+   1.055,
+   1.075,
+   1.109
+  ],
+  "three_over_lb": [
+   1.002,
+   1.009,
+   1.026
+  ],
+  "fifo_over_blevel_three": [
+   1.012,
+   1.016,
+   1.022
+  ],
+  "fixed_namespace_over_dynamic_three": [
+   1.001,
+   1.002,
+   1.003
+  ]
+ },
+ {
+  "instance": "wide proxy 0 (RH sub-closure, n=3016, W/CP=71.93)",
+  "c": 4,
+  "x_one": [
+   0.056,
+   0.059,
+   0.062
+  ],
+  "x_three": [
+   0.167,
+   0.176,
+   0.187
+  ],
+  "T_one_s": [
+   283.477,
+   295.986,
+   351.02
+  ],
+  "T_three_s": [
+   95.154,
+   99.365,
+   117.67
+  ],
+  "speedup_three_vs_one": [
+   2.972,
+   2.98,
+   2.983
+  ],
+  "one_over_lb": [
+   1.013,
+   1.061,
+   1.252
+  ],
+  "three_over_lb": [
+   1.02,
+   1.069,
+   1.259
+  ],
+  "fifo_over_blevel_three": [
+   1.01,
+   1.014,
+   1.019
+  ],
+  "fixed_namespace_over_dynamic_three": [
+   1.007,
+   1.01,
+   1.014
+  ]
+ },
+ {
+  "instance": "wide proxy 0 (RH sub-closure, n=3016, W/CP=71.93)",
+  "c": 8,
+  "x_one": [
+   0.111,
+   0.115,
+   0.121
+  ],
+  "x_three": [
+   0.332,
+   0.346,
+   0.364
+  ],
+  "T_one_s": [
+   143.176,
+   146.6,
+   170.406
+  ],
+  "T_three_s": [
+   48.415,
+   49.635,
+   58.039
+  ],
+  "speedup_three_vs_one": [
+   2.941,
+   2.947,
+   2.96
+  ],
+  "one_over_lb": [
+   1.021,
+   1.044,
+   1.217
+  ],
+  "three_over_lb": [
+   1.038,
+   1.061,
+   1.243
+  ],
+  "fifo_over_blevel_three": [
+   1.026,
+   1.036,
+   1.046
+  ],
+  "fixed_namespace_over_dynamic_three": [
+   1.012,
+   1.015,
+   1.047
+  ]
+ },
+ {
+  "instance": "wide proxy 0 (RH sub-closure, n=3016, W/CP=71.93)",
+  "c": 16,
+  "x_one": [
+   0.212,
+   0.226,
+   0.237
+  ],
+  "x_three": [
+   0.635,
+   0.677,
+   0.712
+  ],
+  "T_one_s": [
+   71.823,
+   73.607,
+   86.329
+  ],
+  "T_three_s": [
+   24.914,
+   25.567,
+   29.811
+  ],
+  "speedup_three_vs_one": [
+   2.867,
+   2.888,
+   2.907
+  ],
+  "one_over_lb": [
+   1.023,
+   1.045,
+   1.234
+  ],
+  "three_over_lb": [
+   1.061,
+   1.092,
+   1.279
+  ],
+  "fifo_over_blevel_three": [
+   1.088,
+   1.107,
+   1.134
+  ],
+  "fixed_namespace_over_dynamic_three": [
+   1.021,
+   1.024,
+   1.034
+  ]
+ },
+ {
+  "instance": "wide proxy 1 (RH sub-closure, n=3000, W/CP=60.06)",
+  "c": 4,
+  "x_one": [
+   0.063,
+   0.067,
+   0.072
+  ],
+  "x_three": [
+   0.19,
+   0.201,
+   0.215
+  ],
+  "T_one_s": [
+   284.376,
+   288.448,
+   322.855
+  ],
+  "T_three_s": [
+   98.26,
+   99.991,
+   111.752
+  ],
+  "speedup_three_vs_one": [
+   2.868,
+   2.891,
+   2.905
+  ],
+  "one_over_lb": [
+   1.017,
+   1.029,
+   1.151
+  ],
+  "three_over_lb": [
+   1.055,
+   1.069,
+   1.197
+  ],
+  "fifo_over_blevel_three": [
+   1.055,
+   1.059,
+   1.063
+  ],
+  "fixed_namespace_over_dynamic_three": [
+   2.585,
+   2.608,
+   2.613
+  ]
+ },
+ {
+  "instance": "wide proxy 1 (RH sub-closure, n=3000, W/CP=60.06)",
+  "c": 8,
+  "x_one": [
+   0.129,
+   0.135,
+   0.141
+  ],
+  "x_three": [
+   0.388,
+   0.406,
+   0.424
+  ],
+  "T_one_s": [
+   144.726,
+   149.963,
+   171.336
+  ],
+  "T_three_s": [
+   54.225,
+   56.124,
+   63.679
+  ],
+  "speedup_three_vs_one": [
+   2.657,
+   2.672,
+   2.695
+  ],
+  "one_over_lb": [
+   1.039,
+   1.069,
+   1.218
+  ],
+  "three_over_lb": [
+   1.167,
+   1.197,
+   1.358
+  ],
+  "fifo_over_blevel_three": [
+   1.067,
+   1.076,
+   1.085
+  ],
+  "fixed_namespace_over_dynamic_three": [
+   2.43,
+   2.444,
+   2.462
+  ]
+ },
+ {
+  "instance": "wide proxy 1 (RH sub-closure, n=3000, W/CP=60.06)",
+  "c": 16,
+  "x_one": [
+   0.254,
+   0.269,
+   0.285
+  ],
+  "x_three": [
+   0.762,
+   0.808,
+   0.856
+  ],
+  "T_one_s": [
+   76.741,
+   79.705,
+   87.499
+  ],
+  "T_three_s": [
+   31.818,
+   33.542,
+   35.954
+  ],
+  "speedup_three_vs_one": [
+   2.371,
+   2.406,
+   2.437
+  ],
+  "one_over_lb": [
+   1.093,
+   1.138,
+   1.25
+  ],
+  "three_over_lb": [
+   1.359,
+   1.438,
+   1.539
+  ],
+  "fifo_over_blevel_three": [
+   1.115,
+   1.129,
+   1.154
+  ],
+  "fixed_namespace_over_dynamic_three": [
+   2.2,
+   2.226,
+   2.255
+  ]
+ },
+ {
+  "instance": "wide proxy 2 (RH sub-closure, n=3025, W/CP=63.73)",
+  "c": 4,
+  "x_one": [
+   0.061,
+   0.063,
+   0.067
+  ],
+  "x_three": [
+   0.182,
+   0.19,
+   0.202
+  ],
+  "T_one_s": [
+   284.577,
+   292.977,
+   350.277
+  ],
+  "T_three_s": [
+   95.54,
+   98.378,
+   117.6
+  ],
+  "speedup_three_vs_one": [
+   2.974,
+   2.979,
+   2.981
+  ],
+  "one_over_lb": [
+   1.014,
+   1.039,
+   1.249
+  ],
+  "three_over_lb": [
+   1.021,
+   1.046,
+   1.258
+  ],
+  "fifo_over_blevel_three": [
+   1.015,
+   1.02,
+   1.023
+  ],
+  "fixed_namespace_over_dynamic_three": [
+   1.051,
+   1.066,
+   1.085
+  ]
+ },
+ {
+  "instance": "wide proxy 2 (RH sub-closure, n=3025, W/CP=63.73)",
+  "c": 8,
+  "x_one": [
+   0.122,
+   0.129,
+   0.135
+  ],
+  "x_three": [
+   0.365,
+   0.386,
+   0.406
+  ],
+  "T_one_s": [
+   142.556,
+   153.041,
+   173.294
+  ],
+  "T_three_s": [
+   48.302,
+   51.737,
+   58.662
+  ],
+  "speedup_three_vs_one": [
+   2.948,
+   2.955,
+   2.963
+  ],
+  "one_over_lb": [
+   1.022,
+   1.091,
+   1.239
+  ],
+  "three_over_lb": [
+   1.038,
+   1.104,
+   1.259
+  ],
+  "fifo_over_blevel_three": [
+   1.051,
+   1.063,
+   1.074
+  ],
+  "fixed_namespace_over_dynamic_three": [
+   1.06,
+   1.075,
+   1.096
+  ]
+ },
+ {
+  "instance": "wide proxy 2 (RH sub-closure, n=3025, W/CP=63.73)",
+  "c": 16,
+  "x_one": [
+   0.246,
+   0.254,
+   0.269
+  ],
+  "x_three": [
+   0.739,
+   0.763,
+   0.806
+  ],
+  "T_one_s": [
+   72.34,
+   75.817,
+   83.772
+  ],
+  "T_three_s": [
+   24.874,
+   25.977,
+   28.664
+  ],
+  "speedup_three_vs_one": [
+   2.886,
+   2.911,
+   2.931
+  ],
+  "one_over_lb": [
+   1.027,
+   1.079,
+   1.198
+  ],
+  "three_over_lb": [
+   1.061,
+   1.112,
+   1.23
+  ],
+  "fifo_over_blevel_three": [
+   1.164,
+   1.186,
+   1.22
+  ],
+  "fixed_namespace_over_dynamic_three": [
+   1.086,
+   1.104,
+   1.129
+  ]
+ }
+]

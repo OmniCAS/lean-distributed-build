@@ -1,0 +1,452 @@
+{
+ "work_s": 43309.281,
+ "critical_path_s": 1183.5970000000004,
+ "max_speedup": 36.591239247818294,
+ "cp_modules": 154,
+ "cp_top10": [
+  {
+   "module": "Mathlib.Analysis.Distribution.SchwartzSpace.Basic",
+   "seconds": 55.0,
+   "lines": 1420,
+   "share_of_cp": 0.04646851926796028
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Module.Multilinear.Basic",
+   "seconds": 36.0,
+   "lines": 1295,
+   "share_of_cp": 0.03041575806630127
+  },
+  {
+   "module": "Mathlib.Analysis.Analytic.Constructions",
+   "seconds": 36.0,
+   "lines": 1299,
+   "share_of_cp": 0.03041575806630127
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.MFDeriv.SpecificFunctions",
+   "seconds": 33.0,
+   "lines": 1139,
+   "share_of_cp": 0.027881111560776165
+  },
+  {
+   "module": "Mathlib.Analysis.Analytic.Basic",
+   "seconds": 29.0,
+   "lines": 1136,
+   "share_of_cp": 0.02450158288674269
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Module.Multilinear.Curry",
+   "seconds": 26.0,
+   "lines": 713,
+   "share_of_cp": 0.021966936381217585
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Operator.Bilinear",
+   "seconds": 25.0,
+   "lines": 475,
+   "share_of_cp": 0.021122054212709216
+  },
+  {
+   "module": "Mathlib.Analysis.Calculus.ContDiff.Operations",
+   "seconds": 24.0,
+   "lines": 1052,
+   "share_of_cp": 0.020277172044200847
+  },
+  {
+   "module": "Mathlib.Analysis.Analytic.Composition",
+   "seconds": 23.0,
+   "lines": 1288,
+   "share_of_cp": 0.01943228987569248
+  },
+  {
+   "module": "Mathlib.Analysis.Calculus.ContDiff.Defs",
+   "seconds": 23.0,
+   "lines": 1283,
+   "share_of_cp": 0.01943228987569248
+  }
+ ],
+ "cp_by_package": {
+  "batteries": 19.605,
+  "aesop": 36.192,
+  "mathlib": 1127.8000000000004
+ },
+ "cp_small_modules_s": 23.397,
+ "depth": 180,
+ "depth_floor_s": 178.25,
+ "split": [
+  {
+   "parts": 2,
+   "k": 0,
+   "cp_s": 1183.5970000000004,
+   "max_speedup": 36.591239247818294,
+   "last_split": ""
+  },
+  {
+   "parts": 2,
+   "k": 1,
+   "cp_s": 1156.5970000000004,
+   "max_speedup": 37.4463023853598,
+   "last_split": "Mathlib.Analysis.Distribution.SchwartzSpace.Basic"
+  },
+  {
+   "parts": 2,
+   "k": 2,
+   "cp_s": 1139.0970000000004,
+   "max_speedup": 38.022469552636856,
+   "last_split": "Mathlib.Analysis.Normed.Module.Multilinear.Basic"
+  },
+  {
+   "parts": 2,
+   "k": 5,
+   "cp_s": 1099.3970000000002,
+   "max_speedup": 39.398216476850486,
+   "last_split": "Mathlib.Analysis.Analytic.Basic"
+  },
+  {
+   "parts": 2,
+   "k": 10,
+   "cp_s": 1038.8970000000002,
+   "max_speedup": 41.69737808464169,
+   "last_split": "Mathlib.Analysis.Analytic.Composition"
+  },
+  {
+   "parts": 2,
+   "k": 20,
+   "cp_s": 962.147,
+   "max_speedup": 45.03395115299429,
+   "last_split": "Mathlib.MeasureTheory.Function.LpSpace.Basic"
+  },
+  {
+   "parts": 2,
+   "k": 50,
+   "cp_s": 897.7969999999998,
+   "max_speedup": 48.295194793477826,
+   "last_split": "Mathlib.AlgebraicGeometry.Normalization"
+  },
+  {
+   "parts": 2,
+   "k": 100,
+   "cp_s": 824.4969999999998,
+   "max_speedup": 52.64941048906183,
+   "last_split": "Mathlib.AlgebraicGeometry.GammaSpecAdjunction"
+  },
+  {
+   "parts": 2,
+   "k": 200,
+   "cp_s": 730.722,
+   "max_speedup": 59.542864454607916,
+   "last_split": "Mathlib.Topology.Algebra.InfiniteSum.NatInt"
+  },
+  {
+   "parts": 4,
+   "k": 0,
+   "cp_s": 1183.5970000000004,
+   "max_speedup": 36.591239247818294,
+   "last_split": ""
+  },
+  {
+   "parts": 4,
+   "k": 1,
+   "cp_s": 1143.0970000000004,
+   "max_speedup": 37.890293649620276,
+   "last_split": "Mathlib.Analysis.Distribution.SchwartzSpace.Basic"
+  },
+  {
+   "parts": 4,
+   "k": 2,
+   "cp_s": 1117.0970000000004,
+   "max_speedup": 38.77486109084528,
+   "last_split": "Mathlib.Analysis.Normed.Module.Multilinear.Basic"
+  },
+  {
+   "parts": 4,
+   "k": 5,
+   "cp_s": 1061.6470000000002,
+   "max_speedup": 40.808555951271934,
+   "last_split": "Mathlib.Analysis.Analytic.Basic"
+  },
+  {
+   "parts": 4,
+   "k": 10,
+   "cp_s": 991.147,
+   "max_speedup": 43.726390737196404,
+   "last_split": "Mathlib.Analysis.Calculus.ContDiff.FTaylorSeries"
+  },
+  {
+   "parts": 4,
+   "k": 20,
+   "cp_s": 931.3469999999998,
+   "max_speedup": 46.56618961568569,
+   "last_split": "Mathlib.Analysis.Calculus.ContDiff.Convolution"
+  },
+  {
+   "parts": 4,
+   "k": 50,
+   "cp_s": 853.9470000000001,
+   "max_speedup": 50.89224624010623,
+   "last_split": "Mathlib.MeasureTheory.Group.Arithmetic"
+  },
+  {
+   "parts": 4,
+   "k": 100,
+   "cp_s": 761.5219999999998,
+   "max_speedup": 57.26595029427911,
+   "last_split": "Mathlib.AlgebraicGeometry.Group.Abelian"
+  },
+  {
+   "parts": 4,
+   "k": 200,
+   "cp_s": 649.65,
+   "max_speedup": 67.58913414915725,
+   "last_split": "Mathlib.Algebra.Group.Submonoid.Operations"
+  },
+  {
+   "parts": 16,
+   "k": 0,
+   "cp_s": 1183.5970000000004,
+   "max_speedup": 36.591239247818294,
+   "last_split": ""
+  },
+  {
+   "parts": 16,
+   "k": 1,
+   "cp_s": 1134.8970000000002,
+   "max_speedup": 38.17463699348927,
+   "last_split": "Mathlib.Analysis.Distribution.SchwartzSpace.Basic"
+  },
+  {
+   "parts": 16,
+   "k": 2,
+   "cp_s": 1108.8970000000002,
+   "max_speedup": 39.08323406051238,
+   "last_split": "Mathlib.Analysis.Normed.Module.Multilinear.Basic"
+  },
+  {
+   "parts": 16,
+   "k": 5,
+   "cp_s": 1065.9595000000002,
+   "max_speedup": 40.69974609729544,
+   "last_split": "Mathlib.Geometry.Manifold.MFDeriv.SpecificFunctions"
+  },
+  {
+   "parts": 16,
+   "k": 10,
+   "cp_s": 976.1719999999999,
+   "max_speedup": 44.52010608786157,
+   "last_split": "Mathlib.Analysis.Calculus.ContDiff.Operations"
+  },
+  {
+   "parts": 16,
+   "k": 20,
+   "cp_s": 927.4094999999998,
+   "max_speedup": 47.02268091927031,
+   "last_split": "Mathlib.Topology.Algebra.Module.Equiv"
+  },
+  {
+   "parts": 16,
+   "k": 50,
+   "cp_s": 835.0219999999997,
+   "max_speedup": 52.76421579311685,
+   "last_split": "Mathlib.LinearAlgebra.TensorProduct.Tower"
+  },
+  {
+   "parts": 16,
+   "k": 100,
+   "cp_s": 730.1094999999998,
+   "max_speedup": 61.37337070672278,
+   "last_split": "Mathlib.Topology.Semicontinuity.Basic"
+  },
+  {
+   "parts": 16,
+   "k": 200,
+   "cp_s": 600.6219999999997,
+   "max_speedup": 77.10220571341047,
+   "last_split": "Mathlib.MeasureTheory.Integral.Prod"
+  }
+ ],
+ "redundant_edges": 12197,
+ "edges": 36212,
+ "cp_after_transitive_reduction_s": 1183.5970000000004,
+ "edge_removal": [
+  {
+   "removed": 1,
+   "edge": "Mathlib.Analysis.Calculus.ContDiff.Operations -> Mathlib.Analysis.Calculus.ContDiff.Comp",
+   "cp_s": 1090.4970000000003,
+   "max_speedup": 39.715176657982546
+  },
+  {
+   "removed": 2,
+   "edge": "Mathlib.Analysis.Calculus.FormalMultilinearSeries -> Mathlib.Analysis.Normed.Module.Multilinear.Curry",
+   "cp_s": 1026.797,
+   "max_speedup": 42.17901006722848
+  },
+  {
+   "removed": 3,
+   "edge": "Mathlib.Topology.Algebra.MulAction -> Mathlib.Topology.Algebra.ConstMulAction",
+   "cp_s": 982.6969999999998,
+   "max_speedup": 44.07185633007938
+  },
+  {
+   "removed": 4,
+   "edge": "Mathlib.Analysis.Distribution.SchwartzSpace.Deriv -> Mathlib.Analysis.Distribution.SchwartzSpace.Basic",
+   "cp_s": 942.197,
+   "max_speedup": 45.96626926216068
+  },
+  {
+   "removed": 5,
+   "edge": "Mathlib.Topology.Algebra.Module.ClosedSubmodule -> Mathlib.Topology.Algebra.Module.Equiv",
+   "cp_s": 924.1969999999998,
+   "max_speedup": 46.86152519430382
+  },
+  {
+   "removed": 6,
+   "edge": "Mathlib.Order.Disjoint -> Mathlib.Order.BoundedOrder.Lattice",
+   "cp_s": 908.7969999999999,
+   "max_speedup": 47.65561616070476
+  },
+  {
+   "removed": 7,
+   "edge": "Mathlib.Data.Set.Image -> Mathlib.Data.Set.SymmDiff",
+   "cp_s": 899.3370000000001,
+   "max_speedup": 48.15689891553444
+  },
+  {
+   "removed": 8,
+   "edge": "Mathlib.Tactic.Linter.Header -> Mathlib.Tactic.Linter.DirectoryDependency",
+   "cp_s": 896.9969999999998,
+   "max_speedup": 48.28252602851516
+  },
+  {
+   "removed": 9,
+   "edge": "Batteries.Tactic.Lint.Misc -> Batteries.Tactic.Lint.Basic",
+   "cp_s": 896.589,
+   "max_speedup": 48.30449737839746
+  },
+  {
+   "removed": 10,
+   "edge": "Mathlib.Tactic.Translate.TagUnfoldBoundary -> Mathlib.Tactic.Translate.Core",
+   "cp_s": 891.1999999999997,
+   "max_speedup": 48.59658999102336
+  },
+  {
+   "removed": 11,
+   "edge": "Aesop.Rule.Basic -> Aesop.RuleTac.Descr",
+   "cp_s": 883.8890000000001,
+   "max_speedup": 48.9985518543618
+  },
+  {
+   "removed": 12,
+   "edge": "Mathlib.Tactic.ExtractGoal -> Mathlib.Tactic.MinImports",
+   "cp_s": 883.4399999999997,
+   "max_speedup": 49.023454903558836
+  },
+  {
+   "removed": 13,
+   "edge": "Aesop.Search.Expansion -> Aesop.Search.Expansion.Norm",
+   "cp_s": 880.8570000000001,
+   "max_speedup": 49.16720988764351
+  },
+  {
+   "removed": 14,
+   "edge": "Mathlib.Data.Set.Defs -> Mathlib.Tactic.SetNotationForOrder",
+   "cp_s": 878.5399999999997,
+   "max_speedup": 49.296880050993714
+  },
+  {
+   "removed": 15,
+   "edge": "Mathlib.Data.Set.BooleanAlgebra -> Mathlib.Order.CompleteBooleanAlgebra",
+   "cp_s": 874.2570000000002,
+   "max_speedup": 49.53838630974644
+  },
+  {
+   "removed": 16,
+   "edge": "Mathlib.CategoryTheory.Functor.Basic -> Mathlib.CategoryTheory.Category.Basic",
+   "cp_s": 866.1569999999999,
+   "max_speedup": 50.001652125423
+  },
+  {
+   "removed": 17,
+   "edge": "Mathlib.Tactic.GRewrite.Core -> Mathlib.Tactic.GCongr.Core",
+   "cp_s": 862.5740000000002,
+   "max_speedup": 50.20935131362642
+  },
+  {
+   "removed": 18,
+   "edge": "Mathlib.Util.WithWeakNamespace -> Mathlib.Init",
+   "cp_s": 860.4570000000002,
+   "max_speedup": 50.332882410161105
+  },
+  {
+   "removed": 19,
+   "edge": "Mathlib.Logic.Small.Defs -> Mathlib.Logic.Equiv.Defs",
+   "cp_s": 859.0569999999999,
+   "max_speedup": 50.41490960436852
+  },
+  {
+   "removed": 20,
+   "edge": "Mathlib.Topology.NhdsWithin -> Mathlib.Topology.Constructions",
+   "cp_s": 845.84,
+   "max_speedup": 51.20268726945994
+  },
+  {
+   "removed": 21,
+   "edge": "Mathlib.CategoryTheory.Opposites -> Mathlib.CategoryTheory.Equivalence",
+   "cp_s": 839.4569999999999,
+   "max_speedup": 51.59201841190199
+  },
+  {
+   "removed": 22,
+   "edge": "Mathlib.Topology.Compactness.LocallyCompact -> Mathlib.Topology.Compactness.Compact",
+   "cp_s": 828.457,
+   "max_speedup": 52.27704153625354
+  },
+  {
+   "removed": 23,
+   "edge": "Mathlib.Data.Finset.Sum -> Mathlib.Data.Finset.Card",
+   "cp_s": 822.757,
+   "max_speedup": 52.63921303616986
+  },
+  {
+   "removed": 24,
+   "edge": "Mathlib.Data.Multiset.Defs -> Mathlib.Data.List.Perm.Subperm",
+   "cp_s": 822.14,
+   "max_speedup": 52.67871773663853
+  },
+  {
+   "removed": 25,
+   "edge": "Aesop.Util.UnorderedArraySet -> Batteries.Data.Array.Merge",
+   "cp_s": 822.0569999999999,
+   "max_speedup": 52.68403650841731
+  },
+  {
+   "removed": 26,
+   "edge": "Mathlib.Logic.Equiv.Prod -> Mathlib.Logic.Equiv.Defs",
+   "cp_s": 821.0020000000001,
+   "max_speedup": 52.751736292968836
+  },
+  {
+   "removed": 27,
+   "edge": "Aesop.Search.ExpandSafePrefix -> Aesop.Search.Expansion",
+   "cp_s": 818.9569999999999,
+   "max_speedup": 52.88346152484198
+  },
+  {
+   "removed": 28,
+   "edge": "Mathlib.Tactic.GCongr -> Mathlib.Tactic.GCongr.Core",
+   "cp_s": 816.8570000000001,
+   "max_speedup": 53.019415883073776
+  },
+  {
+   "removed": 29,
+   "edge": "Mathlib.Order.Heyting.Basic -> Mathlib.Order.GaloisConnection.Defs",
+   "cp_s": 815.8789999999999,
+   "max_speedup": 53.082970636577244
+  },
+  {
+   "removed": 30,
+   "edge": "Mathlib.Topology.Algebra.InfiniteSum.ENNReal -> Mathlib.Topology.Instances.ENNReal.Lemmas",
+   "cp_s": 812.7570000000001,
+   "max_speedup": 53.2868754129463
+  }
+ ]
+}

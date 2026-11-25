@@ -1,0 +1,10 @@
+{
+ "base": "/tmp/lakeshard-e1",
+ "port": 18765,
+ "toolchain_bin": "/tmp/lakeshard-e1/tc/v4.34.0/bin",
+ "hosts": {
+  "worker-1": {"ssh": "worker-1", "addr": "10.0.0.1", "python": "python3"},
+  "worker-2": {"ssh": "worker-2", "addr": "10.0.0.2", "python": "python3"},
+  "worker-3": {"ssh": "worker-3", "addr": "10.0.0.3", "python": "python3"}
+ }
+}

@@ -1,0 +1,190 @@
+{
+ "name": "wide-B1-c16-r1",
+ "project": "wide",
+ "mode": "tool",
+ "hosts": [
+  "worker-1",
+  "worker-2",
+  "worker-3"
+ ],
+ "cores_per_host": 16,
+ "cores": [
+  16,
+  16,
+  16
+ ],
+ "project_dir": "src/wide",
+ "cpus": "32-47",
+ "priority": "bl",
+ "history": "/tmp/lakeshard-e1/runs/wide-A0-c16-r1/ref.history.json",
+ "assign": null,
+ "fetch_delay_s": 0.0,
+ "started": "2026-11-25T01:04:05",
+ "load_before": {
+  "worker-1": [
+   "9.77",
+   "23.07",
+   "25.69"
+  ],
+  "worker-2": [
+   "11.23",
+   "11.70",
+   "12.44"
+  ],
+  "worker-3": [
+   "12.89",
+   "13.01",
+   "11.83"
+  ]
+ },
+ "result": {
+  "ok": true,
+  "backend": "lean",
+  "from_store": 0,
+  "built": 4333,
+  "failed_modules": {},
+  "skipped_modules": [],
+  "skipped_count": 0,
+  "refused_workers": {},
+  "storage": "store",
+  "build_dir": "",
+  "store": "http://10.0.0.1:18765",
+  "wall_s": 248.78,
+  "modules": 4333,
+  "status": {
+   "done": 4333
+  },
+  "modules_built": 4333,
+  "slots": 48,
+  "lower_bound": {
+   "critical_path_s": 161.73,
+   "work_s": 9550.77,
+   "slots": 48,
+   "work_per_slot_s": 198.97,
+   "bound_s": 198.97,
+   "max_speedup": 59.05,
+   "ratio": 1.25
+  },
+  "totals": {
+   "attempts": 4333,
+   "failed_attempts": 0,
+   "stale_reports": 0,
+   "lean_s": 9550.742,
+   "cpu_s": 9383.619,
+   "max_rss_bytes": 6557151232,
+   "wait_s": 0.0,
+   "fetch_s": 95.571,
+   "fetched_bytes": 12298086218,
+   "publish_s": 546.942,
+   "confirm_s": 4.131,
+   "output_bytes": 6073665519
+  },
+  "workers": {
+   "worker-1": {
+    "slots": 16,
+    "threads": 1,
+    "host": "worker-1",
+    "pid": 3259487,
+    "tasks": 1668,
+    "failed": 0,
+    "lean_s": 3444.097970724106,
+    "cpu_s": 3327.594517999993,
+    "max_rss_bytes": 6557151232,
+    "clock_rtt_s": 0.0006809234619140625,
+    "clock_offset_estimate_s": -0.00010013580322265625,
+    "clock_offset_s": 0.0
+   },
+   "worker-2": {
+    "slots": 16,
+    "threads": 1,
+    "host": "worker-2",
+    "pid": 581885,
+    "tasks": 1260,
+    "failed": 0,
+    "lean_s": 3133.7187645435333,
+    "cpu_s": 3088.613270999998,
+    "max_rss_bytes": 4184571904,
+    "clock_rtt_s": 0.0008349418640136719,
+    "clock_offset_estimate_s": 0.02625298500061035,
+    "clock_offset_s": 0.0263
+   },
+   "worker-3": {
+    "slots": 16,
+    "threads": 1,
+    "host": "worker-3",
+    "pid": 2417369,
+    "tasks": 1405,
+    "failed": 0,
+    "lean_s": 2972.9256315231323,
+    "cpu_s": 2967.411367999997,
+    "max_rss_bytes": 4694155264,
+    "clock_rtt_s": 0.0006935596466064453,
+    "clock_offset_estimate_s": 0.022499561309814453,
+    "clock_offset_s": 0.0225
+   }
+  },
+  "store_server": {
+   "objects_put": 12999,
+   "bytes_put": 6073665519,
+   "objects_get": 26109,
+   "bytes_get": 12298086218,
+   "puts_existing": 0
+  },
+  "failures": [],
+  "run_records": "/tmp/lakeshard-e1/runs/wide-B1-c16-r1/work/modules.jsonl",
+  "run_record_count": 4333,
+  "manifest": "/tmp/lakeshard-e1/runs/wide-B1-c16-r1/work/manifest.json",
+  "fingerprint": "57eb20a7f46423317b8e847f0aef5ac848bf1f7bc5dd0d2fca719c05d90ed212",
+  "prepare_s": 0.19,
+  "finished": true,
+  "url": "http://10.0.0.1:18765",
+  "local_workers": 0,
+  "slots_per_worker": 3,
+  "threads_per_lean": 0,
+  "retries": 2,
+  "run_id": "20261125-150504-5b9f11",
+  "worker_exit_codes": [],
+  "store_root": "/tmp/lakeshard-e1/runs/wide-B1-c16-r1/work/store",
+  "priority": "bl",
+  "assigned": 0,
+  "fetch_delay_s": 0.0,
+  "history": "/tmp/lakeshard-e1/runs/wide-B1-c16-r1/work/history.json"
+ },
+ "worker_log_tail": {
+  "worker-1": "",
+  "worker-2": "",
+  "worker-3": ""
+ },
+ "elapsed_s": 311.4,
+ "load_after": {
+  "worker-1": [
+   "12.07",
+   "20.87",
+   "24.06"
+  ],
+  "worker-2": [
+   "15.54",
+   "17.83",
+   "15.16"
+  ],
+  "worker-3": [
+   "7.76",
+   "13.33",
+   "12.67"
+  ]
+ },
+ "summary": {
+  "wall_s": 248.78,
+  "ok": true,
+  "lower_bound": {
+   "critical_path_s": 161.73,
+   "work_s": 9550.77,
+   "slots": 48,
+   "work_per_slot_s": 198.97,
+   "bound_s": 198.97,
+   "max_speedup": 59.05,
+   "ratio": 1.25
+  },
+  "modules_built": 4333
+ }
+}

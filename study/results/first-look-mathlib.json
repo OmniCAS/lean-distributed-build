@@ -1,0 +1,189 @@
+{
+ "modules": 8908,
+ "edges": 36212,
+ "depth": 180,
+ "lines": 2389734,
+ "work_s": 43309.281,
+ "work_core_h": 12.030355833333335,
+ "critical_path_s": 1183.5970000000004,
+ "max_speedup": 36.591239247818294,
+ "cp_modules": 154,
+ "wall_s": 2863.3966751098633,
+ "by_package_work_s": {
+  "LeanSearchClient": 5.542999999999999,
+  "Qq": 22.951000000000004,
+  "aesop": 172.987,
+  "batteries": 293.0639999999999,
+  "importGraph": 24.811000000000003,
+  "mathlib": 42758.55800000001,
+  "plausible": 14.882000000000001,
+  "proofwidgets": 16.485000000000003
+ },
+ "cpu_sum_s": 40527.22,
+ "cpu_over_built": 0.9930300825200162,
+ "sampled_modules": 8448,
+ "lower_bound_16_s": 2706.8300625,
+ "wall_over_lb_16": 1.0578413158546274,
+ "sim_blevel_16_s": 2711.885999999999,
+ "sim_fifo_16_s": 2809.4549999999986,
+ "sim_os_share_C_16_s": 2796.7849999999835,
+ "cp_top10": [
+  {
+   "module": "Mathlib.Analysis.Distribution.SchwartzSpace.Basic",
+   "pkg": "mathlib",
+   "seconds": 55.0,
+   "lines": 1420,
+   "share_of_cp": 0.04646851926796028,
+   "cpu_s": 48.63
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Module.Multilinear.Basic",
+   "pkg": "mathlib",
+   "seconds": 36.0,
+   "lines": 1295,
+   "share_of_cp": 0.03041575806630127,
+   "cpu_s": 37.83
+  },
+  {
+   "module": "Mathlib.Analysis.Analytic.Constructions",
+   "pkg": "mathlib",
+   "seconds": 36.0,
+   "lines": 1299,
+   "share_of_cp": 0.03041575806630127,
+   "cpu_s": 34.4
+  },
+  {
+   "module": "Mathlib.Geometry.Manifold.MFDeriv.SpecificFunctions",
+   "pkg": "mathlib",
+   "seconds": 33.0,
+   "lines": 1139,
+   "share_of_cp": 0.027881111560776165,
+   "cpu_s": 41.92
+  },
+  {
+   "module": "Mathlib.Analysis.Analytic.Basic",
+   "pkg": "mathlib",
+   "seconds": 29.0,
+   "lines": 1136,
+   "share_of_cp": 0.02450158288674269,
+   "cpu_s": 32.7
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Module.Multilinear.Curry",
+   "pkg": "mathlib",
+   "seconds": 26.0,
+   "lines": 713,
+   "share_of_cp": 0.021966936381217585,
+   "cpu_s": 26.37
+  },
+  {
+   "module": "Mathlib.Analysis.Normed.Operator.Bilinear",
+   "pkg": "mathlib",
+   "seconds": 25.0,
+   "lines": 475,
+   "share_of_cp": 0.021122054212709216,
+   "cpu_s": 24.46
+  },
+  {
+   "module": "Mathlib.Analysis.Calculus.ContDiff.Operations",
+   "pkg": "mathlib",
+   "seconds": 24.0,
+   "lines": 1052,
+   "share_of_cp": 0.020277172044200847,
+   "cpu_s": 31.81
+  },
+  {
+   "module": "Mathlib.Analysis.Analytic.Composition",
+   "pkg": "mathlib",
+   "seconds": 23.0,
+   "lines": 1288,
+   "share_of_cp": 0.01943228987569248,
+   "cpu_s": 27.14
+  },
+  {
+   "module": "Mathlib.Analysis.Calculus.ContDiff.Defs",
+   "pkg": "mathlib",
+   "seconds": 23.0,
+   "lines": 1283,
+   "share_of_cp": 0.01943228987569248,
+   "cpu_s": null
+  }
+ ],
+ "heaviest15": [
+  {
+   "module": "Mathlib.CategoryTheory.Sites.SheafCohomology.MayerVietoris",
+   "seconds": 110.0,
+   "on_cp": false
+  },
+  {
+   "module": "Mathlib.CategoryTheory.Sites.SheafCohomology.ExactSequences",
+   "seconds": 100.0,
+   "on_cp": false
+  },
+  {
+   "module": "Mathlib.CategoryTheory.Sites.SheafCohomology.Basic",
+   "seconds": 87.0,
+   "on_cp": false
+  },
+  {
+   "module": "Mathlib.AlgebraicGeometry.Modules.Tilde",
+   "seconds": 82.0,
+   "on_cp": false
+  },
+  {
+   "module": "Mathlib.AlgebraicGeometry.Modules.Sheaf",
+   "seconds": 79.0,
+   "on_cp": false
+  },
+  {
+   "module": "Mathlib.Analysis.Distribution.ContDiffMapSupportedIn",
+   "seconds": 64.0,
+   "on_cp": false
+  },
+  {
+   "module": "Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Functor",
+   "seconds": 64.0,
+   "on_cp": false
+  },
+  {
+   "module": "Mathlib.CategoryTheory.Abelian.Indization",
+   "seconds": 58.0,
+   "on_cp": false
+  },
+  {
+   "module": "Mathlib.RingTheory.Etale.QuasiFinite",
+   "seconds": 58.0,
+   "on_cp": false
+  },
+  {
+   "module": "Mathlib.Analysis.Fourier.FourierTransform",
+   "seconds": 55.0,
+   "on_cp": false
+  },
+  {
+   "module": "Mathlib.Analysis.Distribution.SchwartzSpace.Basic",
+   "seconds": 55.0,
+   "on_cp": true
+  },
+  {
+   "module": "Mathlib.Analysis.InnerProductSpace.Adjoint",
+   "seconds": 50.0,
+   "on_cp": false
+  },
+  {
+   "module": "Mathlib.RingTheory.ZariskisMainTheorem",
+   "seconds": 49.0,
+   "on_cp": false
+  },
+  {
+   "module": "Mathlib.RingTheory.Polynomial.UniversalFactorizationRing",
+   "seconds": 48.0,
+   "on_cp": false
+  },
+  {
+   "module": "Mathlib.MeasureTheory.VectorMeasure.Integral",
+   "seconds": 48.0,
+   "on_cp": false
+  }
+ ]
+}

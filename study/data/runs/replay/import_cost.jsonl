@@ -1,0 +1,12 @@
+{"file": "None", "run": 1, "exit": 0, "wall_s": 0.439132042}
+{"file": "None", "run": 2, "exit": 0, "wall_s": 0.397007708}
+{"file": "None", "run": 3, "exit": 0, "wall_s": 0.389148670}
+{"file": "Mid", "run": 1, "exit": 0, "wall_s": 1.514330675}
+{"file": "Mid", "run": 2, "exit": 0, "wall_s": 0.980727633}
+{"file": "Mid", "run": 3, "exit": 0, "wall_s": 0.966248409}
+{"file": "Big", "run": 1, "exit": 0, "wall_s": 4.071216088}
+{"file": "Big", "run": 2, "exit": 0, "wall_s": 2.886716233}
+{"file": "Big", "run": 3, "exit": 0, "wall_s": 2.956783179}
+{"file": "All", "run": 1, "exit": 0, "wall_s": 7.000184252}
+{"file": "All", "run": 2, "exit": 0, "wall_s": 5.949896783}
+{"file": "All", "run": 3, "exit": 0, "wall_s": 6.316551199}
