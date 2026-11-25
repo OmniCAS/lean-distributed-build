@@ -14,7 +14,7 @@ fork 都在 OmniCAS 下，钉住的提交见 `bench/README.md` 第 4 节。W 是
 |---|---|---|---:|---|
 | 合成，宽 | `bench/instances/wide` | 4,333 模块 | 60 | 实测 |
 | 合成，窄（反例） | `bench/instances/narrow` | 2,613 模块 | 5 | 两机实测 |
-| 小 | `OmniCAS/carleson`、`OmniCAS/pfr` | 125、74 个模块，约 5 万、2 万行 | 约 3、约 2.5（按行数估） | 未用本工具跑过 |
+| 小 | `OmniCAS/pfr`、`OmniCAS/carleson` | 76、125 个模块，约 2 万、5 万行 | 约 2.5、约 3（按行数估） | PFR 已通过阶段 1；Carleson 未跑 |
 | 中 | `OmniCAS/mathlib4` v4.34.0 | 8,908 模块 | 36.6 | 单机基线实测 |
 | 大 | `OmniCAS/TauCeti` | 34,760 模块 | 200–450 | 模型，未测 |
 | 特大 | `OmniCAS/riemann-hypothesis` | 175,187 模块 | 约 510 | 模型，未测 |
@@ -40,7 +40,8 @@ fork 都在 OmniCAS 下，钉住的提交见 `bench/README.md` 第 4 节。W 是
 ## 阶段 1　单机上的黑箱（小仓库）
 
 - [x] 一个 230 模块、依赖 Mathlib 的工程：四条标准全过
-- [ ] 在 Carleson 或 PFR 上重做：`lakeshard run` 产出缓存，`lakeshard restore` 放进全新检出（两者的工具链 v4.36.0-rc1、v4.37.0-rc1 和 Mathlib 版本各自钉住，见 `bench/README.md` 第 4 节）
+- [x] PFR 修订 `1ef23c3c`（v4.36.0-rc2，76 个模块），单机：四条全过。516/516 个文件一致；恢复 1,108 个文件（90 MB）后编译 0 个；杀掉后重跑复用 41、新建 35；改一个文件重建 4 个，21.0 秒。命令见 `bench/README.md` 第 5 节；fork 上更新的提交没验证过
+- [ ] Carleson（`f7487cc9`，v4.36.0-rc1）：同一份命令
 
 通过，四条：
 

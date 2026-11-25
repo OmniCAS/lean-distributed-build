@@ -27,7 +27,10 @@ import json
 import os
 import re
 import subprocess
-import tomllib
+try:
+    import tomllib
+except ModuleNotFoundError:  # Python < 3.11 (worker): dependencies keep the default layout
+    tomllib = None
 from dataclasses import dataclass, field
 
 from .headers import Header, Import, read_header
@@ -85,7 +88,7 @@ def _dep_packages(proj: LakeProject) -> list[Package]:
         build = os.path.join(".lake", "build")
         src_dirs = [d]
         toml_path = os.path.join(d, "lakefile.toml")
-        if os.path.exists(toml_path):
+        if os.path.exists(toml_path) and tomllib is not None:
             with open(toml_path, "rb") as fh:
                 cfg = tomllib.load(fh)
             build = cfg.get("buildDir", build)

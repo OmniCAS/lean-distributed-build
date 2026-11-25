@@ -36,6 +36,8 @@ lakeshard store serve --root DIR --listen HOST:PORT --token-file F   # a store s
 lakeshard run REPO --work WORK [--rev R --checkout DIR] [--cache OUT] [--deps-command CMD]   # repository in, cache out
 lakeshard restore CACHE --checkout DIR          # put a cache into a checkout; stock lake build is then up to date
 lakeshard seal PROJECT --store DIR --manifest M --build-dir OUT --work W   # stock Lake writes the traces
+lakeshard assign PROJECT --method namespace|chains --workers w1,w2 --out A.json   # static split (experiments)
+lakeshard forward serve|agent|sysroot ...       # control: stock Lake, lean forwarded to other machines
 lakeshard check-setup PROJECT --lake-build-dir REF   # direct backend's lean calls vs a real lake build
 lakeshard assemble PROJECT --store WORK/store --dest OUT
 lakeshard verify PROJECT --build-dir OUT --reference REF --leanchecker-jobs 8 [--prefix-modules skip]
@@ -53,7 +55,11 @@ over HTTP), `--build-dir DIR` (`shared` only, default `WORK/build`), `--listen H
 `--advertise-host NAME` (how workers reach the coordinator), `--local-workers N` (0: only remote
 workers), `--token-file F`, `--visibility-timeout S` (`shared` on NFS),
 `--heavy-cost S --heavy-threads T` (more threads for modules estimated at >= S seconds; not tuned),
-`--lease S`, `--keep-setup`, `--retries`, `--timeout`, `--history`, `--fail-once MODULE`.
+`--lease S`, `--keep-setup`, `--retries`, `--timeout`, `--history`, `--fail-once MODULE`; for experiments:
+`--priority bl|fifo|structure` (longest remaining path in measured or estimated seconds; first
+ready first; longest remaining path counted in modules), `--assign FILE` (a fixed placement,
+module -> worker id, made by `lakeshard assign --method namespace|chains`), `--fetch-delay S`
+(added latency for every task that fetches imports).
 
 All commands print JSON. `build` writes `WORK/report.json`, `WORK/events.jsonl` (one line per
 job), `WORK/history.json` (measured seconds per module, used for later cost estimates) and keeps
@@ -202,6 +208,16 @@ store), the seal, an optional kernel check (`--leanchecker-jobs N`), and packing
   Mathlib sub-closure; the seal then runs `lake build MODULE ...`.
 
 Not yet: the seal's traces carry no warnings for later `lake build`s to replay.
+
+### Control experiment: stock Lake with forwarded `lean` (`lakeshard forward`)
+
+To compare with "keep Lake's own scheduler and only move the compilations" (as distcc does for C):
+`lakeshard forward sysroot` makes a stand-in toolchain whose `bin/lean` posts each compile command
+to `lakeshard forward serve`; `lakeshard forward agent` on each machine pulls commands, waits until
+the imports named in the setup file are visible, runs the real `lean` with one thread and returns
+output and exit code. Lake runs with `LAKE_OVERRIDE_LEAN=true LEAN_SYSROOT=<stand-in>
+LEAN_NUM_THREADS=<all slots>` and a build directory on a file system all machines share (NFS);
+it writes its own traces. Dispatch order is Lake's (first ready).
 
 ### Remote workers (direct backend)
 

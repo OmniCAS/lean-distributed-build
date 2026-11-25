@@ -1,0 +1,69 @@
+{
+ "source": {
+  "repo": "/work/pfr",
+  "path": "/work/pfr",
+  "commit": "1ef23c3c5a83db690fe3b3b5c2e8299fae17b81a",
+  "dirty": true
+ },
+ "phases": {
+  "source_s": 0.02,
+  "build_s": 17.94,
+  "seal_s": 2.9,
+  "pack_s": 0.15,
+  "total_s": 21.01
+ },
+ "build": {
+  "ok": true,
+  "wall_s": 16.31,
+  "modules": 76,
+  "from_store": 72,
+  "built": 4,
+  "status": {
+   "done": 76
+  },
+  "slots": 12,
+  "lower_bound": {
+   "critical_path_s": 14.32,
+   "work_s": 22.1,
+   "slots": 12,
+   "work_per_slot_s": 1.84,
+   "bound_s": 14.32,
+   "max_speedup": 1.54,
+   "ratio": 1.139
+  },
+  "failed_modules": {},
+  "skipped_count": 0,
+  "refused_workers": {},
+  "failures": [],
+  "run_records": "/work/accept/work/build/modules.jsonl",
+  "fingerprint": "901b7ace9584f85740d49621b0eaae9efb7c259a80dba4aefdeb3d43ed84ac36"
+ },
+ "seal": {
+  "ok": true,
+  "lake_exit": 0,
+  "seconds": 1.72,
+  "cpu_s": 3.06,
+  "from_store": 4,
+  "compiled_by_lean": 0,
+  "compiled_modules": [],
+  "no_build_check": {
+   "ok": true,
+   "seconds": 1.19,
+   "tail": [
+    "All targets up-to-date (7178 jobs)."
+   ]
+  },
+  "build_dir": "/work/accept/work/sealed",
+  "output_tail": [
+   "✔ [7176/7178] Built PFR (60ms)",
+   "Build completed successfully (7178 jobs)."
+  ]
+ },
+ "cache": {
+  "cache": "/work/accept/work/cache",
+  "files": 1108,
+  "bytes": 90354179,
+  "seconds": 0.15
+ },
+ "ok": true
+}

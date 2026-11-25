@@ -156,3 +156,46 @@ def test_lower_bound(tmp_path):
     depth = max(g.depth().values())
     assert lb["critical_path_s"] == 2.0 * depth and lb["work_s"] == 60.0
     assert lb["bound_s"] == max(2.0 * depth, 15.0)
+
+
+def test_priority_rules_and_fixed_placement(tmp_path):
+    from lakeshard.plan import assign_by_chains, assign_by_namespace, assignment_stats
+    g = _graph(tmp_path, 60, max_imports=3, locality=6)
+    costs = {m: 1.0 + (hash(m) % 7) for m in g.modules}
+    # fifo: modules leave in the order they became ready, whatever their remaining path
+    s = ModuleScheduler(g, costs, priority="fifo")
+    s.register("a", 1, 0.0)
+    order_ready, order_dispatched, now = [], [], 0.0
+    while not s.done():
+        before = {m for m, v in s.state.items() if v == "ready"}
+        (t,) = s.claim("a", 1, now)
+        order_dispatched.append(t.module)
+        s.complete(t.task_id, True, now)
+        order_ready += sorted({m for m, v in s.state.items() if v == "ready"} - before - {t.module},
+                              key=lambda m: min(x[0] for x in s.ready if x[1] == m))  # first-ready key
+        now += 1.0
+    roots = [m for m in g.modules if not g.modules[m].imports]
+    assert order_dispatched[: len(roots)] == [m for m in order_dispatched if m in roots]  # roots first
+    assert order_dispatched[len(roots):] == order_ready[: len(order_dispatched) - len(roots)]
+    # structure: remaining path counted in modules, not seconds
+    st = ModuleScheduler(g, costs, priority="structure")
+    depth_below = {}
+    for m in reversed(g.order):
+        depth_below[m] = 1 + max((depth_below[c] for c in st.children[m]), default=0)
+    assert all(st.bl[m] == depth_below[m] for m in g.modules)
+    # fixed placement: a worker only ever gets its own modules
+    for assign in (assign_by_namespace(g, costs, ["a", "b"], depth=2), assign_by_chains(g, costs, ["a", "b"], 4)):
+        assert set(assign) == set(g.modules) and set(assign.values()) <= {"a", "b"}
+        stats = assignment_stats(g, costs, assign)
+        assert sum(stats["load_s"].values()) == sum(costs.values())
+        s = ModuleScheduler(g, costs, assign=assign)
+        s.register("a", 100, 0.0)
+        s.register("b", 100, 0.0)
+        done = 0
+        while not s.done():
+            for w in ("a", "b"):
+                for t in s.claim(w, 100, 0.0):
+                    assert assign[t.module] == w
+                    s.complete(t.task_id, True, 0.0)
+                    done += 1
+        assert done == len(g.modules)

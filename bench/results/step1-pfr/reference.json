@@ -1,0 +1,14 @@
+{
+ "ok": true,
+ "exit": 0,
+ "wall_s": 57.82,
+ "cpu_s": 271.77,
+ "max_rss_bytes": 3250749440,
+ "threads": 0,
+ "build_dir": "/work/ref",
+ "modules_built": 86,
+ "module_seconds_sum": 201.63,
+ "history": "/work/ref.history.json",
+ "output_tail": "✔ [7174/7178] Built PFR.Examples (7.4s)\n✔ [7176/7178] Built PFR (1.4s)\nBuild completed successfully (7178 jobs).",
+ "started": 1795609810.2401128
+}

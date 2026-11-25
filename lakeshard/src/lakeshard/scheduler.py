@@ -47,7 +47,8 @@ class ModuleScheduler:
     def __init__(self, graph: ProjectGraph, costs: dict[str, float], retries: int = 2, lease_s: float = 60.0,
                  timeout_s: float = 7200.0, threads: int = 0, heavy_cost: float = math.inf, heavy_threads: int = 0,
                  needs_closure: bool = False, fail_once: set | None = None, overdue_grace_s: float = 120.0,
-                 keys: dict[str, str] | None = None, done: set | None = None, source_failure_workers: int = 2):
+                 keys: dict[str, str] | None = None, done: set | None = None, source_failure_workers: int = 2,
+                 priority: str = "bl", assign: dict[str, str] | None = None):
         self.g, self.costs = graph, costs
         self.retries, self.lease_s, self.timeout_s = retries, lease_s, timeout_s
         self.threads, self.heavy_cost, self.heavy_threads = threads, heavy_cost, heavy_threads
@@ -59,10 +60,16 @@ class ModuleScheduler:
         self.cached = set(done or ()) & set(graph.modules)
         self.failure_class: dict[str, str] = {}
         self.error_workers: dict[str, set] = defaultdict(set)
+        if priority not in ("bl", "fifo", "structure"):
+            raise ValueError(f"unknown priority {priority!r}")
+        self.priority = priority  # bl: longest remaining path by cost; structure: by module count; fifo
+        self.assign = dict(assign or {})  # fixed placement: module -> the only worker that may build it
+        self._ready_seq = itertools.count()
         self.children = graph.children()
         self.bl: dict[str, float] = {}
+        unit = priority == "structure"
         for m in reversed(graph.order):
-            self.bl[m] = costs[m] + max((self.bl[c] for c in self.children[m]), default=0.0)
+            self.bl[m] = (1.0 if unit else costs[m]) + max((self.bl[c] for c in self.children[m]), default=0.0)
         self.state = dict.fromkeys(graph.modules, "waiting")
         self.indeg = {m: len(i.imports) for m, i in graph.modules.items()}
         self.ready: list[tuple[float, str]] = []
@@ -107,7 +114,8 @@ class ModuleScheduler:
     def _make_ready(self, m: str, now: float | None = None) -> None:
         self.state[m] = "ready"
         self.ready_at[m] = now
-        heapq.heappush(self.ready, (-self.bl[m], m))
+        key = float(next(self._ready_seq)) if self.priority == "fifo" else -self.bl[m]
+        heapq.heappush(self.ready, (key, m))
 
     def _others_can(self, m: str, worker: str) -> bool:
         return any(w != worker and info["alive"] and w not in self.avoid[m] for w, info in self.workers.items())
@@ -121,7 +129,12 @@ class ModuleScheduler:
             m = item[1]
             if self.state[m] != "ready":
                 continue  # stale heap entry
-            if worker in self.avoid[m] and self._others_can(m, worker):
+            pinned = self.assign.get(m)
+            if pinned is not None:
+                if pinned != worker:
+                    held.append(item)
+                    continue
+            elif worker in self.avoid[m] and self._others_can(m, worker):
                 held.append(item)
                 continue
             tasks.append(self._start(m, worker, now))

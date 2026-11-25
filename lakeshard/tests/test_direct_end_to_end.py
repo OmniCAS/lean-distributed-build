@@ -117,3 +117,39 @@ def test_lost_worker_and_remote_style_worker(tmp_path, proj_and_ref):
     assert asm["ok"], asm
     ver = api.verify(str(proj), str(tmp_path / "assembled"), reference=str(ref), lake_check=False)
     assert ver["compare"]["ok"] and ver["compare"]["identical_files"] == 120, ver["compare"]
+
+
+@pytest.mark.lean
+def test_forwarded_lake_build_equals_lake_build(tmp_path, proj_and_ref, tc_bin):
+    """The distcc-style control: stock Lake schedules, a shim forwards each `lean` to agents."""
+    from lakeshard.project import LakeProject
+    proj, ref = proj_and_ref
+    src = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "src")
+    env = dict(os.environ, PYTHONPATH=src, PYTHONDONTWRITEBYTECODE="1")
+    tok = tmp_path / "token"
+    tok.write_text("t0k\n")
+    port = 18000 + os.getpid() % 1000
+    hub = f"http://127.0.0.1:{port}"
+    procs = [subprocess.Popen([sys.executable, "-m", "lakeshard", "forward", "serve", "--listen", f"127.0.0.1:{port}",
+                               "--token-file", str(tok), "--log", str(tmp_path / "jobs.jsonl")], env=env)]
+    time.sleep(1)
+    for i in range(2):
+        procs.append(subprocess.Popen([sys.executable, "-m", "lakeshard", "forward", "agent", "--hub", hub, "--id",
+                                       f"a{i}", "--slots", "2", "--lean", os.path.join(tc_bin, "lean"),
+                                       "--token-file", str(tok)], env=env))
+    try:
+        from lakeshard.forward import make_sysroot
+        sysroot = make_sysroot(str(tmp_path / "sysroot"), tc_bin, hub, str(tok))
+        cfg = tmp_path / "cfg.toml"
+        cfg.write_text(LakeProject.load(str(proj)).worker_lakefile(str(tmp_path / "build")))
+        r = subprocess.run([os.path.join(tc_bin, "lake"), "-d", str(proj), "-f", str(cfg), "build"],
+                           env=dict(os.environ, LAKE_OVERRIDE_LEAN="true", LEAN_SYSROOT=sysroot, LEAN_NUM_THREADS="4"),
+                           capture_output=True, text=True, timeout=600)
+        assert r.returncode == 0, r.stdout[-1000:]
+    finally:
+        for p in procs:
+            p.kill()
+    jobs = [json.loads(x) for x in open(tmp_path / "jobs.jsonl")]
+    assert len(jobs) == 40 and {j["agent"] for j in jobs} == {"a0", "a1"}
+    ver = api.verify(str(proj), str(tmp_path / "build"), reference=str(ref))  # Lake wrote its own traces
+    assert ver["lake_no_build"]["ok"] and ver["compare"]["ok"] and ver["compare"]["identical_files"] == 120, ver

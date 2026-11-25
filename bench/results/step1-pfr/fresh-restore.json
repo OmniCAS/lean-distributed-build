@@ -1,0 +1,16 @@
+{
+ "ok": true,
+ "build_dir": "/work/fresh/pfr/.lake/build",
+ "files": 1108,
+ "bytes": 90352922,
+ "seconds": 0.63,
+ "same_path": false,
+ "forced_parts": [],
+ "lake_no_build": {
+  "ok": true,
+  "seconds": 1.45,
+  "tail": [
+   "All targets up-to-date (7178 jobs)."
+  ]
+ }
+}

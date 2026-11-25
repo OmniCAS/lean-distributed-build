@@ -1,0 +1,12 @@
+06:31:29 1. run from scratch, killed after 40 modules
+06:31:40    killed after 11 s with 41 modules done
+06:31:40 2. same command again (resume)
+real 52.85
+user 163.34
+sys 31.89
+06:32:33 3. byte comparison with plain lake build and Lake's own check
+06:32:35 4. restore into a fresh checkout at another path (dependencies cloned, as from their cache)
+06:33:01    plain lake build in the fresh checkout: 0 modules compiled
+06:33:01 5. edit one file (/work/pfr/PFR/ApproxHomPFR.lean), run again
+06:33:22    edit reverted
+06:33:22 DONE

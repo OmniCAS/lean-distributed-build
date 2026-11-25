@@ -1,0 +1,69 @@
+{
+ "source": {
+  "repo": "/work/pfr",
+  "path": "/work/pfr",
+  "commit": "1ef23c3c5a83db690fe3b3b5c2e8299fae17b81a",
+  "dirty": false
+ },
+ "phases": {
+  "source_s": 0.01,
+  "build_s": 48.09,
+  "seal_s": 4.14,
+  "pack_s": 0.56,
+  "total_s": 52.8
+ },
+ "build": {
+  "ok": true,
+  "wall_s": 47.22,
+  "modules": 76,
+  "from_store": 41,
+  "built": 35,
+  "status": {
+   "done": 76
+  },
+  "slots": 12,
+  "lower_bound": {
+   "critical_path_s": 45.05,
+   "work_s": 101.6,
+   "slots": 12,
+   "work_per_slot_s": 8.47,
+   "bound_s": 45.05,
+   "max_speedup": 2.26,
+   "ratio": 1.048
+  },
+  "failed_modules": {},
+  "skipped_count": 0,
+  "refused_workers": {},
+  "failures": [],
+  "run_records": "/work/accept/work/build/modules.jsonl",
+  "fingerprint": "901b7ace9584f85740d49621b0eaae9efb7c259a80dba4aefdeb3d43ed84ac36"
+ },
+ "seal": {
+  "ok": true,
+  "lake_exit": 0,
+  "seconds": 2.92,
+  "cpu_s": 7.61,
+  "from_store": 76,
+  "compiled_by_lean": 0,
+  "compiled_modules": [],
+  "no_build_check": {
+   "ok": true,
+   "seconds": 1.22,
+   "tail": [
+    "All targets up-to-date (7178 jobs)."
+   ]
+  },
+  "build_dir": "/work/accept/work/sealed",
+  "output_tail": [
+   "✔ [7176/7178] Built PFRPalomar.Solution (62ms)",
+   "Build completed successfully (7178 jobs)."
+  ]
+ },
+ "cache": {
+  "cache": "/work/accept/work/cache",
+  "files": 1108,
+  "bytes": 90352922,
+  "seconds": 0.56
+ },
+ "ok": true
+}

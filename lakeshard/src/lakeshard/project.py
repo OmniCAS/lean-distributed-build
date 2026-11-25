@@ -7,7 +7,10 @@ from __future__ import annotations
 
 import os
 import re
-import tomllib
+try:
+    import tomllib
+except ModuleNotFoundError:  # Python < 3.11 on a worker: the coordinator sends the parsed configuration
+    tomllib = None
 from dataclasses import dataclass, field
 
 from .headers import parse_file
@@ -190,12 +193,12 @@ class LakeProject:
     unsupported: list[str] = field(default_factory=list)  # keys the direct backend cannot reproduce
 
     @staticmethod
-    def load(project_dir: str, config: str | None = None) -> "LakeProject":
+    def load(project_dir: str, config: str | None = None, data: dict | None = None) -> "LakeProject":
         """Read `lakefile.toml`, or `config`, or for a `lakefile.lean` project the translation
         `lakeshard translate` wrote to `.lake/lakeshard/lakefile.toml` (see `translated_config`)."""
         project_dir = os.path.abspath(project_dir)
         toml_path = config or os.path.join(project_dir, "lakefile.toml")
-        if not os.path.exists(toml_path):
+        if data is None and not os.path.exists(toml_path):
             lean_cfg = os.path.join(project_dir, "lakefile.lean")
             if os.path.exists(lean_cfg):
                 tr = translated_config(project_dir)
@@ -205,8 +208,13 @@ class LakeProject:
                 toml_path = tr
             else:
                 raise ProjectError(f"no lakefile.toml in {project_dir}")
-        with open(toml_path, "rb") as fh:
-            cfg = tomllib.load(fh)
+        if data is not None:
+            cfg = data  # already parsed (sent by the coordinator to a worker without tomllib)
+        else:
+            if tomllib is None:
+                raise ProjectError("reading lakefile.toml needs Python 3.11 (tomllib)")
+            with open(toml_path, "rb") as fh:
+                cfg = tomllib.load(fh)
         name = cfg.get("name")
         if not name:
             raise ProjectError("lakefile.toml has no package name")

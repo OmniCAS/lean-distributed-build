@@ -39,10 +39,45 @@ def lean_githash(toolchain_bin: str) -> str:
     return _GITHASH[toolchain_bin]
 
 
-def dependency_digest(lib_dir: str) -> dict:
-    """sha256 over (path, depHash, outputs) of every `.trace` below a dependency's `lib/lean`."""
+def imported_dependency_modules(ws: LakeWorkspace, graph: ProjectGraph | None) -> set[str] | None:
+    """Dependency modules in the project's import closure (None without a graph): only their builds
+    matter, so a consumer who builds more of a dependency (e.g. `lake build AddCombi`) still matches."""
+    if graph is None:
+        return None
+    seen: set[str] = set()
+    stack = [x for info in graph.modules.values() for x in info.external]
+    while stack:
+        x = stack.pop()
+        if x in seen:
+            continue
+        loc = ws.locate(x)
+        if loc is None or loc.is_root:
+            continue
+        seen.add(x)
+        try:
+            stack.extend(i.module for i in ws.header(x).imports)
+        except Exception:  # noqa: BLE001 - a dependency without sources: its trace still counts
+            pass
+    return seen
+
+
+def dependency_digest(lib_dir: str, modules: set[str] | None = None) -> dict:
+    """sha256 over (path, depHash, outputs) of the `.trace` files below a dependency's `lib/lean`:
+    all of them, or those of `modules` (a missing trace counts as such)."""
     h = hashlib.sha256()
     n = 0
+    if modules is not None:
+        entries = [os.path.join(lib_dir, *m.split(".")) + ".trace" for m in modules]
+        for p in sorted(entries):
+            try:
+                with open(p, encoding="utf-8") as fh:
+                    t = json.load(fh)
+            except (OSError, ValueError):
+                t = {"missing": True}
+            h.update(os.path.relpath(p, lib_dir).encode())
+            h.update(json.dumps([t.get("depHash"), t.get("outputs"), t.get("missing")], sort_keys=True).encode())
+            n += 1
+        return {"traces": n, "sha256": h.hexdigest()}
     if os.path.isdir(lib_dir):
         entries = []
         for dp, _dn, fns in os.walk(lib_dir):
@@ -61,8 +96,10 @@ def dependency_digest(lib_dir: str) -> dict:
     return {"traces": n, "sha256": h.hexdigest()}
 
 
-def fingerprint(project: LakeProject, toolchain_bin: str) -> dict:
+def fingerprint(project: LakeProject, toolchain_bin: str, graph: ProjectGraph | None = None) -> dict:
+    """With `graph`, a dependency's digest covers only the modules the project imports from it."""
     ws = LakeWorkspace(project, os.path.join(project.project_dir, ".lake", "build"), toolchain_bin)
+    used = imported_dependency_modules(ws, graph)
     tc = os.path.join(project.project_dir, "lean-toolchain")
     mf = os.path.join(project.project_dir, "lake-manifest.json")
     manifest = []
@@ -78,7 +115,9 @@ def fingerprint(project: LakeProject, toolchain_bin: str) -> dict:
         "project_dir": project.project_dir,
         "lakefile_sha256": sha256_file(project.lakefile),
         "manifest": manifest,
-        "dependencies": {p.name: dependency_digest(p.lib_dir) for p in ws.deps},
+        "dependencies": {p.name: dependency_digest(p.lib_dir, None if used is None else
+                                                   {m for m in used if ws.locate(m).package.name == p.name})
+                         for p in ws.deps},
     }
     salt = os.environ.get("LAKESHARD_TEST_FINGERPRINT_SALT")  # test hook: simulate a different environment
     if salt:

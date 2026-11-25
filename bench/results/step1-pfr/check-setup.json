@@ -1,0 +1,19 @@
+{
+ "checked_setup_files": 76,
+ "checked_commands": 76,
+ "mismatch_counts": {
+  "name": 0,
+  "package": 0,
+  "isModule": 0,
+  "options": 0,
+  "dynlibs": 0,
+  "plugins": 0,
+  "importArts": 0,
+  "command": 0,
+  "lean_path": 0
+ },
+ "mismatches": [],
+ "ok": true,
+ "modules": 76,
+ "lean_version": "4.36.0"
+}

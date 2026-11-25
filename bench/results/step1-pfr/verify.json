@@ -1,0 +1,18 @@
+{
+ "lake_no_build": {
+  "ok": true,
+  "exit": 0,
+  "seconds": 2.32,
+  "rehash": true,
+  "output_tail": "All targets up-to-date (7178 jobs)."
+ },
+ "compare": {
+  "identical_files": 516,
+  "different": [],
+  "different_count": 0,
+  "missing": [],
+  "missing_count": 0,
+  "ok": true
+ },
+ "ok": true
+}

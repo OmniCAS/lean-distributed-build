@@ -197,3 +197,70 @@ def shard_needs(graph: ProjectGraph, plan: Plan) -> dict[str, list[str]]:
         mods = set(s.modules)
         out[s.id] = sorted(graph.closure(s.modules) - mods)
     return out
+
+
+# --- fixed placement (static partitions) for experiments: module -> worker
+
+
+def assign_by_namespace(graph: ProjectGraph, costs: dict[str, float], workers: list[str], depth: int = 2) -> dict:
+    """Whole name-prefix blocks (the first `depth` name components, i.e. directories) to workers,
+    largest block first to the least loaded worker (LPT). The naive static split."""
+    blocks: dict[str, list[str]] = {}
+    for m in graph.modules:
+        blocks.setdefault(".".join(m.split(".")[:depth]), []).append(m)
+    load = dict.fromkeys(workers, 0.0)
+    out: dict[str, str] = {}
+    for _b, mods in sorted(blocks.items(), key=lambda kv: (-sum(costs[m] for m in kv[1]), kv[0])):
+        w = min(workers, key=lambda x: (load[x], x))
+        for m in mods:
+            out[m] = w
+        load[w] += sum(costs[m] for m in mods)
+    return out
+
+
+def assign_by_chains(graph: ProjectGraph, costs: dict[str, float], workers: list[str], slots: int,
+                     transfer_s: float = 0.5) -> dict:
+    """A list schedule computed in advance (HEFT-like): modules in order of longest remaining path;
+    each goes to the worker where it would finish first, counting `transfer_s` for every import
+    built on another worker. Keeps import chains together while balancing the load: the best
+    static split we know; it is then fixed for the real build."""
+    import heapq as _h
+    ch = graph.children()
+    bl: dict[str, float] = {}
+    for m in reversed(graph.order):
+        bl[m] = costs[m] + max((bl[c] for c in ch[m]), default=0.0)
+    free = {w: [0.0] * slots for w in workers}  # per worker: heap of slot free times
+    for w in workers:
+        _h.heapify(free[w])
+    fin: dict[str, float] = {}
+    where: dict[str, str] = {}
+    indeg = {m: len(i.imports) for m, i in graph.modules.items()}
+    ready = [(-bl[m], m) for m, d in indeg.items() if d == 0]
+    _h.heapify(ready)
+    while ready:
+        _, m = _h.heappop(ready)
+        imps = graph.modules[m].imports
+        best = None
+        for w in workers:
+            avail = max((fin[u] + (0.0 if where[u] == w else transfer_s) for u in imps), default=0.0)
+            start = max(avail, free[w][0])
+            key = (start + costs[m], w)
+            if best is None or key < best[0]:
+                best = (key, w, start)
+        (_f, w), start = best[0], best[2]
+        _h.heapreplace(free[w], start + costs[m])
+        fin[m], where[m] = start + costs[m], w
+        for c in ch[m]:
+            indeg[c] -= 1
+            if indeg[c] == 0:
+                _h.heappush(ready, (-bl[c], c))
+    return where
+
+
+def assignment_stats(graph: ProjectGraph, costs: dict[str, float], assign: dict) -> dict:
+    load: dict[str, float] = {}
+    for m, w in assign.items():
+        load[w] = load.get(w, 0.0) + costs[m]
+    edges = sum(len(i.imports) for i in graph.modules.values())
+    cross = sum(1 for m, i in graph.modules.items() for u in i.imports if assign[u] != assign[m])
+    return {"load_s": {w: round(v, 1) for w, v in sorted(load.items())}, "edges": edges, "cross_edges": cross}

@@ -199,6 +199,8 @@ class ModuleBuilder:
         t = time.time()
         with self.lock:
             want = [u for u in task.needs if u not in self.present]
+        if want and self.cfg.fetch_delay_s > 0:
+            time.sleep(self.cfg.fetch_delay_s)  # experiment switch: simulate a slower network
         recs = self.store.get_records(want) if want else {}
         missing = [u for u in want if u not in recs]
         if missing:
@@ -259,13 +261,16 @@ class ModuleBuilder:
 
 def load_worker_project(cfg: BuildConfig, workspace: str) -> LakeProject:
     """The project as the coordinator sees it (with its translation of a `lakefile.lean`)."""
-    if cfg.lakefile_toml:
+    from . import project as _p
+    path = None
+    if cfg.lakefile_toml:  # a lakefile.lean project: the coordinator's translation
         os.makedirs(workspace, exist_ok=True)
         path = os.path.join(os.path.abspath(workspace), "lakefile.translated.toml")
         with open(path, "w", encoding="utf-8") as fh:
             fh.write(cfg.lakefile_toml)
-        return LakeProject.load(cfg.project_dir, config=path)
-    return LakeProject.load(cfg.project_dir)
+    if _p.tomllib is None and cfg.lakefile_data:  # Python < 3.11: use the coordinator's parsed configuration
+        return LakeProject.load(cfg.project_dir, config=path, data=cfg.lakefile_data)
+    return LakeProject.load(cfg.project_dir, config=path)
 
 
 def _first_error(out: str) -> str:

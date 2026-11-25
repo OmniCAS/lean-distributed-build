@@ -105,7 +105,8 @@ def build_direct(project_dir: str, work_dir: str, workers: int = 4, slots: int =
                  lease_s: float = 60.0, heartbeat_s: float = 5.0, keep_setup: bool = False,
                  wait_timeout_s: float | None = None, python: str = sys.executable,
                  advertise_host: str | None = None, reuse: bool = True, check_fingerprint: bool = True,
-                 targets: list[str] | None = None) -> dict:
+                 targets: list[str] | None = None, priority: str = "bl", assign: dict | None = None,
+                 fetch_delay_s: float = 0.0) -> dict:
     """Build every module with one `lean` process per module; workers pull tasks over HTTP.
 
     The coordinator runs in this process. `local_workers` (default `workers`) worker processes
@@ -148,7 +149,7 @@ def build_direct(project_dir: str, work_dir: str, workers: int = 4, slots: int =
     hist_in = load_history(history) if history else load_history(hist_out)
     costs = estimate_costs(g, hist_in)
     t_prep = time.time()
-    fp = env_fingerprint(proj, tb)
+    fp = env_fingerprint(proj, tb, g)
     keys = module_keys(g, proj, fp["sha256"])
     if token_file and os.path.exists(token_file):
         token = open(token_file, encoding="utf-8").read().strip()
@@ -174,11 +175,14 @@ def build_direct(project_dir: str, work_dir: str, workers: int = 4, slots: int =
                       fingerprint=fp["sha256"] if check_fingerprint else "",
                       lakefile_toml=open(proj.lakefile, encoding="utf-8").read()
                       if os.path.basename(proj.lakefile) != "lakefile.toml" or
-                      os.path.dirname(proj.lakefile) != proj.project_dir else "")
+                      os.path.dirname(proj.lakefile) != proj.project_dir else "",
+                      lakefile_data=_parsed_config(proj.lakefile), fetch_delay_s=fetch_delay_s,
+                      targets=list(targets or []))
     sched = ModuleScheduler(g, costs, retries=retries, lease_s=lease_s, timeout_s=timeout_s,
                             heavy_cost=heavy_cost if heavy_cost is not None else float("inf"),
                             heavy_threads=heavy_threads, needs_closure=storage == "store", fail_once=fail_once,
-                            keys=keys if storage == "store" else None, done=cached)
+                            keys=keys if storage == "store" else None, done=cached, priority=priority,
+                            assign=assign)
     host, _, port = listen.rpartition(":")
     svc = BuildService(g, sched, cfg, work_dir, token=token, host=host or "127.0.0.1", port=int(port or 0),
                        store_root=store_root, advertise_host=advertise_host,
@@ -229,12 +233,19 @@ def build_direct(project_dir: str, work_dir: str, workers: int = 4, slots: int =
         svc.stop()
     report.update({"finished": finished, "url": svc.url, "local_workers": n_local, "slots_per_worker": slots,
                    "threads_per_lean": threads, "retries": retries, "run_id": run_id,
-                   "worker_exit_codes": [p.returncode for p in procs], "store_root": store_root})
+                   "worker_exit_codes": [p.returncode for p in procs], "store_root": store_root,
+                   "priority": priority, "assigned": len(assign or {}), "fetch_delay_s": fetch_delay_s})
     _write_history(hist_in, report.pop("module_seconds"), hist_out)
     report["history"] = hist_out
     with open(os.path.join(work_dir, "report.json"), "w", encoding="utf-8") as fh:
         json.dump(report, fh, indent=1)
     return report
+
+
+def _parsed_config(path: str) -> dict:
+    import tomllib
+    with open(path, "rb") as fh:
+        return tomllib.load(fh)
 
 
 def _wait_build(svc, sched, procs: list, timeout_s: float | None) -> bool:
@@ -344,7 +355,7 @@ def run(repo: str, work_dir: str, rev: str | None = None, checkout: str | None =
         bman = json.load(fh)
     t = time.time()
     cache_dir = os.path.abspath(cache_dir or os.path.join(work_dir, "cache"))
-    out["cache"] = pack(proj, g, sealed, cache_dir, bman["fingerprint"], bman["modules"], source)
+    out["cache"] = pack(proj, g, sealed, cache_dir, bman["fingerprint"], bman["modules"], source, targets)
     phases["pack_s"] = round(time.time() - t, 2)
     out["ok"] = True
     phases["total_s"] = round(sum(v for k, v in phases.items() if k != "total_s"), 2)
@@ -435,7 +446,10 @@ def reference_build(project_dir: str, build_dir: str, threads: int = 0, toolchai
         json.dump(secs, fh, indent=0, sort_keys=True)
     with open(base + ".log", "w", encoding="utf-8") as fh:  # full Lake output, for later analysis
         fh.write(out)
-    return {"ok": code == 0, "exit": code, "wall_s": round(wall, 2), "cpu_s": round(cpu, 2),
-            "max_rss_bytes": rss, "threads": threads, "build_dir": os.path.abspath(build_dir),
-            "modules_built": len(secs), "module_seconds_sum": round(sum(secs.values()), 2), "history": hist,
-            "output_tail": "\n".join(out.strip().splitlines()[-3:]), "started": t0}
+    res = {"ok": code == 0, "exit": code, "wall_s": round(wall, 2), "cpu_s": round(cpu, 2),
+           "max_rss_bytes": rss, "threads": threads, "build_dir": os.path.abspath(build_dir),
+           "modules_built": len(secs), "module_seconds_sum": round(sum(secs.values()), 2), "history": hist,
+           "output_tail": "\n".join(out.strip().splitlines()[-3:]), "started": t0}
+    with open(base + ".json", "w", encoding="utf-8") as fh:  # also on disk (for callers that lose stdout)
+        json.dump(res, fh, indent=1)
+    return res

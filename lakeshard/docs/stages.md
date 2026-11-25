@@ -280,6 +280,86 @@ Robustness, each item of `plan.zh.md` section 3 with a test (`tests/test_robustn
 | 4 restore elsewhere | `restore` with another environment fingerprint | refused (`--force` to override) |
 | 6 records | every run | `events.jsonl`, `modules.jsonl`, `report.json`, `manifest.json`, `run.json` |
 
+### Roadmap step 1 acceptance (one machine, the Mathlib-based project of stage c)
+
+One command in (`lakeshard run <project> --work W`, 4 workers x 2 slots x 2 threads), one command
+back (`lakeshard restore W/cache --checkout <fresh checkout>`):
+
+| criterion | measured |
+|---|---|
+| a build killed midway resumes | SIGKILL to the whole process tree at 212 s (151 of 230 modules done); the same command again: 151 from the store, 79 built, 403 s (the 281-second file was running when killed and started over) |
+| outputs identical to plain Lake | sealed build directory vs the stage c `lake build`: 690 / 690 files identical; `lake build --no-build --rehash`: all 3,412 jobs up to date |
+| a fresh checkout with the cache is not recompiled | sources copied to another path, dependencies put in place as from their cache; `restore`: 1,610 files, 417 MB, 1.9 s, fingerprint matches; `lake build --no-build` passes; a plain `lake build` then compiles 0 modules (1.0 s, logs replayed) |
+| one edited file rebuilds only what it affects | a theorem appended to a module with 3 importers: 4 modules rebuilt (it and its 3 importers), 226 from the store; build 17.4 s, seal 2.6 s, pack 0.3 s, 20.2 s in all |
+
+### Roadmap step 1 on a public repository (PFR, Lean v4.36.0-rc2, one machine)
+
+PFR (76 modules, `lakefile.toml`, depends on Mathlib and on AddCombi, which Mathlib's cache does
+not cover). Reference: plain `lake build`, 58 s on 12 cores (including AddCombi from source).
+`check-setup`: 76 / 76 identical on Lake 4.36 (its import walk is the 4.35 one).
+
+| criterion | measured |
+|---|---|
+| a build killed midway resumes | killed at 11 s with 41 of 76 modules done; the same command: 41 from the store, 35 built, 52.8 s |
+| outputs identical to plain Lake | 516 / 516 files; `lake build --no-build --rehash`: all 7,178 jobs up to date |
+| a fresh checkout with the cache is not recompiled | sources at another path, Mathlib and its dependencies as from Mathlib's cache, AddCombi built there with plain `lake build AddCombi` (14 modules); `restore`: 1,108 files, 90 MB, 0.6 s, environment matches; `lake build --no-build` passes; a plain `lake build` then compiles 0 modules |
+| one edited file rebuilds only what it affects | a module with 3 importers: 4 rebuilt, 72 from the store, 21.0 s |
+
+Two fixes came out of this run: the dependency part of the environment fingerprint now covers only
+the dependency modules the project imports (a consumer who builds more of AddCombi still matches,
+any change to an imported dependency module still differs), and the cache copies files instead
+of hard-linking them (Lake rewrites sealed files in place on the next seal, which had changed a
+cache object under its sha256 name; `restore` caught it).
+
+## Experiment E1: is building on several machines faster? (three, then two machines)
+
+Machines: three servers with AMD EPYC 7502 (2 x 32 cores, SMT), shared with other users' jobs.
+Each worker is pinned to c physical cores of one NUMA node (`taskset`, `nice -n 10`); the
+coordinator and store run on one of them (`hub`), on other cores; machines talk over 10 GbE;
+workers only connect outwards. Every machine has the project and the toolchain (Lean v4.34.0)
+at the same paths. Instances are synthetic (trusted code): files generated with the import
+structure of a sub-closure of the RH archive's import graph, module work weighted by the
+original files' line counts, each file elaborated sequentially (`Elab.async false`). The theory
+(plan, decision record) says the shape of the build time depends only on x = cores x CP / W.
+
+Instances (W and CP from the one-machine run's own per-module times):
+
+| instance | modules | W (core-s) | CP (s) | W / CP |
+|---|---:|---:|---:|---:|
+| wide | 4,333 | 8,592 | 144 | 59.5 |
+| medium | 3,156 | 10,809 | 343 | 31.5 |
+
+(The medium instance was meant to be wide: the script that picked it assumed the archive graph's
+numbering was topological and underestimated CP 2.3 times; it is kept as a third data point.)
+
+### Three machines x 16 cores (one run each)
+
+| instance | run | wall s | wall / bound | x | vs `lake build`, one machine | three vs one machine (predicted) |
+|---|---|---:|---:|---:|---:|---|
+| wide | `lake build`, one machine, 16 threads | 570 | - | - | 1.00 | |
+| wide | lakeshard, one machine, critical path first | 564 | 1.05 | 0.27 | 1.01 | |
+| wide | lakeshard, three machines, critical path first | 249 | 1.25 | 0.81 | 2.29 | **2.27 (2.2-2.6)** |
+| wide | three machines, first ready first | 290 | 1.44 | | 1.97 | critical path first 14 % faster (predicted 10-25 %) |
+| wide | three machines, priorities from graph structure only | 273 | 1.37 | | 2.09 | 10 % slower than measured costs (predicted < 2 %; one run) |
+| wide | three machines, fixed split by directory (106 blocks, balanced) | 327 | 1.68 | | 1.74 | 31 % slower than dynamic (predicted > 20 %) |
+| medium | `lake build`, one machine | 733 | - | - | 1.00 | |
+| medium | lakeshard, one machine | 773 | 1.15 | 0.51 | 0.95 | (another user's jobs loaded that machine) |
+| medium | lakeshard, three machines | 419 | 1.09 | 1.52 | 1.75 | 1.84 (theory for the measured x: about 1.85) |
+
+- Outputs of the three-machine runs are identical to `lake build` (wide: 12,999 / 12,999 files) and
+  to the one-machine run (medium: 9,468 / 9,468); the store holds 5.8 GB (wide).
+- The same module takes 1.27 and 1.07 times longer on the second and third machine than on the
+  hub (other users' load): total work on three machines is 11 % larger than on one.
+- Where the wide three-machine run's time goes (`e1_analyze.py`): 15.7 s before the first module
+  starts (the experiment harness starts workers one after another over SSH; 14.3 s on one
+  machine as well; without it three vs one machine is 2.36); then 80 % of slot time runs `lean`,
+  3.5 % is idle while a module was ready, 4.9 % idle with nothing ready; each upload from a remote
+  machine takes about 0.17 s.
+- The fixed split along import chains (an offline list schedule) was clearly slower still (at
+  1,064 s: 2,047 of 4,333 modules done, only 12 of 48 slots busy with 248 modules ready, all pinned
+  to busy machines) but the run is void: the hub's root file system went read-only during it.
+  The remaining configurations run on the two other machines.
+
 ## Known limits and next steps
 
 Direct backend next: S4 three machines and the three acceptance tiers (synthetic, a Mathlib

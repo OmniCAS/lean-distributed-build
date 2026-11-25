@@ -6,7 +6,7 @@ A cache is a directory:
                          environment fingerprint, build directory (relative to the package),
                          module -> input key, and every file: path (relative to the build
                          directory), sha256, size
-    objects/ab/abcd...   the files, named by sha256 (hard links when on the same file system)
+    objects/ab/abcd...   the files, named by sha256 (copies, never links to the build directory)
 
 The files are those of a sealed build directory (see `seal.py`): for every module its outputs
 (`.olean`, `.ilean`, `.c`, and for `module` files `.olean.server`, `.olean.private`, `.ir`,
@@ -33,12 +33,12 @@ RESTORE_PARTS = ("toolchain", "lean_githash", "platform", "manifest", "dependenc
 
 
 def _place(src: str, dst: str) -> None:
+    """Copy into the cache. Never a hard link: Lake rewrites files of the sealed build directory in
+    place on the next seal, which would change an object under its sha256 name. (On APFS and
+    similar file systems the copy is a cheap clone.)"""
     os.makedirs(os.path.dirname(dst), exist_ok=True)
     tmp = f"{dst}.tmp{os.getpid()}"
-    try:
-        os.link(src, tmp)
-    except OSError:
-        shutil.copyfile(src, tmp)
+    shutil.copyfile(src, tmp)
     os.replace(tmp, dst)
 
 
@@ -57,7 +57,7 @@ def _strip_trace_commands(path: str) -> None:
 
 
 def pack(project: LakeProject, graph: ProjectGraph, sealed_build_dir: str, cache_dir: str, fp: dict,
-         keys: dict[str, str], source: dict | None = None) -> dict:
+         keys: dict[str, str], source: dict | None = None, targets: list[str] | None = None) -> dict:
     t0 = time.time()
     files = []
     nbytes = 0
@@ -77,6 +77,7 @@ def pack(project: LakeProject, graph: ProjectGraph, sealed_build_dir: str, cache
     man = {"schema": SCHEMA, "created": time.strftime("%Y-%m-%dT%H:%M:%S%z"), "source": source or {},
            "package": project.package, "toolchain": open(tc).read().strip() if os.path.exists(tc) else "",
            "fingerprint": fp, "build_dir": project.build_dir, "modules": dict(sorted(keys.items())),
+           "targets": list(targets or []),
            "files": files, "file_count": len(files), "bytes": nbytes}
     with open(os.path.join(cache_dir, "manifest.json"), "w", encoding="utf-8") as fh:
         json.dump(man, fh, indent=0)
@@ -98,7 +99,8 @@ def restore(cache_dir: str, checkout: str, toolchain_bin: str, check: bool = Tru
             raise
         from .project import translate
         proj = LakeProject.load(checkout, config=translate(checkout, toolchain_bin))
-    mine = fingerprint(proj, toolchain_bin)
+    targets = man.get("targets") or None
+    mine = fingerprint(proj, toolchain_bin, proj.graph(targets))
     diff = [k for k in fingerprint_diff(man["fingerprint"], mine) if k in RESTORE_PARTS]
     if diff and not force:
         return {"ok": False, "refused": "environment differs from the cache's", "parts": diff}

@@ -126,3 +126,46 @@ def test_module_system_matches_lake(tmp_path):
         a = json.load(open(sealed / "lib" / "lean" / (rel + ".trace")))
         b = json.load(open(tmp_path / "ref" / "lib" / "lean" / (rel + ".trace")))
         assert a["depHash"] == b["depHash"]
+
+
+def test_fingerprint_counts_only_imported_dependency_modules(tmp_path):
+    from lakeshard.fingerprint import dependency_digest, imported_dependency_modules
+    ws = _fake_dep(tmp_path)
+    g = ws.proj.graph()
+    used = imported_dependency_modules(ws, g)
+    assert used == {"Dep.Pub", "Dep.Base", "Dep.Hidden", "Dep.Old"}
+    lib = ws.deps[0].lib_dir
+    for m in used:
+        (tmp_path / "root" / ".lake" / "packages" / "dep" / ".lake" / "build" / "lib" / "lean" /
+         (m.replace(".", "/") + ".trace")).write_text(json.dumps({"depHash": m, "outputs": {"o": m}}))
+    before = dependency_digest(lib, used)
+    extra = os.path.join(lib, "Dep", "Unused.trace")  # a consumer built more of the dependency
+    with open(extra, "w") as fh:
+        json.dump({"depHash": "x", "outputs": {}}, fh)
+    assert dependency_digest(lib, used) == before
+    with open(os.path.join(lib, "Dep", "Pub.trace"), "w") as fh:  # but an imported module's build counts
+        json.dump({"depHash": "Dep.Pub", "outputs": {"o": "other"}}, fh)
+    assert dependency_digest(lib, used) != before
+
+
+def test_cache_objects_are_copies(tmp_path):
+    """Lake rewrites sealed files in place; a hard-linked cache object would change under its name."""
+    from lakeshard.cache import pack
+    from lakeshard.store import sha256_file
+    proj_dir = tmp_path / "proj"
+    write_project(str(proj_dir), random_dag(3))
+    p = LakeProject.load(str(proj_dir))
+    g = p.graph()
+    sealed = tmp_path / "sealed"
+    for m in g.modules:
+        f = sealed / "lib" / "lean" / (m.replace(".", "/") + ".olean")
+        f.parent.mkdir(parents=True, exist_ok=True)
+        f.write_bytes(m.encode())
+    res = pack(p, g, str(sealed), str(tmp_path / "cache"), {"sha256": "x", "parts": {}}, {m: m for m in g.modules})
+    assert res["files"] == 3
+    for m in g.modules:  # rewrite in place, as Lake does
+        with open(sealed / "lib" / "lean" / (m.replace(".", "/") + ".olean"), "r+b") as fh:
+            fh.write(b"changed")
+    man = json.load(open(tmp_path / "cache" / "manifest.json"))
+    for f in man["files"]:
+        assert sha256_file(str(tmp_path / "cache" / "objects" / f["sha256"][:2] / f["sha256"])) == f["sha256"]

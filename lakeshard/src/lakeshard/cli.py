@@ -15,6 +15,10 @@ def _print(obj) -> None:
 
 
 def main(argv: list[str] | None = None) -> int:
+    argv = sys.argv[1:] if argv is None else argv
+    if argv[:1] == ["forward"]:  # control experiment: stock Lake with forwarded lean processes
+        from .forward import main as forward_main
+        return forward_main(argv[1:])
     ap = argparse.ArgumentParser(prog="lakeshard", description=__doc__)
     ap.add_argument("--version", action="version", version=f"lakeshard {__version__}")
     sub = ap.add_subparsers(dest="cmd", required=True)
@@ -54,6 +58,12 @@ def main(argv: list[str] | None = None) -> int:
     b.add_argument("--lease", type=float, default=60.0, help="lean: seconds without heartbeat before a worker is lost")
     b.add_argument("--keep-setup", action="store_true", help="lean: keep each module's .setup.json (as Lake does)")
     b.add_argument("--wait-timeout", type=float, help="lean: give up after this many seconds")
+    b.add_argument("--priority", choices=["bl", "fifo", "structure"], default="bl",
+                   help="lean: ready modules by longest remaining path (measured or estimated seconds), "
+                        "first ready first, or longest remaining path counted in modules")
+    b.add_argument("--assign", help="lean: JSON module -> worker id; each module only on its worker (static split)")
+    b.add_argument("--fetch-delay", type=float, default=0.0,
+                   help="lean, experiments: seconds added to every task that fetches imports")
     b.add_argument("--schedule", choices=["dynamic", "static"], default="dynamic")
     b.add_argument("--batch-cost", type=float, help="dynamic: estimated seconds of work per batch")
     b.add_argument("--plan", help="static: use this plan.json instead of planning")
@@ -93,6 +103,17 @@ def main(argv: list[str] | None = None) -> int:
     tr = sub.add_parser("translate", help="translate a lakefile.lean into .lake/lakeshard/lakefile.toml (runs Lake)")
     tr.add_argument("project")
     tr.add_argument("--toolchain-bin")
+
+    asg = sub.add_parser("assign", help="a static split of the modules over workers (experiments)")
+    asg.add_argument("project")
+    asg.add_argument("--method", choices=["namespace", "chains"], required=True)
+    asg.add_argument("--workers", required=True, help="comma-separated worker ids")
+    asg.add_argument("--slots", type=int, default=16, help="chains: slots per worker")
+    asg.add_argument("--depth", type=int, default=2, help="namespace: name components per block")
+    asg.add_argument("--transfer", type=float, default=0.5, help="chains: assumed seconds per cross-worker import")
+    asg.add_argument("--history")
+    asg.add_argument("--target", action="append", default=[])
+    asg.add_argument("--out", required=True)
 
     se = sub.add_parser("seal", help="stock lake build that takes every module's outputs from a store")
     se.add_argument("project")
@@ -193,7 +214,9 @@ def main(argv: list[str] | None = None) -> int:
                                visibility_timeout_s=args.visibility_timeout, heavy_cost=args.heavy_cost,
                                heavy_threads=args.heavy_threads, lease_s=args.lease, keep_setup=args.keep_setup,
                                wait_timeout_s=args.wait_timeout, advertise_host=args.advertise_host,
-                               targets=args.target or None)
+                               targets=args.target or None, priority=args.priority,
+                               assign=json.load(open(args.assign)) if args.assign else None,
+                               fetch_delay_s=args.fetch_delay)
         _print({k: v for k, v in rep.items() if k not in ("workers",)})
         return 0 if rep["ok"] else 1
     elif args.cmd == "run":
@@ -205,6 +228,17 @@ def main(argv: list[str] | None = None) -> int:
                       reuse=not args.no_reuse, targets=args.target or None)
         _print(res)
         return 0 if res["ok"] else 1
+    elif args.cmd == "assign":
+        from .plan import assign_by_chains, assign_by_namespace, assignment_stats, estimate_costs, load_history
+        from .project import LakeProject
+        g = LakeProject.load(args.project).graph(args.target or None)
+        costs = estimate_costs(g, load_history(args.history))
+        ws = args.workers.split(",")
+        a = (assign_by_namespace(g, costs, ws, args.depth) if args.method == "namespace"
+             else assign_by_chains(g, costs, ws, args.slots, args.transfer))
+        with open(args.out, "w") as fh:
+            json.dump(a, fh)
+        _print({"method": args.method, **assignment_stats(g, costs, a)})
     elif args.cmd == "translate":
         from .project import toolchain_bin, translate
         _print({"config": translate(args.project, toolchain_bin(os.path.abspath(args.project), args.toolchain_bin))})

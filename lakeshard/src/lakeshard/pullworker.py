@@ -106,7 +106,8 @@ class PullWorker:
         if cfg.fingerprint:  # prove that this machine's environment is the coordinator's
             from .direct import load_worker_project
             from .fingerprint import fingerprint
-            fp = fingerprint(load_worker_project(cfg, self.workspace), cfg.toolchain_bin)
+            wproj = load_worker_project(cfg, self.workspace)
+            fp = fingerprint(wproj, cfg.toolchain_bin, wproj.graph(cfg.targets or None))
         resp = self._post("/v1/register", {"worker": self.id, "slots": self.slots, "threads": self.threads,
                                            "host": socket.gethostname(), "pid": os.getpid(), "fingerprint": fp})
         if resp.get("refused"):

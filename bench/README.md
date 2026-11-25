@@ -35,7 +35,7 @@ python3 -B bench/run/run_e1.py mid-A0-c16-r1 --hosts-file bench/run/hosts.json -
 
 其余行同样，把 `queue.txt` 里该行的参数接在 `--hosts-file bench/run/hosts.json` 后面。记录落在 `bench/results/runs/<名字>/`。命名：A0 = 单机原版 `lake build`，A1 = 本工具单机，B1 = 本工具三机，B1s = 只按图结构排优先级，B4 = 先就绪先派，B2 / B3 = 预先按目录 / 沿导入链固定放置，`-dX` = 每次跨机取产物人为加 X 秒，`-cC` = 每台 C 个核。
 
-**注意**：本仓库的 `lakeshard/` 是工具仓库提交 `550e631` 的快照。对照组用到的 `--priority fifo|structure`、`--fetch-delay` 和固定放置文件（`lakeshard assign`）在之后的版本里才有；A0、A1、B1 三类运行用这个快照即可复现。
+**注意**：本仓库的 `lakeshard/` 是工具仓库提交 `e408d78` 的快照，也就是第 5 节阶段 1 验收用的版本；对照组用到的 `--priority fifo|structure`、`--fetch-delay` 和固定放置文件（`lakeshard assign`）它都有。
 
 分析：
 
@@ -51,7 +51,7 @@ uv run --with numpy python e1_expected.py                                       
 |---|---|---|---|
 | [`OmniCAS/mathlib4`](https://github.com/OmniCAS/mathlib4) | leanprover-community/mathlib4 | 标签 `v4.34.0` = 提交 `5ed2965256430c3649e86755f9576b54eca72435`；工具链 `leanprover/lean4:v4.34.0` | **E2**（真实仓库的三机构建）；本仓库的 Mathlib trace（`study/data/mathlib.trace.json.gz`）就是用这个版本量的 |
 | [`OmniCAS/carleson`](https://github.com/OmniCAS/carleson) | fpvandoorn/carleson | 提交 `f7487cc9da4d1e73f009dc0280cd5b958f3e2c78`（2026-11-17）；工具链 `leanprover/lean4:v4.36.0-rc1`；Mathlib `d88814353fcbcc0461c55b2a4585d3f44d903df1` | **小仓库一档**（`TODO.md` 阶段 1，只验正确性）：默认目标 `Carleson` 125 个模块、约 4.95 万行、深 30，按行数估的可并行度约 3（2.9–3.1） |
-| [`OmniCAS/pfr`](https://github.com/OmniCAS/pfr) | teorth/pfr | 提交 `1899ce8ed95fc310cce53d4c7ecfa2beb20ebec4`（2026-11-23）；工具链 `leanprover/lean4:v4.37.0-rc1`；Mathlib `c47f9ad906c5ec32a953f99911b446cd26dcc123` | **小仓库一档**：默认目标 `PFR`、`PFRPalomar` 共 74 个模块；约 2.2 万行、深 20、按行数估的可并行度约 2.5（2.25–2.6）是按 2026-11-05 的副本 `1ef23c3c` 估的 |
+| [`OmniCAS/pfr`](https://github.com/OmniCAS/pfr) | teorth/pfr | **提交 `1ef23c3c5a83db690fe3b3b5c2e8299fae17b81a`**（上游 2026-11-05，在 fork 默认分支的历史里）；工具链 `leanprover/lean4:v4.36.0-rc2`；Mathlib `8fe7ce475b056f0b266d7107893f2c4d772c712f`，AddCombi `111b61aa52c0740a298d83967ff2394ff20dbbb4` | **小仓库一档，阶段 1 已在这个修订上通过**（第 5 节）：76 个模块、约 2.2 万行、深 20，按行数估的可并行度约 2.5（2.25–2.6）。fork 默认分支上更新的提交 `1899ce8ed95fc310cce53d4c7ecfa2beb20ebec4`（2026-11-23，工具链 v4.37.0-rc1，Mathlib `c47f9ad9…`，74 个模块）**没有验证过** |
 | [`OmniCAS/riemann-hypothesis`](https://github.com/OmniCAS/riemann-hypothesis) | leanprover-community/riemann-hypothesis | 原始提交 `40e56bab026552e089d7afcfeff08d2defb9c005`（2026-11-20，原样镜像所提交的归档） | **E4**（大集群）；导入图（`study/data/rh.trace.json.gz`）与 E1 三个实例的结构来源 |
 | [`OmniCAS/riemann-hypothesis-omega`](https://github.com/OmniCAS/riemann-hypothesis-omega) | the-omega-institute/riemann-hypothesis | 提交 `c7d25b3bfd7906388bb8eb0774e027a2b756a7b6`（2026-11-22） | **参考实现**：在 GitHub 托管 runner 上按内容哈希分片构建的脚本（`ci/`、`.github/workflows/`），机制见 `docs/research/precedents-omega-shards.md` |
 | [`OmniCAS/CFSG`](https://github.com/OmniCAS/CFSG) | AxiomMath/CFSG | 提交 `965a0775e82217494217503621b843e1b0e1e337`（2026-11-19） | **E4 之后**；尚未分析 |
@@ -62,6 +62,62 @@ uv run --with numpy python e1_expected.py                                       
 
 Mathlib 从源码构建（不用缓存）的做法：`study/scripts/remote/setup_tarballs.py` 按 `lake-manifest.json` 的提交取各依赖的源码包并做成本地快照，`setup2.sh` 让 Lake 离线加载工作区，`build.sh ROOT RUN CPUS THREADS` 跑原版 `lake build` 并用 `procmon.py` 采样每个 `lean` 进程。线程伸缩的重放：`replay.py`、`replay_waves.py`；`import Mathlib` 的开销：`import_cost.sh`。
 
-## 5 预期
+## 5 阶段 1：从一个干净的检出开始（PFR）
+
+`TODO.md` 阶段 1 的四条标准，在 PFR 修订 `1ef23c3c` 上按下面的命令逐条通过（2026-11-25，一台 12 核 macOS 机器，`lakeshard/` 即 `e408d78`；Linux 上还没按这份命令跑过）。需要 git、elan、Python ≥ 3.11，磁盘约 12 GB（大部分是 Mathlib 的源码与缓存）。PFR 是第三方代码，编译会执行它的元程序：在隔离环境里做：不放凭据；除了第 1、5 步取依赖要访问 GitHub 与 Mathlib 的缓存，不联网。
+
+```bash
+# 0. 工具（本仓库里的 lakeshard/ 快照，无第三方依赖）
+git clone https://github.com/OmniCAS/lean-distributed-build ldb
+python3 -m venv ldb/.venv
+ldb/.venv/bin/pip install -e ldb/lakeshard
+export PATH="$PWD/ldb/.venv/bin:$PATH"
+
+# 1. 仓库钉在验证过的修订；装它的工具链；Lake 克隆依赖并取 Mathlib 的缓存
+git clone https://github.com/OmniCAS/pfr pfr
+git -C pfr checkout 1ef23c3c5a83db690fe3b3b5c2e8299fae17b81a
+(cd pfr && elan toolchain install "$(cat lean-toolchain)" && lake exe cache get)
+
+# 2. 参照：原版 Lake 建一遍，供逐字节比对（AddCombi 不在 Mathlib 的缓存里，这一步顺带把它建了）
+lakeshard reference pfr --build-dir ref
+
+# 3. 仓库进、缓存出；中途杀掉一次（Ctrl-C 或 kill），再敲同一条命令
+lakeshard run pfr --work work --workers 4 --slots 3 --threads 1
+#    work/run.json 的 "build"："from_store"（杀掉前已建好、这次复用的）与 "built"；缓存在 work/cache
+
+# 4. 与原版 Lake 逐字节一致，且 Lake 认它
+lakeshard verify pfr --build-dir work/sealed --reference ref
+#    "compare"：identical_files 516，different_count 0，missing_count 0；"lake_no_build"：ok
+
+# 5. 另一处的全新检出：取 Mathlib 缓存，单独建 AddCombi，恢复，然后原版 Lake 不编译
+git clone https://github.com/OmniCAS/pfr fresh
+git -C fresh checkout 1ef23c3c5a83db690fe3b3b5c2e8299fae17b81a
+(cd fresh && lake exe cache get && lake build AddCombi)
+lakeshard restore work/cache --checkout fresh      # 先核对环境，再复制，最后跑 lake build --no-build
+(cd fresh && lake build)                            # "Build completed successfully"，没有 "Built" 行
+
+# 6. 改一个文件，只重建它和它的下游
+printf '\ntheorem lakeshard_edit_probe : (2 : Nat) + 2 = 4 := rfl\n' >> pfr/PFR/ApproxHomPFR.lean
+lakeshard run pfr --work work --workers 4 --slots 3 --threads 1
+#    "build"：built 4（它与 3 个导入它的模块），from_store 72
+git -C pfr checkout PFR/ApproxHomPFR.lean
+```
+
+| 步 | 实测 |
+|---|---|
+| 2 | 原版 `lake build` 58 秒，86 个模块（PFR 与 AddCombi） |
+| 3 | 11 秒时杀掉，41/76 完成；同一条命令：41 个复用、35 个新建，52.8 秒；缓存 1,108 个文件、90 MB。另外 `lakeshard check-setup` 76/76 条 `lean` 调用与 Lake 一致 |
+| 4 | 516/516 个文件一致；`lake build --no-build --rehash` 7,178 个任务全最新 |
+| 5 | 全新检出里 AddCombi 建 14 个模块；`restore` 1,108 个文件 0.6 秒，环境一致；之后 `lake build` 编译 0 个模块 |
+| 6 | 重建 4 个、复用 72 个，21.0 秒 |
+
+输出在 [`results/step1-pfr/`](results/step1-pfr/)。几点说明：
+
+- `restore` 拒绝工具链、平台、`lake-manifest.json` 或被导入的依赖模块的构建与缓存不一致的检出。第 5 步先建 AddCombi 就是为此：它不在 Mathlib 的缓存里，要由使用方自己建，被导入的那些模块建出来必须一致（实测一致；多建 AddCombi 的其他模块不影响）。
+- 检出可以放在任意路径：Lake 的 trace 哈希与路径无关。
+- `lakeshard run` 最后用原版 Lake 封口，缓存里是 Lake 自己的 `.trace` 与 `.hash`；Lake 记在 trace 里的命令行（带本机路径）被去掉了。
+- Carleson（第 4 节）还没有按这份命令跑过。
+
+## 6 预期
 
 见 [`expected.md`](expected.md)：E1–E4 每一格的预测值、容差与当前实测。

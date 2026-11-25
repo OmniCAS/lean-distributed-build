@@ -41,9 +41,10 @@
 | Mathlib 在 8 + 8 + 16 核上 | 21–24 分钟；核再多也约 20 分钟（每文件 2 线程约 14 分钟） | 预测 | `bench/expected.md` E2 |
 | 黎曼猜想归档（175,187 模块） | 约 475 核·时，最长链约 0.93 小时；128 核 3.9 小时，512 核 69 分钟，2,048 核 56 分钟 | 预测 | 3.7 |
 | Tau Ceti（34,760 模块，中间台阶） | 约 57 核·时，最长链 8–17 分钟，可并行度约 200–450；32 核 1.8 小时，128 核 27 分钟，512 核 8–17 分钟 | 预测 | 3.7 |
-| 合成宽图、窄图，2 × 4 / 8 / 16 核（一台机器的根盘掉线后改用两台） | 两机对单机：宽图 1.87–1.95 倍（预测 2.04–2.11），窄图 1.00–1.28 倍（预测 1.03–1.26）；16 核时先就绪先派慢 23%，只按图结构慢 7%，按目录预先固定放置慢 18%，沿导入链预先固定放置持平 | 实测 | `bench/expected.md` |
-| 同上，模拟器的绝对时长误差 | 沿用上一批的机器速度：16 格中 8 格出容差（一台机器变快了）；按每次运行当场量的速度重算：宽图 11 格 −8.4% 到 +4.1% | 实测 vs 模拟 | 同上 |
+| 合成宽图、窄图，2 × 4 / 8 / 16 核（一台机器的根盘掉线后改用两台） | 两机对单机：宽图 1.87–1.95 倍（预测 2.04–2.11），窄图 1.00–1.28 倍（预测 1.03–1.26）；16 核时先就绪先派慢 23%，只按图结构慢 7%，按目录预先固定放置慢 18%，沿导入链预先固定放置持平；每次跨机取产物多等 1 秒慢 13%（预测 1%） | 实测 | `bench/expected.md` |
+| 同上，模拟器的绝对时长误差 | 沿用上一批的机器速度：18 格中 8 格出容差（一台机器变快了）；按每次运行当场量的速度重算：宽图不加延迟的 11 格 −8.4% 到 +4.1% | 实测 vs 模拟 | 同上 |
 | Mathlib 在 16 + 16 核上 | 约 19 分钟（本工具单机约 40 分钟，原版 Lake 约 47 分钟） | 预测 | 同上 |
+| 阶段 1“仓库进、缓存出”，公开仓库 PFR（76 个模块，单机） | 516/516 个产物文件与原版 `lake build` 逐字节一致；在另一路径的全新检出上恢复 1,108 个文件后原版 Lake 编译 0 个；中途杀掉后同一条命令复用 41 个、新建 35 个；改一个文件只重建 4 个（21.0 秒） | 实测 | `bench/README.md` 第 5 节、`bench/results/step1-pfr/` |
 
 （“3.x”指 `docs/study-report.md` 的节号。）**文档是独立的模块，从 [`docs/README.md`](docs/README.md) 开始读**：一页结论、问题定义与路线图、调度理论、完整报告、别人的做法，以及出处 [`REFERENCES.md`](REFERENCES.md)。
 
@@ -55,7 +56,7 @@ OmniCAS 下的 fork，版本钉死在下表的提交上（细节与用途见 `be
 |---|---|---|
 | [`OmniCAS/mathlib4`](https://github.com/OmniCAS/mathlib4) | `v4.34.0`（`5ed29652…`） | E2：真实仓库的三机构建；本仓库 Mathlib trace 的版本 |
 | [`OmniCAS/carleson`](https://github.com/OmniCAS/carleson) | `f7487cc9…`（工具链 v4.36.0-rc1） | 小仓库一档：125 个模块，只验正确性 |
-| [`OmniCAS/pfr`](https://github.com/OmniCAS/pfr) | `1899ce8e…`（工具链 v4.37.0-rc1） | 小仓库一档：74 个模块，只验正确性 |
+| [`OmniCAS/pfr`](https://github.com/OmniCAS/pfr) | `1ef23c3c…`（工具链 v4.36.0-rc2；验证过的修订，fork 上更新的提交没验证） | 小仓库一档：76 个模块，阶段 1 已通过 |
 | [`OmniCAS/riemann-hypothesis`](https://github.com/OmniCAS/riemann-hypothesis) | 原始提交 `40e56bab…` | E4：大集群；导入图与合成实例的结构来源 |
 | [`OmniCAS/riemann-hypothesis-omega`](https://github.com/OmniCAS/riemann-hypothesis-omega) | `c7d25b3b…` | 参考实现：Omega Institute 按内容哈希分片构建的脚本 |
 | [`OmniCAS/CFSG`](https://github.com/OmniCAS/CFSG) | `965a0775…` | E4 之后 |
@@ -90,7 +91,7 @@ OmniCAS 下的 fork，版本钉死在下表的提交上（细节与用途见 `be
 | `docs/study-summary.md`、`docs/study-report.md` | 研究结论（一页）与完整报告（七个问题、最优性、校准） |
 | `docs/research/` | 别人的做法：黎曼猜想归档的各次构建、Omega Institute 的分片构建、Isabelle 与 Mathlib 的基础设施 |
 | `REFERENCES.md` | 完整书目：调度理论 [T…]、系统文档与源码 [S…]、公开的构建数据 [D…]，每条标明读了全文、只读了摘要或未重新核对 |
-| `lakeshard/` | 工具快照 |
+| `lakeshard/` | 工具快照（工具仓库提交 `e408d78`，阶段 1 验收用的版本） |
 | `study/` | 模拟器、测试、trace、实验脚本与结果 |
 | `bench/` | 基准实例（规格、生成脚本、生成好的工程）、运行脚本、预期效果、运行记录 |
 

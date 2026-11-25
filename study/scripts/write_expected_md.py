@@ -85,18 +85,23 @@ if os.path.exists(two_path):
           ("只按图结构 ÷ 按耗时（宽图两机 16 核）", "wide2-B1s-c16-r1", "wide2-B1-c16-r1"),
           ("按目录固定放置 ÷ 动态派发（宽图两机 16 核）", "wide2-B2-c16-r1", "wide2-B1-c16-r1"),
           ("沿导入链固定放置 ÷ 动态派发（宽图两机 16 核）", "wide2-B3-c16-r1", "wide2-B1-c16-r1"),
+          ("每次取产物加 0.1 秒 ÷ 不加（宽图两机 16 核）", "wide2-B1-c16-d0.1", "wide2-B1-c16-r1"),
+          ("每次取产物加 1 秒 ÷ 不加（宽图两机 16 核）", "wide2-B1-c16-d1", "wide2-B1-c16-r1"),
+          ("每次取产物加 10 秒 ÷ 不加（宽图两机 16 核）", "wide2-B1-c16-d10", "wide2-B1-c16-r1"),
           ("单机 ÷ 两机（Mathlib 16 + 16 核）", "mathlib2-A1-c16-r1", "mathlib2-B1-c1616-r1")]
     rtab = ["| 比较 | 预测 | 实测 |", "|---|---:|---:|"] + [f"| {n} | {q(a, b, pr)} | {q(a, b, me)} |" for n, a, b in R2]
     rec_path = os.path.join(STUDY, "results", "e1-two-machines-recalibrated-wide.json")
     REC = ""
     if os.path.exists(rec_path):
         rec = json.load(open(rec_path))
-        e = [x["error_pct"] for x in rec]
+        e = [x["error_pct"] for x in rec if "-d" not in x["run"]]
+        ed = [(x["run"].split("-d")[1], x["error_pct"]) for x in rec if "-d" in x["run"]]
         s2 = [x["speed_vs_reference"][0] for x in rec]
         s3 = [x["speed_vs_reference"][1] for x in rec if x["run"].split("-")[1].startswith("B")]
         REC = (f"\n\n**校准**：这批运行里 worker-2 只比参考机慢 {min(s2):.2f}–{max(s2):.2f} 倍（校准时是 1.438；两批记录的系统负载相近，变快的原因不明），"
                f"worker-3 {min(s3):.2f}–{max(s3):.2f} 倍（原 1.122）。按每次运行自身记录里量出的速度重算（`python e1_two_machines.py --recalibrate`），"
-               f"宽图 {len(rec)} 格的误差是 {min(e):+.1f}% 到 {max(e):+.1f}%：模型本身没问题，偏差来自机器速度变了。"
+               f"宽图不加延迟的 {len(e)} 格误差是 {min(e):+.1f}% 到 {max(e):+.1f}%：模型本身没问题，偏差来自机器速度变了。"
+               + ("加延迟的几格：" + "、".join(f"每次加 {d} 秒 {v:+.1f}%" for d, v in ed) + "，模型低估了跨机取产物变慢的代价。" if ed else "") +
                "所以每次运行前都要当场量一次每台机器的速度。窄图的逐模块耗时来自 macOS，不能这样校准，只看比值。")
     TWO = ("\n".join(lines_) + f"\n\n已测 {len(done)} 格，{n_in} 格在容差带内。\n\n" + "\n".join(rtab) + REC +
            "\n\n说明：单机运行放在 worker-2 上（协调器也在那里）。`wide2-B5`（原版 Lake 调度、只把 `lean` 转发出去）没有模型，不给预测。"
