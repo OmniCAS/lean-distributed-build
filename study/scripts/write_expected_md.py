@@ -95,7 +95,7 @@ if os.path.exists(two_path):
     if os.path.exists(bt_path):
         bt = json.load(open(bt_path))["backtest"]
         dl = [x for x in bt if x["delay_s"] > 0]
-        BT = ("加延迟的格：上面的预测用的是“产物建完即推送、派发看数据所在”的模型，误差 " +
+        BT = ("加延迟的格：同样按当场速度重算，但仍用“产物建完即推送、派发看数据所在”的模型，误差 " +
               "、".join(f"{x['dispatch']} {x['delay_s']:g} 秒 {x['push-est']['error_pct']:+.1f}%" for x in dl) +
               "。工具其实是派发不看数据所在、每个任务开工时才取件；按这个做法回测（`python e1_delay_backtest.py`）误差 " +
               "、".join(f"{x['pull-blind']['error_pct']:+.1f}%" for x in dl) +
@@ -114,7 +114,22 @@ if os.path.exists(two_path):
                f"宽图不加延迟的 {len(e)} 格误差是 {min(e):+.1f}% 到 {max(e):+.1f}%：模型本身没问题，偏差来自机器速度变了。"
                + BT +
                "所以每次运行前都要当场量一次每台机器的速度。窄图的逐模块耗时来自 macOS，不能这样校准，只看比值。")
-    TWO = ("\n".join(lines_) + f"\n\n已测 {len(done)} 格，{n_in} 格在容差带内。\n\n" + "\n".join(rtab) + REC +
+    mb_path = os.path.join(STUDY, "results", "e1-mathlib-backtest.json")
+    MB = ""
+    if os.path.exists(mb_path):
+        mb = json.load(open(mb_path))
+        me_, tw = mb["measured"], mb["two_machines"]
+        tool = tw["on demand, one request per file (the tool)"]
+        fix = tw["on demand, one batched request per task (33 ms + bytes at 1.1 GB/s)"]
+        MB = (f"\n\n**Mathlib**：本工具单机 {me_['one_machine_s'] / 60:.1f} 分钟，两机 {me_['two_machines_s'] / 60:.1f} 分钟（{me_['one_machine_s'] / me_['two_machines_s']:.2f} 倍），"
+              f"比预测慢 {100 * (me_['two_machines_s'] / pr['mathlib2-B1-c1616-r1'] - 1):.0f}%。除根模块 `Mathlib` 外 {me_['two_machines_all_but_root_s']:,.0f} 秒建完；"
+              f"根模块逐个文件取了 {me_['root_fetched_files']:,} 个文件，用了 {me_['root_fetch_s']:.0f} 秒。"
+              f"另外 1 线程 `lean` 只省 7%（0.93 倍，预测用 0.86），每任务开销 {mb['params']['task_overhead_s']:.2f} 秒（预测用 0.21）。"
+              f"把这些建进模型（`python e1_mathlib_backtest.py`）：两机 {tool['makespan_if_root_on_hub_s']:,.0f} 秒，"
+              f"除根模块外 {tool['all_but_root_s']:,.0f} 秒；单机 {mb['one_machine']['simulated_s']:,.0f} 秒。"
+              f"改成每任务一次成批取，预计 {fix['makespan_s']:,.0f} 秒（{fix['makespan_s'] / 60:.1f} 分钟，{me_['one_machine_s'] / fix['makespan_s']:.2f} 倍），修好后重测。"
+              "细节见 `docs/study-report.md` 4.5 节。")
+    TWO = ("\n".join(lines_) + f"\n\n已测 {len(done)} 格，{n_in} 格在容差带内。\n\n" + "\n".join(rtab) + REC + MB +
            "\n\n说明：单机运行放在 worker-2 上（协调器也在那里）。`wide2-B5`（原版 Lake 调度、只把 `lean` 转发出去）没有模型，没给预测；实测 909 秒，比本工具两机慢 2.5 倍、比本工具单机还慢 35%，原因见 `docs/lessons.md` 第 12 节。"
            "Mathlib 的单机原版 Lake 就在本研究量 trace 的那台机器上，预测即那次实测的复现（47.7 分钟）；本工具每个 `lean` 1 线程，按 Mathlib 文件实测的 0.86 倍计。")
 doc = f"""# 预期效果：实验 E1–E4 每一格的预期值、容差与当前实测

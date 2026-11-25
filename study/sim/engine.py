@@ -15,7 +15,8 @@ Model
   With `fetch="pull"` (what the tool does) nothing is pushed: when a task starts on machine j it
   fetches every artifact of its import closure that is not already on j (built or fetched there
   earlier), paying `latency` once per task plus the bytes over `bandwidth`, with its slot held;
-  the fetched artifacts then stay on j.
+  the fetched artifacts then stay on j. `fetch_item_s` adds a cost per missing module (one request
+  per file, as the tool does: files per module x seconds per request), a float or one per machine.
 * Release: with `release="module"` each module's artifacts are published when it finishes;
   with `release="batch"` only when the whole batch is done (Lake-style batch).
 * Scheduling is decided with *estimated* costs (`est_cost`), timing uses the actual `cost`.
@@ -94,6 +95,7 @@ class Config:
     delay: float = math.inf  # placement="est": defer a module whose best free machine must wait more than
     #                          this for data while a busy machine already has it (delay scheduling)
     fetch: str = "push"  # "push": artifacts sent to every machine when built; "pull": fetched on demand per task
+    fetch_item_s: float | tuple = 0.0  # fetch="pull": seconds per missing module, scalar or per receiving machine
 
 
 @dataclass
@@ -151,12 +153,14 @@ def simulate(trace: Trace, cfg: Config, cost: np.ndarray | None = None) -> dict:
         obp = np.nan_to_num(trace.out_bytes, nan=0.0) if trace.out_bytes is not None else np.zeros(n)
         bw = cfg.bandwidth if math.isfinite(cfg.bandwidth) else math.inf
         st.stats["fetch_tasks"] = 0
+        item = np.broadcast_to(np.asarray(cfg.fetch_item_s, dtype=np.float64), (M,))
 
     def pull_wait(m, j):
         miss = clo[m] & ~have[:, j]
         if not miss.any():
             return 0.0, miss
-        return cfg.latency + (float(obp[miss].sum()) / bw if math.isfinite(bw) else 0.0), miss
+        return (cfg.latency + (float(obp[miss].sum()) / bw if math.isfinite(bw) else 0.0)
+                + float(item[j]) * int(miss.sum())), miss
 
     net = (cfg.latency > 0 or math.isfinite(cfg.bandwidth)) and not pull
     if net and M > 1:
@@ -465,6 +469,8 @@ def simulate(trace: Trace, cfg: Config, cost: np.ndarray | None = None) -> dict:
     }
     if pull:
         res["fetch_tasks"] = st.stats["fetch_tasks"]
+        if cfg.record:
+            res["have"] = have  # which artifacts each machine had at the end
     if cfg.record:
         res["start"], res["finish"], res["machine"], res["threads"] = st.start, st.finish, st.machine, st.threads
     return res

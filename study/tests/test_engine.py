@@ -328,3 +328,16 @@ def test_pull_est_prefers_machine_with_imports():
     ms = [Machine(1, start_at=0.5), Machine(1)]
     assert simulate(t, Config(ms, latency=5.0, fetch="pull"))["makespan_s"] == pytest.approx(7)
     assert simulate(t, Config(ms, latency=5.0, fetch="pull", placement="est"))["makespan_s"] == pytest.approx(2)
+
+
+def test_pull_fetch_item_cost():
+    # three roots a, c, e (1 each) and r(1) importing all three. Machine 0 joins at 3, so the roots
+    # run on machine 1 (0-1, 1-2, 2-3); r is ready at 3, both machines are free, the tie goes to
+    # machine 0, which misses 3 modules: latency 1 + 3 x 0.5 = 2.5, so r runs 5.5-6.5.
+    # Per-machine costs (0.5, 0.1): machine 0 still pays 0.5 per module, same result.
+    t = from_edges(4, [(3, 0), (3, 1), (3, 2)], [1, 1, 1, 1])
+    ms = [Machine(1, start_at=3.0), Machine(1)]
+    r = simulate(t, Config(ms, latency=1.0, fetch="pull", fetch_item_s=0.5))
+    assert r["makespan_s"] == pytest.approx(6.5)
+    r = simulate(t, Config(ms, latency=1.0, fetch="pull", fetch_item_s=(0.5, 0.1)))
+    assert r["makespan_s"] == pytest.approx(6.5)

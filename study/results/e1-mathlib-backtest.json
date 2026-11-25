@@ -1,0 +1,94 @@
+{
+ "params": {
+  "speed_vs_one_machine_run": [
+   0.938,
+   0.907
+  ],
+  "first_start_s": [
+   22.9,
+   33.6
+  ],
+  "one_machine_first_start_s": 10.9,
+  "seconds_per_fetched_file": [
+   0.0323,
+   0.0097
+  ],
+  "files_per_module": 7.4,
+  "task_overhead_s": 0.371,
+  "one_machine_task_overhead_s": 0.366,
+  "work_lean_core_s": {
+   "one_machine": 39748,
+   "two_machines": 37156
+  },
+  "trace_work_same_modules_core_s": 42759
+ },
+ "measured": {
+  "one_machine_s": 2712.74,
+  "two_machines_s": 1606.05,
+  "two_machines_all_but_root_s": 1351.5,
+  "root_fetch_s": 250.02,
+  "root_fetched_files": 7525
+ },
+ "one_machine": {
+  "simulated_s": 2703.7,
+  "lower_bound_s": 2484.2
+ },
+ "steps": {
+  "prediction inputs: trace x 0.86, worker-3 1.28x worker-2, overhead 0.21 s, starts 13.0 / 22.4 s": 1125.2,
+  "+ measured one-thread lean times (0.93 x trace) and speeds (worker-3 1.03x worker-2)": 1254.2,
+  "+ measured per-task overhead (upload) and worker starts": 1308.1
+ },
+ "two_machines": {
+  "pushed ahead (no fetch cost)": {
+   "makespan_s": 1307.2,
+   "all_but_root_s": 1302.6,
+   "root_fetch_s": 0.4,
+   "lower_bound_s": 1145.5,
+   "fetch_tasks": null
+  },
+  "on demand, one request per file (the tool)": {
+   "root_on_hub_missing_modules": 1116,
+   "root_ran_on": 1,
+   "root_on_hub_fetch_s": 267.6,
+   "makespan_if_root_on_hub_s": 1610.2,
+   "makespan_s": 1409.4,
+   "all_but_root_s": 1337.9,
+   "root_fetch_s": 67.3,
+   "lower_bound_s": 1145.5,
+   "fetch_tasks": 2857
+  },
+  "on demand, one batched request per task (33 ms + bytes at 1.1 GB/s)": {
+   "root_on_hub_missing_modules": 1052,
+   "root_ran_on": 1,
+   "root_on_hub_fetch_s": 0.6,
+   "makespan_if_root_on_hub_s": 1310.9,
+   "makespan_s": 1310.7,
+   "all_but_root_s": 1305.6,
+   "root_fetch_s": 0.9,
+   "lower_bound_s": 1145.5,
+   "fetch_tasks": 2920
+  },
+  "on demand, one batched request per task (33 ms + bytes at 0.3 GB/s)": {
+   "root_on_hub_missing_modules": 1053,
+   "root_ran_on": 1,
+   "root_on_hub_fetch_s": 1.8,
+   "makespan_if_root_on_hub_s": 1312.6,
+   "makespan_s": 1312.7,
+   "all_but_root_s": 1306.1,
+   "root_fetch_s": 2.4,
+   "lower_bound_s": 1145.5,
+   "fetch_tasks": 2900
+  },
+  "on demand, 16 requests in parallel": {
+   "root_on_hub_missing_modules": 1038,
+   "root_ran_on": 1,
+   "root_on_hub_fetch_s": 16.0,
+   "makespan_if_root_on_hub_s": 1324.6,
+   "makespan_s": 1313.4,
+   "all_but_root_s": 1303.8,
+   "root_fetch_s": 5.4,
+   "lower_bound_s": 1145.5,
+   "fetch_tasks": 2904
+  }
+ }
+}

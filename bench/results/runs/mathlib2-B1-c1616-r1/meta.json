@@ -1,0 +1,163 @@
+{
+ "name": "mathlib2-B1-c1616-r1",
+ "project": "mathlib",
+ "mode": "tool",
+ "hosts": [
+  "worker-2",
+  "worker-3"
+ ],
+ "cores_per_host": 16,
+ "cores": [
+  16,
+  16
+ ],
+ "project_dir": "/tmp/lakeshard-e2/mathlib4",
+ "cpus": "32-47",
+ "priority": "bl",
+ "history": "/tmp/lakeshard-e1/hist-mathlib.json",
+ "assign": null,
+ "fetch_delay_s": 0.0,
+ "started": "2026-11-25T08:50:35",
+ "load_before": {
+  "worker-2": [
+   "13.40",
+   "26.46",
+   "32.64"
+  ],
+  "worker-3": [
+   "4.38",
+   "4.18",
+   "4.71"
+  ]
+ },
+ "result": {
+  "ok": true,
+  "backend": "lean",
+  "from_store": 0,
+  "built": 8530,
+  "failed_modules": {},
+  "skipped_modules": [],
+  "skipped_count": 0,
+  "refused_workers": {},
+  "storage": "store",
+  "build_dir": "",
+  "store": "http://10.0.0.2:18765",
+  "wall_s": 1606.05,
+  "modules": 8530,
+  "status": {
+   "done": 8530
+  },
+  "modules_built": 8530,
+  "slots": 32,
+  "lower_bound": {
+   "critical_path_s": 1119.4,
+   "work_s": 37156.03,
+   "slots": 32,
+   "work_per_slot_s": 1161.13,
+   "bound_s": 1161.13,
+   "max_speedup": 33.19,
+   "ratio": 1.383
+  },
+  "totals": {
+   "attempts": 8530,
+   "failed_attempts": 0,
+   "stale_reports": 0,
+   "lean_s": 37156.075,
+   "cpu_s": 40399.914,
+   "max_rss_bytes": 3105492992,
+   "wait_s": 0.0,
+   "fetch_s": 1280.606,
+   "fetched_bytes": 6631213397,
+   "publish_s": 2755.216,
+   "confirm_s": 2.687,
+   "output_bytes": 6548910167
+  },
+  "workers": {
+   "worker-1": {
+    "slots": 16,
+    "threads": 1,
+    "host": "worker-2",
+    "pid": 2444555,
+    "tasks": 4184,
+    "failed": 0,
+    "lean_s": 18409.421073675156,
+    "cpu_s": 20194.259473999973,
+    "max_rss_bytes": 3105492992,
+    "clock_rtt_s": 0.000469207763671875,
+    "clock_offset_estimate_s": -3.910064697265625e-05,
+    "clock_offset_s": 0.0
+   },
+   "worker-2": {
+    "slots": 16,
+    "threads": 1,
+    "host": "worker-3",
+    "pid": 225659,
+    "tasks": 4346,
+    "failed": 0,
+    "lean_s": 18746.653457164764,
+    "cpu_s": 20205.65461699999,
+    "max_rss_bytes": 2948378624,
+    "clock_rtt_s": 0.0007693767547607422,
+    "clock_offset_estimate_s": 0.011930227279663086,
+    "clock_offset_s": 0.0119
+   }
+  },
+  "store_server": {
+   "objects_put": 59710,
+   "bytes_put": 6548910167,
+   "objects_get": 56959,
+   "bytes_get": 6631213397,
+   "puts_existing": 0
+  },
+  "failures": [],
+  "run_records": "/tmp/lakeshard-e1/runs/mathlib2-B1-c1616-r1/work/modules.jsonl",
+  "run_record_count": 8530,
+  "manifest": "/tmp/lakeshard-e1/runs/mathlib2-B1-c1616-r1/work/manifest.json",
+  "fingerprint": "2c0f8576548ccbde632cb253c672912de754fe611ab53917a8ff68481e29c196",
+  "prepare_s": 0.53,
+  "finished": true,
+  "url": "http://10.0.0.2:18765",
+  "local_workers": 0,
+  "slots_per_worker": 3,
+  "threads_per_lean": 0,
+  "retries": 2,
+  "run_id": "20261125-225131-8d52ac",
+  "worker_exit_codes": [],
+  "store_root": "/tmp/lakeshard-e1/runs/mathlib2-B1-c1616-r1/work/store",
+  "priority": "bl",
+  "assigned": 0,
+  "fetch_delay_s": 0.0,
+  "history": "/tmp/lakeshard-e1/runs/mathlib2-B1-c1616-r1/work/history.json"
+ },
+ "worker_log_tail": {
+  "worker-1": "",
+  "worker-2": ""
+ },
+ "elapsed_s": 1665.6,
+ "load_after": {
+  "worker-2": [
+   "9.89",
+   "18.59",
+   "27.58"
+  ],
+  "worker-3": [
+   "3.06",
+   "13.58",
+   "19.01"
+  ]
+ },
+ "summary": {
+  "wall_s": 1606.05,
+  "ok": true,
+  "lower_bound": {
+   "critical_path_s": 1119.4,
+   "work_s": 37156.03,
+   "slots": 32,
+   "work_per_slot_s": 1161.13,
+   "bound_s": 1161.13,
+   "max_speedup": 33.19,
+   "ratio": 1.383
+  },
+  "modules_built": 8530
+ }
+}

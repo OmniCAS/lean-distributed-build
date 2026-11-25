@@ -1,0 +1,166 @@
+{
+ "modules": 175187,
+ "closure_max": 175186,
+ "closure_over_150k": 9,
+ "closure_over_100k": 13,
+ "closure_over_50k": 27,
+ "critical_path_modules": 144,
+ "critical_path_modules_closure_over_100k": 9,
+ "critical_path_modules_closure_over_50k": 9,
+ "mb_per_module": {
+  "model": 0.339,
+  "public": 0.537
+ },
+ "rows": [
+  {
+   "cores": 128,
+   "machines": 2,
+   "q": 0.23,
+   "missing_modules": 20146,
+   "files": 149083,
+   "one_request_per_file_h": [
+    1.34,
+    0.4
+   ],
+   "16_parallel_requests_min": [
+    5.0,
+    1.5
+   ],
+   "batched_model_GB": 6.8,
+   "batched_model_s_at_1.1GBps_0.3GBps": [
+    6.0,
+    23.0
+   ],
+   "batched_public_GB": 10.8,
+   "batched_public_s_at_1.1GBps_0.3GBps": [
+    10.0,
+    36.0
+   ]
+  },
+  {
+   "cores": 128,
+   "machines": 2,
+   "q": 1.0,
+   "missing_modules": 87593,
+   "files": 648188,
+   "one_request_per_file_h": [
+    5.82,
+    1.75
+   ],
+   "16_parallel_requests_min": [
+    21.8,
+    6.5
+   ],
+   "batched_model_GB": 29.7,
+   "batched_model_s_at_1.1GBps_0.3GBps": [
+    27.0,
+    99.0
+   ],
+   "batched_public_GB": 47.0,
+   "batched_public_s_at_1.1GBps_0.3GBps": [
+    43.0,
+    157.0
+   ]
+  },
+  {
+   "cores": 512,
+   "machines": 8,
+   "q": 0.23,
+   "missing_modules": 35256,
+   "files": 260896,
+   "one_request_per_file_h": [
+    2.34,
+    0.7
+   ],
+   "16_parallel_requests_min": [
+    8.8,
+    2.6
+   ],
+   "batched_model_GB": 12.0,
+   "batched_model_s_at_1.1GBps_0.3GBps": [
+    11.0,
+    40.0
+   ],
+   "batched_public_GB": 18.9,
+   "batched_public_s_at_1.1GBps_0.3GBps": [
+    17.0,
+    63.0
+   ]
+  },
+  {
+   "cores": 512,
+   "machines": 8,
+   "q": 1.0,
+   "missing_modules": 153288,
+   "files": 1134329,
+   "one_request_per_file_h": [
+    10.18,
+    3.06
+   ],
+   "16_parallel_requests_min": [
+    38.2,
+    11.5
+   ],
+   "batched_model_GB": 52.0,
+   "batched_model_s_at_1.1GBps_0.3GBps": [
+    47.0,
+    173.0
+   ],
+   "batched_public_GB": 82.3,
+   "batched_public_s_at_1.1GBps_0.3GBps": [
+    75.0,
+    274.0
+   ]
+  },
+  {
+   "cores": 2048,
+   "machines": 32,
+   "q": 0.23,
+   "missing_modules": 39034,
+   "files": 288849,
+   "one_request_per_file_h": [
+    2.59,
+    0.78
+   ],
+   "16_parallel_requests_min": [
+    9.7,
+    2.9
+   ],
+   "batched_model_GB": 13.2,
+   "batched_model_s_at_1.1GBps_0.3GBps": [
+    12.0,
+    44.0
+   ],
+   "batched_public_GB": 21.0,
+   "batched_public_s_at_1.1GBps_0.3GBps": [
+    19.0,
+    70.0
+   ]
+  },
+  {
+   "cores": 2048,
+   "machines": 32,
+   "q": 1.0,
+   "missing_modules": 169711,
+   "files": 1255865,
+   "one_request_per_file_h": [
+    11.27,
+    3.38
+   ],
+   "16_parallel_requests_min": [
+    42.3,
+    12.7
+   ],
+   "batched_model_GB": 57.5,
+   "batched_model_s_at_1.1GBps_0.3GBps": [
+    52.0,
+    192.0
+   ],
+   "batched_public_GB": 91.1,
+   "batched_public_s_at_1.1GBps_0.3GBps": [
+    83.0,
+    304.0
+   ]
+  }
+ ]
+}
