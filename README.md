@@ -73,6 +73,22 @@ OmniCAS 下的 fork，版本钉死在下表的提交上（细节与用途见 `be
 
 除 Mathlib 外都是第三方代码（多为 AI 生成的形式化），**只在隔离环境里构建**。
 
+<!-- repo-tiers:begin（由脚本生成，改数据请改 bench/repos/） -->
+## 示例仓库：按规模分档
+
+做快速实验时按档挑仓库。链接是上游原始仓库；每个例子的文件数、依赖图统计、钉住的提交，以及全部 141 个仓库的清单见 [`bench/repos/README.md`](bench/repos/README.md)，数据在 [`bench/repos/repos.json`](bench/repos/repos.json)。
+
+| 档 | 行数 | 示例 | 构建量的参照 |
+|---|---|---|---|
+| T0 入门 | 不到 1 万行 | [lean4-cli](https://github.com/leanprover/lean4-cli)（2,353 行）、[quote4](https://github.com/leanprover-community/quote4)（2,557 行）、[import-graph](https://github.com/leanprover-community/import-graph)（7,593 行）、[IMOLean](https://github.com/jsm28/IMOLean)（1,443 行）、[GlimpseOfLean](https://github.com/PatrickMassot/GlimpseOfLean)（7,169 行） | 未测。自身只有几个到一两百个文件，量级是秒到几分钟 |
+| T1 万级 | 1 万–10 万行 | [batteries](https://github.com/leanprover-community/batteries)（3.3 万行）、[pfr](https://github.com/teorth/pfr)（2.2 万行）、[carleson](https://github.com/fpvandoorn/carleson)（5.0 万行）、[FLT](https://github.com/ImperialCollegeLondon/FLT)（5.9 万行）、[cslib](https://github.com/leanprover/cslib)（5.6 万行） | PFR（连同依赖 AddCombi 共 86 个模块）原版 `lake build` 58 秒（一台 12 核 macOS 机器，Mathlib 取现成缓存） |
+| T2 十万级 | 10 万–100 万行 | [PrimeNumberTheoremAnd](https://github.com/AlexKontorovich/PrimeNumberTheoremAnd)（17.3 万行）、[equational_theories](https://github.com/teorth/equational_theories)（16.8 万行）、[Weil](https://github.com/AxiomMath/Weil)（21.4 万行）、[physlib](https://github.com/leanprover-community/physlib)（46.3 万行）、[NavierStokesAndEuler](https://github.com/openai/NavierStokesAndEuler)（64.4 万行）、[sequencelib](https://github.com/provables/sequencelib)（86.0 万行） | 未测，介于上下两档之间 |
+| T3 百万级 | 100 万–1,000 万行 | [mathlib4](https://github.com/leanprover-community/mathlib4)（248 万行）、[MMP](https://github.com/AxiomMath/MMP)（206 万行）、[TauCeti](https://github.com/TauCetiProject/TauCeti)（795 万行）、[lean-pool](https://github.com/Vilin97/lean-pool)（996 万行） | Mathlib 实测 12.0 核·时：16 核单机 46 分钟，两机各 16 核 23 分钟。Tau Ceti 模型约 57 核·时 |
+| T4 千万级 | 1,000 万行以上 | [Stacks](https://github.com/AxiomMath/Stacks)（1,853 万行）、[riemann-hypothesis](https://github.com/leanprover-community/riemann-hypothesis)（1,737 万行）、[fermats-last-theorem](https://github.com/anthropics/fermats-last-theorem)（1,356 万行）、[CFSG](https://github.com/AxiomMath/CFSG)（约 4,310 万行） | 黎曼猜想归档模型约 475 核·时。CFSG 作者报告单机 22.5 小时（32 线程），产物 208 GB |
+
+实际构建过的只有 PFR 和 Mathlib，其余的数来自静态统计或模型。除 Mathlib 和 Lean 社区的基础库外都是第三方代码，只在隔离环境里构建。
+<!-- repo-tiers:end -->
+
 ## 怎么复现
 
 - **模拟与分析**（只要 Python 3.12 与 uv）：
@@ -102,6 +118,7 @@ OmniCAS 下的 fork，版本钉死在下表的提交上（细节与用途见 `be
 | `lakeshard/` | 工具快照（工具仓库提交 `e408d78`，阶段 1 验收用的版本） |
 | `study/` | 模拟器、测试、trace、实验脚本与结果 |
 | `bench/` | 基准实例（规格、生成脚本、生成好的工程）、运行脚本、预期效果、运行记录 |
+| `bench/repos/` | 按规模分档的仓库清单：五档、每档的示例、141 个仓库的行数与依赖图统计（`repos.json`、`repos.tsv`） |
 
 ## 说明
 

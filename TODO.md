@@ -8,7 +8,7 @@
 
 ## 用哪些仓库
 
-fork 都在 OmniCAS 下，钉住的提交见 `bench/README.md` 第 4 节。W 是总工作量，CP 是最长依赖链，W/CP 是加速比的上限。
+fork 都在 OmniCAS 下，钉住的提交见 `bench/README.md` 第 4 节。每一档还有哪些仓库可挑（五档、每档几个示例、上游链接）见 `bench/repos/README.md`。W 是总工作量，CP 是最长依赖链，W/CP 是加速比的上限。
 
 | 档 | 仓库 | 规模 | W/CP | 现状 |
 |---|---|---|---:|---|

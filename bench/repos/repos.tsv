@@ -1,0 +1,142 @@
+tier	repo	tier_lines	tier_files	lean_lines	lean_files	toolchain	uses_mathlib	lake	project_dir	modules	depth	max_width	par_lo	par_hi	commit	license	stars	sample
+T4	AxiomMath/CFSG	43100000		43100000		v4.35.0	True	single	.						965a0775e82217494217503621b843e1b0e1e337	Apache-2.0	169	True
+T4	eth-sri/leanlean-october	29687538	171267	29687538	171267			multi							cca0a5dfa61d32e3566094529ea1585d258a81ec		1	False
+T4	AxiomMath/Stacks	18527110	64216	18527110	64216	v4.35.0	True	single	.	64216	197	2718	118.8	144.0	f56a316ddf7a930906d88b78d6f9a2668cffd0cf	Apache-2.0	143	True
+T4	leanprover-community/riemann-hypothesis	17374215	175187	17374215	175187	v4.33.1	True	single	.	175187	203	5927	349.2	601.1	40e56bab026552e089d7afcfeff08d2defb9c005			True
+T4	prove2me/or-formalization-drive	14213350	96074	14213350	96074			none							1ae1f7e6f0644a3986302ae8e9a21ca9670871cb	Apache-2.0	1	False
+T4	anthropics/fermats-last-theorem	13559858	60478	13559858	60478	v4.33.1	True	single	.						6e837e75355538c7f80bab5b956861e86c4eacc2	Apache-2.0	1321	True
+T4	plby/lean-proofs	12699082	43587	12699082	43587			multi							8822f7ddef30fadbd92e1c6ab4ed897af356af5e		48	False
+T3	Vilin97/lean-pool	9956631	22324	9956631	22324	v4.35.0-rc3	True	single	.	22324	250	1646	14.6	17.4	01db1d7049cf9668bda1e9e106875ee1278b43e6			True
+T3	TauCetiProject/TauCeti	7954869	34782	7954869	34782	v4.36.0	True	single	.	34782	50	4669	400.8	467.6	aa3cfad1274c06cff25f2b58848498b3c3f68d0f	Apache-2.0	305	True
+T3	anthropics/FlashProve	6046801	29566	6046801	29566			unknown							9e2bdd8ff5bf9c62f18263d7dac189b0400b260c	Apache-2.0	1083	False
+T3	leanprover-community/mathlib4	2476531	9345	2476531	9345	v4.37.0-rc1	False	single	.	9345	181	211	22.6	26.8	5f78f9ce46fc85fa3cb45561d47b489c4c98cd04	Apache-2.0	4504	True
+T3	plby/Erdos90	2401565	5271	2401565	5271			multi							2062b0e6c9770c81e397bfe41148e90b92ca0567		21	False
+T3	AxiomMath/MMP	2056546	2269	2056546	2269	v4.35.0	True	single	.	2269	136	122	8.9	9.4	1f9ade367087ec711a2ce1382bad279a5a0284c3	Apache-2.0	7	True
+T3	frenzymath/FormalPantheon	1959885	12734	1959885	12734			multi							5b7e1288f08bcfbd31470851660f51ed9d931462	Apache-2.0	8	False
+T2	provables/sequencelib	859926	25905	859926	25905	v4.30.0	True	single	.	25905	9	25534	408.1	1147.7	dfb06c18bba196b5aa5bcb3725fe9d201fb9a61a	CC-BY-SA-4.0	21	True
+T2	ShouqiaoW/erdos	817110	5492	817110	5492			unknown							d28713ac8245ca86a686b8c67370a8d19d81b242	MIT	232	False
+T2	openai/NavierStokesAndEuler	643991	2659	643991	2659	v4.34.0-rc2	True	single	.	2659	97	86	9.5	12.2	f9e8bc5b38b6e212696e8a30e3e91517af887bbd	Apache-2.0	2135	True
+T2	strata-org/Strata	584452	1596	584452	1596	v4.34.0	False	single	.						f962533ec36bfbff23a857f4aa561d80a9641d65	Apache-2.0	294	False
+T2	openai/ten-proofs	550003	23	550003	23	v4.32.0	True	single	.	23	3	21	3.2	3.2	94bc0feb6a9ff12c7d31d6de640a725c9d43d2b6	Apache-2.0	219	False
+T2	leanprover-community/physlib	462570	1683	462570	1683	v4.35.0	True	single	.	1683	83	233	11.9	13.5	8c87bdfb015de47e82da811567aaa7a2a05353f4	Apache-2.0	842	True
+T2	Verified-zkEVM/ArkLib	406685	1534	406685	1534	v4.36.0	True	single	.						d0866aa7c02ee266a412ead9b0e50a649a337f5e	Apache-2.0	362	False
+T2	lean-dojo/TorchLean	399751	1238	399751	1238	v4.35.0	True	single	.						bb95db148ab63e3beb3e9c43813ad782bdddad67	MIT	213	False
+T2	anthropics/formal-math	359574	1812	359574	1812			unknown							16a5ce41304fcdaea4e0be7c132e1c361dc26da5	Apache-2.0	473	False
+T2	lean-dojo/ITPEval	354477	4050	354477	4050			none							56f468dc4a86594309b1bf3bb9973db8f9f38e4d			False
+T2	Beneficial-AI-Foundation/vericoding	334801	8686	334801	8686	v4.23.0-rc2	True	single	.	8686	1	8686	1618.7	3928.3	b265a3b2bce31e09d264306f419e810d02f98f44	MIT	35	False
+T2	zirui-HIT/FormalTCS	330995	487	330995	487			multi							021c3bf3285003a897ec3fee0b98218150e91e09		2	False
+T2	google-deepmind/formal-conjectures	219670	2153	219670	2153	v4.33.1	True	single	.	2153	8	1847	66.5	111.8	d8d031d4998c78575159ccab9a7a9e95ce043883	Apache-2.0	1366	False
+T2	AxiomMath/Weil	214139	980	214139	980	v4.34.0-rc2	True	single	.	980	17	218	22.9	28.2	27cdb2049be62ee2911429b47f54774078450e32	Apache-2.0	22	True
+T2	openai/PrimeGaps186	211605	2	211605	2	v4.34.0-rc2	True	single	.	2	1	2	1.0	1.0	61340d0b74163003b32756bb16e91d9209a5e330	Apache-2.0	170	False
+T2	Verilean/sparkle	201903	1014	201903	1014	v4.32.1	False	single	.						6c29b9b8b4bed436afcc0a3f23a6335bfbc751a1	Apache-2.0	182	False
+T2	formal-applied-math/formal-mathfin	189888	818	189888	818	v4.35.0	True	single	.	818	63	112	9.9	10.7	0e52ae61e4e50f0315a6e604d1dce4f468e1b26a	Apache-2.0	51	False
+T2	dwrensha/compfiles	180449	550	180449	550	v4.36.0	True	single	.	550	12	525	36.8	44.4	929b58afc2ed7b44cb107f8fe060991ec6348924	Apache-2.0	256	False
+T2	AlexKontorovich/PrimeNumberTheoremAnd	172577	235	172577	235	v4.35.0	True	single	.	235	20	59	5.2	5.6	a4fb6989b07e9c76b511807ae93e33e25b820e9b	Apache-2.0	356	True
+T2	teorth/equational_theories	168239	1347	168239	1347	v4.29.1	True	single	.	1347	19	1218	9.6	15.8	b4b3c42da2d21b858acb5dab7e90924c1396f73e	Apache-2.0	570	True
+T2	Vilin97/homotopy-groups-lean	165846	1195	165846	1195	v4.32.2	True	single	.	1195	6	1168	54.5	78.5	c66523531ff172d7f41913d94e56921e790a1b47	Apache-2.0	0	False
+T2	facebookresearch/autoformbench	163677	2009	163677	2009			multi							af1aa38fd44e019e566bce0b5a168609a886d8e6	NOASSERTION	17	False
+T2	openai/math	144530	680	30001821	163097	v4.34.1	True	single	lean	680	2	679	7.5	11.0	4eaee87548250b2682affda7d05d947c05554bae	Apache-2.0	17598	False
+T2	AxiomMath/Mordell	124542	432	124542	432	v4.35.0	True	single	.	432	35	89	8.2	9.2	82a30cb7857f6e3cfdb1be91f5533c0ccb57d493	Apache-2.0	6	False
+T2	leanprover-community/iris-lean	100653	324	100653	324			unknown							5540ef0110fc8f6d8e495c10c2f238c3ede14f3b	Apache-2.0	255	False
+T1	josevalim/lynx	98792	280	98792	280	v4.36.0		single	.						f57c29fd3756fa4ae5bc5ab620376e1ae9c6950b	Apache-2.0	215	False
+T1	ataylor24/TaoAnalysisBench	93491	608	93491	608			multi							9275bfd5364b9c7f4f76793d148b78bc81c58121	MIT	6	False
+T1	verse-lab/veil	91310	501	91310	501	v4.35.0	False	single	.						46243794e012ce4cc2b1b9ed330b77459338a687	Apache-2.0	415	False
+T1	lecopivo/SciLean	86723	568	86723	568	v4.28.0-rc1	True	single	.						95f8119a2884e9c41f82136523bd5568ea7075c5	Apache-2.0	548	False
+T1	leanprover/lean-eval	84910	2164	84910	2164	v4.36.0	True	single	.	2164	4	1839	57.9	183.6	edc3d323e1a3b40fa3a2b6276ffd9cfe9aaea04c	Apache-2.0	51	False
+T1	plclub/sf-in-lean	83269	90	83269	90	v4.34.0	False	single	.						cb999ba1bf75d20a9c08c710d148096de00038b1	Apache-2.0	211	False
+T1	FormalizedFormalLogic/Foundation	80580	321	80580	321	v4.35.0	True	single	.						fbcfee52cb4a892087fa978366282a9ebd844f29	Apache-2.0	300	False
+T1	agenticsnz/unsorry	72395	11154	83385	11154	v4.30.0	True	single	.	11154	1	11154	613.5	5448.6	4f4df493e00146f42d084d1085e07366e74d3830	Apache-2.0	47	False
+T1	leanprover/verso	72355	451	72355	451	v4.37.0-rc1	False	single	.						0b0474a7009da6fc4e5645003df1dfc4af3a7f20	Apache-2.0	411	False
+T1	google-deepmind/superhuman	60290	24	104834	82	v4.27.0	True	single	FutureMath/Erdos-Hajnal	24	11	5	2.4	2.4	9b620a92886b3a7655b30ddcfe36e725e9596509	Apache-2.0	809	False
+T1	ImperialCollegeLondon/FLT	59080	271	59080	271	v4.35.0	True	single	.	271	18	116	8.1	9.6	019805815d7da565ed1e9f427b6fbd0cbc9d00d3	Apache-2.0	1059	True
+T1	Sequential-Intelligence-Lab/MathlibLemma	58131	5024	646601	33991	v4.25.0-rc2	True	single	.	5024	1	5024	104.9	857.1	d5ffad4d554b83a7eafce8a2eb6c221f8d1e91f1	Apache-2.0	2	False
+T1	leanprover/cslib	55907	358	55907	358	v4.37.0-rc1	True	single	.	358	19	51	12.5	14.9	1ed150d1cec92cd4368d4f7257c73c77e1d00b89	Apache-2.0	820	True
+T1	Verified-zkEVM/clean	54415	221	54415	221	v4.35.0	True	single	.						71cd9a32ce2aa35a14115fa6b7a42377c58fb602	MIT	211	False
+T1	leansolving/SqueezeBench	54358	581	54358	581	v4.31.0	True	single	.	581	20	75	11.6	16.8	a485258435ff389675dfcb186e58d143522a1f8c	Apache-2.0	10	False
+T1	fpvandoorn/carleson	50325	128	50325	128	v4.36.0-rc1	True	single	.	129	30	22	3.0	3.2	f7487cc9da4d1e73f009dc0280cd5b958f3e2c78	Apache-2.0	116	True
+T1	digama0/lean4lean	49524	112	49524	112	v4.33.0-rc2	False	single	.						67f63b0c818920dfaed2ad07ccff187a6a8fe1e3	Apache-2.0	278	False
+T1	leanprover-community/lean-auto	45849	123	45849	123	v4.35.0		single	.						af766b1ee415486289d28e0720ed39930e86134e	Apache-2.0	197	False
+T1	teorth/analysis	45803	109	45803	109	v4.36.0	True	single	.	109	30	36	1.7	1.9	b019951163e7d6c5ff10795b7a12fd36af579969	Apache-2.0	1987	False
+T1	google-deepmind/alphaproof-nexus-results	44928	71	44928	71	v4.27.0	True	single	.	71	1	71	20.4	22.6	0647711a71183c1ea492ad60860776617ce1ea88	Apache-2.0	328	False
+T1	optpku/CAM-Bench	41996	780	41996	780	v4.28.0	True	single	.	780	1	780	53.0	135.8	a36ff77720e2f5f149bed756d4dd5370ba1b43ef	NOASSERTION	3	False
+T1	leanprover-community/batteries	33484	262	33484	262	v4.37.0-rc1	False	single	.	262	14	100	7.5	11.2	87486d547af639cb39c01f0d2f8025aa47d7dde1	Apache-2.0	436	True
+T1	ufmg-smite/lean-smt	29231	287	29231	287	v4.35.0	True	single	.						cbec5bd226c79d80ce0c2d2ea28e1e6359c5f207	Apache-2.0	321	False
+T1	math-inc/strongpnt	28415	8	28415	8	v4.21.0	True	single	.	8	8	1	1.0	1.0	2f5835c322314f55f1026ec2f139d704b7c45c69		328	False
+T1	Eleanor-H/MUSTARD	27002	182	27002	182			none							4b64aa0289e458e176a1a07cbda688463cf67679			False
+T1	Zhitao-He/MATPBench	26392	1056	26392	1056			none							9bc114246fca7e01c64093bbcc6b62ac6e478354			False
+T1	leanprover-community/aesop	24479	250	24479	250	v4.37.0-rc1	False	single	.						637fdbb8689a3387a82568b07355231f892144d7	Apache-2.0	415	False
+T1	NyxFoundation/nyxis	22822	103	22822	103	v4.34.1	False	single	.						df5c9ac7ecc1c5fbc73ed40f5d23c3323e8717ad	MIT	322	False
+T1	teorth/pfr	21990	76	21990	76	v4.36.0-rc2	True	single	.	76	20	31	2.3	2.6	1ef23c3c5a83db690fe3b3b5c2e8299fae17b81a	Apache-2.0	247	True
+T1	avigad/mathematics_in_lean_source	18954	45	18954	45	v4.35.0	True	single	.						645b5a4d754e3c68a54fc2a7ea0c5327c6bf1939	Apache-2.0	227	False
+T1	leanprover/human-eval-lean	18893	169	18893	169	nightly-2026-03-27	False	single	.	169	2	158	24.6	41.3	ebb161b8692fdf5059424f73d9d7389f389dd1a6	MIT	34	False
+T1	cmu-l3/reuF2F	18875	248	18875	248			multi							230023d821dff5f58d18446ce6dab0b588205c9f	NOASSERTION	25	False
+T1	trishullab/clever	17234	169	17234	169	v4.27.0	True	single	src/lean4	169	2	167	11.7	20.4	8348039a7ff7730a126d761e71d0439735eeb3e2	MIT	50	False
+T1	ImperialCollegeLondon/formalising-mathematics-2024	17136	176	17136	176	v4.5.0-rc1	True	single	.						c4cfdc64d59c12e07e0c88d702bfe654d518c0bd	Apache-2.0	264	False
+T1	project-numina/Numina-Putnam2025	16427	13	16427	13	v4.26.0	True	single	.	13	2	12	3.7	3.8	60d33c8ba19af905bd731e938ebde1c5b8c76519	MIT	5	False
+T1	marcusm117/DNA	16324	390	23416	408	v4.8.0-rc2	True	single	LeanEuclidPlus	390	32	121	4.1	10.5	d0880f26e1076a43b454608d173eb8e26a2e2152			False
+T1	thefundamentaltheor3m/Sphere-Packing-Lean	15769	75	15769	75	v4.35.0	True	single	.	75	19	21	3.0	3.3	7f30e2017277b4dc5f97ad3bb60dcfe074b70293	Apache-2.0	110	False
+T1	zhangir-azerbayev/ProofNet	15506	131	15506	131			none							509ad79710ed4f46ff5c282ed5640c1aa9ac3f30	MIT	129	False
+T1	leanprover-community/sphere-eversion	14988	65	14988	65	v4.35.0	True	single	.	65	13	29	3.2	3.6	33ab3d626854a0f0f04ed5772e3102d652e96475	Apache-2.0	50	False
+T1	lean-dojo/LeanMillenniumPrizeProblems	14076	31	14076	31	v4.31.0	True	single	.	31	7	9	3.7	3.9	603053dc267cf3efe422f438eb78098c0ececd6f	Apache-2.0	71	False
+T1	sunblaze-ucb/verina	13864	192	13864	192	v4.18.0	True	single	.	192	1	192	62.1	102.7	66b3ce5014edafb20cb26b87c681e7f31847249f	Apache-2.0	88	False
+T1	AxiomMath/Putnam2025	12367	26	12367	26	v4.21.0	True	single	.	26	1	26	6.0	6.9	2653cded72f5112acdc935b4f674711a780af95d	MIT	116	False
+T1	project-numina/LeanGeo	12243	232	12243	232	v4.15.0	True	single	.	232	48	122	2.5	3.7	9212b89ef0cb08adb049b32f6332a1f2b9e551ab	MIT	44	False
+T1	merely-true/merely-true	12237	42	12237	42	v4.29.0	True	single	.	42	17	8	2.1	2.2	f4ff319d4622f410e001ebab016c4e7d23f9cd97	Apache-2.0	39	False
+T1	frenzymath/Archon-FirstProof-Results	11972	28	11972	28	v4.28.0	True	single	.	28	10	7	2.1	2.2	35550f2bc0a58289bbe2342a64f10a46ada0f52f	Apache-2.0	21	False
+T1	konne88/functorio	11842	33	11842	33	v4.20.1		single	.						d4d09d0c7ee9d76eedf852b322022a979ec7063f	Apache-2.0	298	False
+T1	trishullab/PutnamBench	11735	674	11735	674	v4.33.1	True	single	lean4	674	1	674	94.5	361.6	a635813f5edf297d928f9bd5ef8324a26bdde09c		273	False
+T1	leanprover-community/mathematics_in_lean	11256	89	11256	89	v4.34.0	True	single	.						cff01285931648054c4fe6817baed0ccd45c0372	Apache-2.0	631	False
+T1	ByteDance-s··d/s··d-Prover	11044	6	138434	553	v4.14.0	True	single	s··dProver/imo2025	6	2	5	2.5	2.6	38c59cebaf969ac259196eb091757518d5b54c67	Apache-2.0	442	False
+T1	google-deepmind/formal-imo	10966	262	10966	262	v4.27.0	True	single	.	262	3	258	29.6	55.7	a85d84b97c8e88a352c136b1e29c355139609bea	Apache-2.0	37	False
+T1	loganrjmurphy/LeanEuclid	10024	235	10024	235	v4.19.0	True	single	.	235	37	42	3.8	6.1	33a72c0fa83914202532998a2e7b8771295c3cc7	MIT	147	False
+T0	Shashi456/atp-checkers	9934	34	9934	34	v4.30.0-rc2	True	single	.	34	1	34	14.5	17.0	3e7e99d027fece04d9cd96288cdd040c366458e5	MIT	3	False
+T0	cmu-l3/llmlean	9798	51	9798	51	v4.35.0		single	.						0d876f5e16b114a62c91eb1317853406149bd2d4	MIT	224	False
+T0	project-numina/LeanTriathlon	8507	179	8507	179	v4.30.0-rc2	True	single	.	179	6	108	6.7	15.0	2aede4209c203ae9901eff870744e4b77dc6173f	Apache-2.0	9	False
+T0	leanprover-community/NNG4	8462	182	8462	182	v4.35.0	True	single	.						f815691ed45436cda91716700ab76684f411f1a7	Apache-2.0	399	False
+T0	AxiomMath/IMO2026	8064	13	8064	13	v4.31.0	True	single	.	13	1	13	1.9	2.2	c5a6a089d06d3619afe7ff45c5ccab9e2a30d5d2	MIT	104	False
+T0	leanprover-community/import-graph	7593	86	7593	86	v4.35.0	False	single	.	86	13	28	3.6	5.4	a41f0e9a4dea23188ea9cc1c41ac9f8bbafe0b93	Apache-2.0	30	True
+T0	leanprover/doc-gen4	7467	50	7467	50	v4.37.0-rc1	False	single	.						43c98922de00e9f215d2f3fe027cd2f99873212f	Apache-2.0	176	False
+T0	leanprover-community/lean4-metaprogramming-book	7245	23	7245	23	v4.36.0	False	single	.						efd4d4eb572b1892b4e924a581a38daf60151a27	Apache-2.0	321	False
+T0	PatrickMassot/GlimpseOfLean	7169	28	7169	28	v4.27.0	True	single	.						7dc816910638406f4232d23977bbcc59a335393c	Apache-2.0	431	True
+T0	math-ai-org/IMO2026	7101	6	7101	6	v4.30.0-rc2	True	single	.	6	1	6	1.6	1.7	a8912f36ed4f0a658bf5cc640daf8b1f88a50f48	Apache-2.0	8	False
+T0	utopia-group/VeriSoftBench	6824	21	6824	21			multi							8f5e8b36ab5fbdec6fd8d8f4ee0580d29647097a			False
+T0	haoyuzhao123/LeanIneqComp	5991	150	5991	150			none							070869094c3682e27ce7157c3bbf3328e3a203f1	Apache-2.0	22	False
+T0	haoyuzhao123/algoveri	5408	78	5408	78			none							8e313b0e8110a781009d4b67ca93b3771b5dc9db			False
+T0	harmonic-ai/IMO2025	5315	13	5315	13	v4.20.0-rc5	True	single	.	13	4	10	3.6	3.5	72b62405a176a7eaeadb335a7fa6ee80b6667161		73	False
+T0	yangky11/miniF2F-lean4	5071	492	5071	492	v4.24.0	True	single	.	492	3	489	18.8	95.2	5746b7d6c47855ce1294bed87329618ff7f1bc31	MIT	77	False
+T0	formalabstracts/formalabstracts	4951	34	4951	34			none							b0173da1af45421239d44492eeecd54bf65ee0f6	MIT	170	False
+T0	emilyriehl/infinity-cosmos	4777	32	4777	32	v4.34.0-rc1	True	single	.	32	8	11	2.8	3.2	89d7dc3ed861824535e540da489a46469dcc8e56	Apache-2.0	124	False
+T0	leanprover-community/ProofWidgets4	4721	49	4721	49	v4.37.0-rc1		single	.						197b8bdfd8bbfea6dff6ac04170a710b231c3aaa	Apache-2.0	233	False
+T0	ImperialCollegeLondon/AnnalsChallenge	4540	53	4540	53	v4.33.0-rc1	True	single	.	53	2	49	14.0	23.3	e32eb1411db0d700ca874dd695aea92f78699db8	Apache-2.0	32	False
+T0	leanprover-community/plausible	4218	28	4218	28	v4.35.0	False	single	.	28	9	12	2.0	2.3	dfa4f38190d07c37e315953e08b90fe2d95b3c24	Apache-2.0	123	False
+T0	midspiral/LemmaScript	4129	103	4129	103	v4.34.0	True	single	.						60cab87d9b1f267e8d94aa8cf5943829c9a18e9e	MIT	182	False
+T0	Paper-Proof/paperproof	4103	32	4103	32	v4.29.0-rc8		single	.						05c68e9cb8e881f9e971abb94efd231a269e0229	MIT	556	False
+T0	google-deepmind/formal-putnam-like	3516	97	3516	97	v4.27.0	True	single	.	97	1	97	62.2	84.6	636c2d46b3a7d7e77a9f58209b0c17816f8d172b	Apache-2.0	22	False
+T0	ShirleyLIYuxin/Lean4PHYS	3357	30	3357	30			multi							cae90192085dda428a47af46766f7c738d9624f2		21	False
+T0	cmu-l3/minicodeprops-eval	3354	31	3354	31			multi							58e3dd999e7d2dbdf09a39dba2f9bf97e457c7e8	MIT	2	False
+T0	jongwony/epistemic-protocols	3310	30	3310	30	v4.34.0		single	.						bd8ac403381138d076321ab6148283d61cdd3d32	MIT	177	False
+T0	google-deepmind/miniF2F	3204	4	3204	4	v4.27.0	True	single	.	4	2	2	1.9	1.9	f0a20e14c1eeccd859d51bb4c2b3ee487889c303	Apache-2.0	15	False
+T0	optsuite/M2F	2696	5	2696	5			none							aace03a0e97a67908add5ab2dd6f5ab05ca5b802	NOASSERTION	42	False
+T0	davidsyin/leannavigator	2595	7	2595	7	v4.10.0-rc2	True	single	miniF2F-lean4	7	3	4	1.7	1.8	5c06f1477728ab5e349a0792d68461b1b2961ef9			False
+T0	leanprover-community/quote4	2557	28	2557	28	v4.35.0	False	single	.	28	8	13	1.5	2.2	dce0ad79c486cb1fb504af04f953c3466b0c6db8	Apache-2.0	111	True
+T0	grenadeComing/beyond-compilation	2547	97	2547	97	v4.22.0-rc4	True	single	code/lean						18781ac59ca8e4a93596b9456c026b1df474c64a			False
+T0	leanprover/lean4-cli	2353	5	2353	5	v4.35.0	False	single	.	5	4	2	1.1	1.1	c24fe6078c630e89b489bffe59b3e20ac30d12c8	MIT	127	True
+T0	lean-dojo/LeanCopilot	2340	25	2340	25	v4.36.0	False	single	.						ee9eb62cf3357d0991ce942f718ce0dafc75dc73	MIT	1347	False
+T0	rahul3613/ProofNet-lean4	2076	13	2076	13	v4.20.0	True	single	.	13	1	13	5.0	6.6	6deae98b38954dadf732746d023e8be65c56f246	MIT	31	False
+T0	stepchowfun/proofs	2064	6	2064	6	v4.36.0	True	single	.						7275b25f9adcd01891e92ca7648e09b04571e2b9	MIT	317	False
+T0	BartoszPiotrowski/lean-premise-selection	2017	21	2017	21	v4.3.0-rc1	False	single	.	21	7	4	2.2	2.8	db1b03c1dc7a953526104f1effa2c7b2a380b7fd		23	False
+T0	leanprover-community/repl	1815	25	1815	25	v4.37.0-rc1		single	.						ca348e9dcc2eeb58e88af4b4324214e248b2d7f9	Apache-2.0	238	False
+T0	jsm28/IMOLean	1443	39	1443	39	v4.36.0-rc2	True	single	.	39	2	38	10.5	15.9	bd4d0e1f8560cda44a30fa3e826df21a4acc97f0	Apache-2.0	18	True
+T0	leanprover/comparator	1111	46	1111	46	v4.35.0	False	single	.						865edc14486c3388e9225daa971da8e157488c3e	Apache-2.0	249	False
+T0	leanprover-community/LeanSearchClient	1100	8	1100	8	v4.35.0	False	single	.	8	4	3	1.3	1.5	d6b4c7be5be75ec4917c873ac50c756dc1436372	Apache-2.0	38	False
+T0	lean-dojo/QuantumLean-Bench	1047	10	1047	10	v4.24.0	True	single	.	10	2	9	5.6	7.1	dac8c9da3ccdbb0319b8e9dc76b94c11f7dcf39b			False
+T0	ulfjack/ryu	582	4	582	4	v4.27.0-rc1	True	single	.						4c0618b0e44f7ef027ebae05d2cc7812048f7c8f	Apache-2.0	1359	False
+T0	haaaardcvZ/LeanContext	579	3	579	3			none							5f86090a8d615a172a87ca08f8dfad4d677bca0a			False
+T0	math-inc/FormalQualBench	498	25	498	25	v4.28.0	True	single	.	25	3	23	8.4	8.4	efaa113c6a00a79e92842ce541b407d7695d7699	Apache-2.0	11	False
+T0	prove2me/prove2me_workspace	442	12	442	12			none							4f34d35c5ee6026244a1f181142c76d1bc1cac74		110	False
+T0	quinn-dougherty/fvapps	430	7	430	7	v4.12.0		multi							6f2f56c29c4f7c2cb409e0fedf3430953404023e			False
+T0	wellecks/ntptutorial	294	5	294	5	nightly-2023-06-10	False	single	.						80f56388c1e22004c8e63f6faa5c8d3b23b2e650	MIT	180	False
+T0	eth-sri/lean-lean	200	2	200	2			none							55097cfe752717cd5ac9aca09a18b335d9c5bb7a			False
+T0	eth-sri/matharena	143	3	143	3			multi							d98156fa67822629b7554faabeeea5682f4ad0ca			False
+T0	Deicyde/WikiLean	114	3	114	3			none							e2ff035231e5754e6555d1dd6158ed5d722805e3			False
+T0	SorryDB/SorryDB	63	9	208	10	v4.24.0	False	single	tests/mock_lean_repository	9	1	9	4.8	8.5	74b3b63f8ba890d675f362924b21ac55db410383			False

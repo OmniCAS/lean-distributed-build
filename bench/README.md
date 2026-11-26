@@ -47,6 +47,8 @@ uv run --with numpy python e1_expected.py                                       
 
 ## 4 关联的实验仓库（OmniCAS 下的 fork，钉住的版本）
 
+按规模分档的示例清单（不 fork，直接给上游链接和统计时的提交）在 [`repos/README.md`](repos/README.md)。
+
 | 仓库 | 上游 | 钉住的版本 | 用途 |
 |---|---|---|---|
 | [`OmniCAS/mathlib4`](https://github.com/OmniCAS/mathlib4) | leanprover-community/mathlib4 | 标签 `v4.34.0` = 提交 `5ed2965256430c3649e86755f9576b54eca72435`；工具链 `leanprover/lean4:v4.34.0` | **E2**（真实仓库的三机构建）；本仓库的 Mathlib trace（`study/data/mathlib.trace.json.gz`）就是用这个版本量的 |
